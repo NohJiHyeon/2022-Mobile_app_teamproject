@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import './styles.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: AppColor.APPBAR_COLOR
       ),
       home: const MyHomePage(title: 'Hot Reload Demo'),
     );
