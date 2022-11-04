@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './styles.dart';
+import './components/button.dart';
 
 class GifticonDetail extends StatefulWidget {
   const GifticonDetail({super.key});
@@ -13,7 +14,7 @@ class _GifticonDetailState extends State<GifticonDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('기프티콘 생성'),
+        title: const Text('기프티콘 생성'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -26,78 +27,18 @@ class _GifticonDetailState extends State<GifticonDetail> {
               color: AppColor.BRIGHT_GRAY,
             ),
             alignment: Alignment.center,
-            child: Text('이미지 파일',
+            child: const Text('이미지 파일',
                 style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold)),
           ),
-          SizedBox(height: 50),
+          const SizedBox(height: 50),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 180,
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: Text('사용 완료',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.white)),
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    )),
-                    backgroundColor: MaterialStateProperty.all(AppColor.ORANGE),
-                    elevation: MaterialStateProperty.all(10),
-                    shadowColor: MaterialStateProperty.all(Colors.black),
-                  ),
-                ),
-              ),
+            children: const [
+              customButton('사용 완료', 180, 50, AppColor.ORANGE),
               SizedBox(width: 15),
-              SizedBox(
-                  width: 80,
-                  height: 50,
-                  child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text('저장',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Colors.white)),
-                      style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        )),
-                        backgroundColor:
-                            MaterialStateProperty.all(AppColor.GRAY),
-                        elevation: MaterialStateProperty.all(10),
-                        shadowColor: MaterialStateProperty.all(Colors.black),
-                      ))),
+              customButton('저장', 80, 50, AppColor.GRAY),
               SizedBox(width: 15),
-              SizedBox(
-                  width: 80,
-                  height: 50,
-                  child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text('삭제',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Colors.white)),
-                      style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        )),
-                        backgroundColor:
-                            MaterialStateProperty.all(AppColor.GRAY),
-                        elevation: MaterialStateProperty.all(10),
-                        shadowColor: MaterialStateProperty.all(Colors.black),
-                      ))),
+              customButton('삭제', 80, 50, AppColor.GRAY),
             ],
           )
         ],
