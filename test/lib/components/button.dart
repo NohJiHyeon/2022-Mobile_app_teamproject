@@ -16,21 +16,26 @@ class customButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {},
-      style: ButtonStyle(
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            )),
-        backgroundColor: MaterialStateProperty.all(color),
-        elevation: MaterialStateProperty.all(10),
-        shadowColor: MaterialStateProperty.all(Colors.black),
-        fixedSize: MaterialStateProperty.all(Size(width, height)),
+    return Container(
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(color: Colors.black.withOpacity(0.7), blurRadius: 4, offset: const Offset(1, 1.5))
+      ], borderRadius: BorderRadius.circular(20)),
+      child: ElevatedButton(
+        onPressed: () {},
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          )),
+          backgroundColor: MaterialStateProperty.all(color),
+          fixedSize: MaterialStateProperty.all(Size(width, height)),
+        ),
+        child: Text(text,
+            style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                color: Colors.white)),
       ),
-      child: Text(text,
-          style: const TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white)),
     );
   }
 }
