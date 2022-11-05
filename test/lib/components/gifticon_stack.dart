@@ -5,7 +5,18 @@ Widget GifticonStackState(String imgFileName, String dDay) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Stack(alignment: Alignment.topLeft, children: [
-      Image.asset(imgFileName),
+      Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.7),
+              blurRadius: 4,
+              offset: const Offset(0, 4),
+            )
+          ],
+        ),
+        child: Image.asset(imgFileName),
+      ),
       Container(
         alignment: const Alignment(0, 0), // 중앙 정렬
         color: AppColor.GRAY,
