@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'brand/brand_detail.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,10 +31,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: Center());
+    return const BrandeDetailPage();
   }
 }
