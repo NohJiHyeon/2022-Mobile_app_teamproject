@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../styles.dart';
 
 class BrandeDetailPage extends StatefulWidget {
   const BrandeDetailPage({Key? key}) : super(key: key);
@@ -64,7 +65,7 @@ class _BrandeDetailPageState extends State<BrandeDetailPage> {
                               Image.asset('lib/images/cat.jpg'),
                               Container(
                                 alignment: Alignment(0, 0), // 중앙 정렬
-                                color: Colors.grey,
+                                color: AppColor.GRAY,
                                 height: 29,
                                 width: 69,
                                 child: const Text(
@@ -81,7 +82,7 @@ class _BrandeDetailPageState extends State<BrandeDetailPage> {
                               Image.asset('lib/images/cat.jpg'),
                               Container(
                                 alignment: Alignment(0, 0), // 중앙 정렬
-                                color: Colors.grey,
+                                color: AppColor.GRAY,
                                 height: 29,
                                 width: 69,
                                 child: const Text(
@@ -122,7 +123,8 @@ class _BrandeDetailPageState extends State<BrandeDetailPage> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
-          child: const Icon(Icons.refresh),
+          child: const Icon(Icons.add),
+          backgroundColor: Colors.grey,
         ),
       ),
     );
