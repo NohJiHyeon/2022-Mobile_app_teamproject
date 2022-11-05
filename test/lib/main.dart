@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import './styles.dart';
-import 'package:w3_class/gitficon/gifticonDetail.dart';
+import 'package:w3_class/gifticon/gifticonDetail.dart';
 import 'package:w3_class/brand/brand_detail.dart';
 import 'package:w3_class/gifticon/gifticon_list.dart';
+
 void main() {
   runApp(const MyApp());
 }
