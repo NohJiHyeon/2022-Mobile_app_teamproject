@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import './styles.dart';
+import 'package:w3_class/brand/brand_detail.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -11,10 +13,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: AppColor.APPBAR_COLOR
-      ),
-      home: const MyHomePage(title: 'Hot Reload Demo'),
+      theme: ThemeData(primarySwatch: AppColor.APPBAR_COLOR),
+      home: const MyHomePage(title: ''),
     );
   }
 }
@@ -30,10 +30,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: Center());
+    return BrandeDetailPage();
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../styles.dart';
+import '../base/gifticon_stack.dart';
 
 class BrandeDetailPage extends StatefulWidget {
   const BrandeDetailPage({Key? key}) : super(key: key);
@@ -57,57 +59,13 @@ class _BrandeDetailPageState extends State<BrandeDetailPage> {
                       child: GridView.count(
                         crossAxisCount: 2,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child:
-                                Stack(alignment: Alignment.topLeft, children: [
-                              Image.asset('lib/images/cat.jpg'),
-                              Container(
-                                alignment: Alignment(0, 0), // 중앙 정렬
-                                color: Colors.grey,
-                                height: 29,
-                                width: 69,
-                                child: const Text(
-                                  'D-89',
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                              )
-                            ]),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child:
-                                Stack(alignment: Alignment.topLeft, children: [
-                              Image.asset('lib/images/cat.jpg'),
-                              Container(
-                                alignment: Alignment(0, 0), // 중앙 정렬
-                                color: Colors.grey,
-                                height: 29,
-                                width: 69,
-                                child: const Text(
-                                  'D-89',
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                              )
-                            ]),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child:
-                                Stack(alignment: Alignment.topLeft, children: [
-                              Image.asset('lib/images/cat.jpg'),
-                              Container(
-                                alignment: Alignment(0, 0), // 중앙 정렬
-                                color: Colors.grey,
-                                height: 29,
-                                width: 69,
-                                child: const Text(
-                                  'D-89',
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                              )
-                            ]),
-                          ),
+                          GifticonStackState('lib/images/cat.jpg', '34'),
+                          GifticonStackState('lib/images/cat.jpg', '56'),
+                          GifticonStackState('lib/images/cat.jpg', '90'),
+                          GifticonStackState('lib/images/cat.jpg', '34'),
+                          GifticonStackState('lib/images/cat.jpg', '34'),
+                          GifticonStackState('lib/images/cat.jpg', '34'),
+                          GifticonStackState('lib/images/cat.jpg', '34'),
                         ],
                       ),
                     ),
@@ -122,7 +80,8 @@ class _BrandeDetailPageState extends State<BrandeDetailPage> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
-          child: const Icon(Icons.refresh),
+          child: const Icon(Icons.add),
+          backgroundColor: Colors.grey,
         ),
       ),
     );
