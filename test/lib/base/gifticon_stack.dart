@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:w3_class/styles.dart';
 
 Widget GifticonStackState(String imgFileName, String dDay) {
   return Padding(
@@ -6,9 +7,8 @@ Widget GifticonStackState(String imgFileName, String dDay) {
     child: Stack(alignment: Alignment.topLeft, children: [
       Image.asset(imgFileName),
       Container(
-        alignment: Alignment(0, 0), // 중앙 정렬
-        // color: AppColor.GRAY,
-        color: Colors.grey,
+        alignment: const Alignment(0, 0), // 중앙 정렬
+        color: AppColor.GRAY,
         height: 29,
         width: 69,
         child: Text(
