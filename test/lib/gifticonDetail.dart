@@ -20,17 +20,28 @@ class _GifticonDetailState extends State<GifticonDetail> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-              color: AppColor.APPBAR_COLOR,
-              width: 300,
-              height: 500,
-              child: FittedBox(
-                  fit: BoxFit.fill,
-                  child: Image.asset('lib/images/gifticon.jpg'))),
+              width: 350,
+              height: 600,
+              decoration: BoxDecoration(
+                  color: AppColor.GRAY,
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.black.withOpacity(0.9),
+                        blurRadius: 4,
+                        offset: const Offset(4, 4))
+                  ],
+                  borderRadius: BorderRadius.circular(20)),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: FittedBox(
+                    fit: BoxFit.fill,
+                    child: Image.asset('lib/images/gifticon.jpg')),
+              )),
           const SizedBox(height: 50),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              customButton('사용 완료', 180, 50, AppColor.ORANGE),
+              customButton('사용 완료', 150, 50, AppColor.ORANGE),
               SizedBox(width: 15),
               customButton('저장', 80, 50, AppColor.GRAY),
               SizedBox(width: 15),
