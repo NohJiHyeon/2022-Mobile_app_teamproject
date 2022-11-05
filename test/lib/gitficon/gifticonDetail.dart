@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import './styles.dart';
-import './components/button.dart';
+import '../styles.dart';
+import '../components/button.dart';
 
 class GifticonDetail extends StatefulWidget {
   const GifticonDetail({super.key});

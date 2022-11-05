@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../styles.dart';
-import '../base/gifticon_stack.dart';
+import '../components/gifticon_stack.dart';
 
 class BrandeDetailPage extends StatefulWidget {
   const BrandeDetailPage({Key? key}) : super(key: key);

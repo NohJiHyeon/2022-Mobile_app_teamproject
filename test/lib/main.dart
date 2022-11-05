@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:w3_class/gifticonDetail.dart';
 import './styles.dart';
+import 'package:w3_class/gitficon/gifticonDetail.dart';
 import 'package:w3_class/brand/brand_detail.dart';
 
 void main() {
@@ -15,7 +15,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(primarySwatch: AppColor.APPBAR_COLOR),
-      home: const GifticonDetail(),
+      home: const MyHomePage(
+        title: '',
+      ),
     );
   }
 }
@@ -31,6 +33,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Center();
+    // return GifticonDetail();
+    return const BrandeDetailPage();
   }
 }

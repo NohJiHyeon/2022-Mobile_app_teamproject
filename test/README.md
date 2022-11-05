@@ -1,6 +1,6 @@
-# w3_class
+# 2022-Mobile_app_teamproject
 
-모바일앱 w3 수업 코드입니다.
+모바일 앱 개발 팀프로젝트입니다.
 
 ## Getting Started
 
