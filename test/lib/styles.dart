@@ -9,7 +9,7 @@ class AppColor {
   static const BRIGHT_GRAY = Color(0XFFBFBEBA);
 
   static const MaterialColor APPBAR_COLOR = MaterialColor(
-    0xffE8B28D, // 0% comes in here, this will be color picked if no shade is selected when defining a Color property which doesn’t require a swatch.
+    0xffE8B28D,
     const <int, Color>{
       50: const Color(0xffce5641 ),//10%
       100: const Color(0xffb74c3a),//20%
@@ -23,4 +23,4 @@ class AppColor {
       900: const Color(0xff000000),//100%
     },
   );
-} // you can define defi
+}
