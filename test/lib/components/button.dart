@@ -18,7 +18,10 @@ class customButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(boxShadow: [
-        BoxShadow(color: Colors.black.withOpacity(0.7), blurRadius: 4, offset: const Offset(1, 1.5))
+        BoxShadow(
+            color: Colors.black.withOpacity(0.9),
+            blurRadius: 4,
+            offset: const Offset(4, 4))
       ], borderRadius: BorderRadius.circular(20)),
       child: ElevatedButton(
         onPressed: () {},
