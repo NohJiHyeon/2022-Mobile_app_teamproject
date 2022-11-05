@@ -21,11 +21,11 @@ class _GifticonDetailState extends State<GifticonDetail> {
         children: [
           Container(
               color: AppColor.APPBAR_COLOR,
-              width: 450,
-              height: 600,
+              width: 300,
+              height: 500,
               child: FittedBox(
                   fit: BoxFit.fill,
-                  child: Image.asset('assets/images/gifticon.jpg'))),
+                  child: Image.asset('lib/images/gifticon.jpg'))),
           const SizedBox(height: 50),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
