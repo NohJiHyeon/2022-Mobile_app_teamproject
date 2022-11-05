@@ -81,7 +81,7 @@ class _BrandeDetailPageState extends State<BrandeDetailPage> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
           child: const Icon(Icons.add),
-          backgroundColor: Colors.grey,
+          backgroundColor: AppColor.GRAY,
         ),
       ),
     );
