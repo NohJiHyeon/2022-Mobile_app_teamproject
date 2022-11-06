@@ -16,7 +16,7 @@ class BarcodeScanner extends StatefulWidget {
 }
 
 class _BarcodeScanner extends State<BarcodeScanner> {
-  // String _platformVersion = 'Unknown';
+  String _platformVersion = 'Unknown';
   String qrcode = 'Unknown';
 
   @override
