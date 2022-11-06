@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../styles.dart';
+import '../components/shadowed_brand_icon.dart';
 
 class BrandMainPage extends StatefulWidget {
   const BrandMainPage({Key? key}) : super(key: key);
@@ -32,42 +33,15 @@ class _BrandMainPageState extends State<BrandMainPage> {
                   mainAxisSpacing: 20,
                   crossAxisCount: 3,
                   children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(30.0),
-                          child: Image.asset('lib/images/cat.jpg',),
-                        ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(30.0),
-                          child: Image.asset('lib/images/cat.jpg',),
-                        ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(30.0),
-                          child: Image.asset('lib/images/cat.jpg',),
-                        ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(30.0),
-                          child: Image.asset('lib/images/cat.jpg',),
-                        ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(30.0),
-                          child: Image.asset('lib/images/cat.jpg',),
-                        ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(30.0),
-                          child: Image.asset('lib/images/cat.jpg',),
-                        ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(30.0),
-                          child: Image.asset('lib/images/cat.jpg',),
-                        ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(30.0),
-                          child: Image.asset('lib/images/cat.jpg',),
-                        ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(30.0),
-                          child: Image.asset('lib/images/cat.jpg',),
-                        ),
+                        ShadowedBrandIcon('lib/images/cat.jpg'),
+                        ShadowedBrandIcon('lib/images/cat.jpg'),
+                        ShadowedBrandIcon('lib/images/cat.jpg'),
+                        ShadowedBrandIcon('lib/images/cat.jpg'),
+                        ShadowedBrandIcon('lib/images/cat.jpg'),
+                        ShadowedBrandIcon('lib/images/cat.jpg'),
+                        ShadowedBrandIcon('lib/images/cat.jpg'),
+                        ShadowedBrandIcon('lib/images/cat.jpg'),
+                        ShadowedBrandIcon('lib/images/cat.jpg'),
                       ],
                     ),
                     ),
