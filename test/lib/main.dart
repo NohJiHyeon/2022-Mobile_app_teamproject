@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './styles.dart';
+import 'package:w3_class/brand/brand_main.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: AppColor.APPBAR_COLOR
       ),
-      home: const MyHomePage(title: 'Hot Reload Demo'),
+      home: const BrandMainPage(),
     );
   }
 }
