@@ -24,8 +24,12 @@ class ImagePickState extends State<ImagePick> {
   // 갤러리에서 이미지를 가져온다.
   Future getImage(ImageSource imageSource, String nextPage) async {
     final image = await picker.pickImage(source: imageSource);
-    Navigator.pushNamed(context, '/$nextPage',
+    Navigator.pushNamed(context, '/barcode_scan',
         arguments: File(image!.path)); // argument로 이미지 전달
+
+    setState(() {
+      _image = File(image!.path); // 가져온 이미지를 _image에 저장
+    });
   }
 
   @override
@@ -37,7 +41,7 @@ class ImagePickState extends State<ImagePick> {
     // 갤러리에서 이미지를 가져오는 버튼
     return ElevatedButton(
       onPressed: () {
-        getImage(ImageSource.gallery, 'barcode');
+        getImage(ImageSource.gallery, '/barcode_scan');
       },
       child: const Icon(Icons.wallpaper),
     );
