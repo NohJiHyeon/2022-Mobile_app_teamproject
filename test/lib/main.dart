@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './styles.dart';
 import 'package:w3_class/brand/brand_main.dart';
+import './components/shadowed_brand_icon.dart';
 import 'package:w3_class/gifticon/gifticonDetail.dart';
 import 'package:w3_class/brand/brand_detail.dart';
 import 'package:w3_class/gifticon/gifticon_list.dart';
