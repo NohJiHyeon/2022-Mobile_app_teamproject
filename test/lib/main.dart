@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './styles.dart';
+import './components/shadowed_brand_icon.dart';
 import 'package:w3_class/gifticon/gifticonDetail.dart';
 import 'package:w3_class/brand/brand_detail.dart';
 import 'package:w3_class/gifticon/gifticon_list.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(primarySwatch: AppColor.APPBAR_COLOR),
-      home: const GifticonListPage(),
+      home: const GifticonDetail(),
     );
   }
 }
