@@ -7,6 +7,7 @@ import 'package:w3_class/gifticon/gifticon_list.dart';
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:w3_class/components/image_picker.dart';
 import 'package:w3_class/components/barcode_scan.dart';
+import 'package:w3_class/components/custom_floatingActionButton.dart';
 
 void main() {
   runApp(const MyApp());
