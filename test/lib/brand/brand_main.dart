@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../styles.dart';
 import '../components/shadowed_brand_icon.dart';
+import '../gifticon/gifticon_list.dart';
+import '../components/custom_floatingActionButton.dart';
 
 class BrandMainPage extends StatefulWidget {
   const BrandMainPage({Key? key}) : super(key: key);
@@ -45,13 +47,10 @@ class _BrandMainPageState extends State<BrandMainPage> {
                       ],
                     ),
                     ),
+              const GifticonListPage(),
                   ],
                 ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {},
-            child: const Icon(Icons.add),
-            backgroundColor: AppColor.GRAY,
-          ),
+          floatingActionButton: CustomFloatingActionButton(),
           ),
         );
   }
