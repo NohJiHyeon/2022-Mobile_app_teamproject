@@ -19,7 +19,7 @@ class _GifticonListPageState extends State<GifticonListPage> {
       child: GridView.count(
           crossAxisCount: 2,
           children: items
-              .map((i) => GifticonStackState('lib/images/cat.jpg', '$i'))
+              .map((i) => GifticonStackState('lib/images/cat.jpg', '$i', context))
               .toList()),
     );
   }

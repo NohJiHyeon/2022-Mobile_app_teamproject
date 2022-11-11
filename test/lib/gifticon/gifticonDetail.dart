@@ -44,20 +44,18 @@ class _GifticonDetailState extends State<GifticonDetail> {
           const SizedBox(height: 30),
           SizedBox(
             child: Container(
-              width: 205,
-              height: 33,
               decoration: BoxDecoration(boxShadow: [
                 BoxShadow(
                     color: Colors.black.withOpacity(0.9), blurRadius: 4, offset: const Offset(4,4))
               ], borderRadius: BorderRadius.circular(20)),
-              child: const CalendarButton(width: 200, height: 30),
+              child: const CalendarButton(330, 30),
             ),
           ),
           const SizedBox(height: 30),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              customButton('사용 완료', 150, 50, AppColor.ORANGE),
+              customButton('멤버십 사용', 150, 50, AppColor.ORANGE),
               SizedBox(width: 15),
               customButton('저장', 80, 50, AppColor.GRAY),
               SizedBox(width: 15),

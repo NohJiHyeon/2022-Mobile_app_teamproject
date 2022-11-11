@@ -12,8 +12,6 @@ class customButton extends StatelessWidget {
   final double height;
   final Color color;
 
-  //final onPressed;
-
   @override
   Widget build(BuildContext context) {
 
@@ -25,7 +23,7 @@ class customButton extends StatelessWidget {
             offset: const Offset(4, 4))
       ], borderRadius: BorderRadius.circular(20)),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () => Navigator.pushNamed(context, '/'),
         style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(

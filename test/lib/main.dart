@@ -30,8 +30,6 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const BrandMainPage(),
-        '/brand_detail': (context) => const BrandeDetailPage(),
-        '/gifticon_list': (context) => const GifticonListPage(),
         '/gifticon_detail': (context) => const GifticonDetail(),
         '/barcode_scan': (context) => BarcodeScanner(),
       },
