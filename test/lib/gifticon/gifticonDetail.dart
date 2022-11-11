@@ -13,7 +13,6 @@ class GifticonDetail extends StatefulWidget {
 }
 
 class _GifticonDetailState extends State<GifticonDetail> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,15 +41,7 @@ class _GifticonDetailState extends State<GifticonDetail> {
                     child: Image.asset('lib/images/gifticon.jpg')),
               )),
           const SizedBox(height: 30),
-          SizedBox(
-            child: Container(
-              decoration: BoxDecoration(boxShadow: [
-                BoxShadow(
-                    color: Colors.black.withOpacity(0.9), blurRadius: 4, offset: const Offset(4,4))
-              ], borderRadius: BorderRadius.circular(20)),
-              child: const CalendarButton(330, 30),
-            ),
-          ),
+          const CalendarButton(330, 30),
           const SizedBox(height: 30),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
