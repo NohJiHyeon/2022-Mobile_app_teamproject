@@ -12,7 +12,7 @@ class GifticonAddPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Gifticon'),
+        title: const Text('기프티콘 등록하기'),
       ),
       body: const GifticonAddForm(),
     );
@@ -37,7 +37,7 @@ class _GifticonAddFormState extends State<GifticonAddForm> {
         key: _formkey,
         child: ListView(
           children: [
-            const Text('기프티콘 이미지 선택', style: TextStyle(fontSize: 18)),
+            const Text('기프티콘 이미지 선택', style: TextStyle(fontSize: 16)),
             const SizedBox(
               height: 20,
             ),
