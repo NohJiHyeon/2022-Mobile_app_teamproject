@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:w3_class/brand/brand_add.dart';
 import 'package:w3_class/gifticon/gifticon_add.dart';
 import './styles.dart';
 import 'package:w3_class/brand/brand_main.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         '/gifticon_detail': (context) => const GifticonDetail(),
         '/barcode_scan': (context) => BarcodeScanner(),
         '/gifticon_add' : (context) => GifticonAddPage(),
+        '/brand_add' : (context) => BrandAddPage(),
       },
     );
   }

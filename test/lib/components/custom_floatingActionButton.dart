@@ -67,7 +67,9 @@ class _CustomFloatingActionButton extends State<CustomFloatingActionButton> {
             fontSize: 18.0,
             color: Colors.black,
           ),
-          onTap: () => print('브랜드 추가 화면으로 이동'),
+          onTap: () => {
+            Navigator.pushNamed(context, '/brand_add')
+          },
         ),
       ],
     );
