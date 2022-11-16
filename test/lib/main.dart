@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:w3_class/gifticon/gifticon_add.dart';
 import './styles.dart';
 import 'package:w3_class/brand/brand_main.dart';
 import './components/shadowed_brand_icon.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
       // home: const ImagePick(),
       initialRoute: '/',
       routes: {
-        '/': (context) => const BrandMainPage(),
+        '/': (context) => const GifticonAddPage(),
         '/gifticon_detail': (context) => const GifticonDetail(),
         '/barcode_scan': (context) => BarcodeScanner(),
       },
