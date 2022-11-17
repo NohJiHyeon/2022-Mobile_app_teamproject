@@ -17,12 +17,7 @@ class customButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(boxShadow: [
-        BoxShadow(
-            color: Colors.black.withOpacity(0.9),
-            blurRadius: 4,
-            offset: const Offset(4, 4))
-      ], borderRadius: BorderRadius.circular(20)),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
       child: ElevatedButton(
         onPressed: () {},
         style: ButtonStyle(
@@ -31,13 +26,10 @@ class customButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           )),
           backgroundColor: MaterialStateProperty.all(color),
-          fixedSize: MaterialStateProperty.all(Size(width, height)),
+          fixedSize: MaterialStateProperty.all(Size(width, 45)),
         ),
         child: Text(text,
-            style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.white)),
+            style: const TextStyle(fontSize: 18, color: Colors.white)),
       ),
     );
   }
