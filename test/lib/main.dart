@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       // home: const ImagePick(),
       initialRoute: '/',
       routes: {
-        '/': (context) => const ImagePick(),
+        '/': (context) => const BrandMainPage(),
         '/barcode_scan': (context) => BarcodeScanner(),
       },
     );
