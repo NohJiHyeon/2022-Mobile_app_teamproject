@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../brand/brand_main.dart';
 /*
 사용법: customButton(텍스트, 너비, 높이, 색깔)
 customButton('사용 완료', 180, 50, AppColor.ORANGE)
@@ -12,14 +13,13 @@ class customButton extends StatelessWidget {
   final double height;
   final Color color;
 
-  //final onPressed;
-
   @override
   Widget build(BuildContext context) {
+
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () => Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (BuildContext context) => const BrandMainPage()), (route) => false),
         style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
@@ -29,8 +29,12 @@ class customButton extends StatelessWidget {
           fixedSize: MaterialStateProperty.all(Size(width, 45)),
         ),
         child: Text(text,
-            style: const TextStyle(fontSize: 18, color: Colors.white)),
+            style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+                color: Colors.white)),
       ),
+
     );
   }
 }

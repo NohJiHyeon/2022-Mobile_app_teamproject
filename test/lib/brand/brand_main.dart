@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../styles.dart';
 import '../components/shadowed_brand_icon.dart';
+import '../gifticon/gifticon_list.dart';
+import '../components/custom_floatingActionButton.dart';
 
 class BrandMainPage extends StatefulWidget {
   const BrandMainPage({Key? key}) : super(key: key);
@@ -21,44 +23,30 @@ class _BrandMainPageState extends State<BrandMainPage> {
           bottom: const TabBar(
             tabs: [
               Tab(
-                text: '브랜드',
-              ),
-              Tab(
-                text: '기프티콘',
-              ),
-            ],
+                child: GridView.count(
+                  primary: false,
+                  padding: const EdgeInsets.all(30),
+                  crossAxisSpacing: 40,
+                  mainAxisSpacing: 20,
+                  crossAxisCount: 3,
+                  children: [
+                        ShadowedBrandIcon('lib/images/cat.jpg'),
+                        ShadowedBrandIcon('lib/images/cat.jpg'),
+                        ShadowedBrandIcon('lib/images/cat.jpg'),
+                        ShadowedBrandIcon('lib/images/cat.jpg'),
+                        ShadowedBrandIcon('lib/images/cat.jpg'),
+                        ShadowedBrandIcon('lib/images/cat.jpg'),
+                        ShadowedBrandIcon('lib/images/cat.jpg'),
+                        ShadowedBrandIcon('lib/images/cat.jpg'),
+                        ShadowedBrandIcon('lib/images/cat.jpg'),
+                      ],
+                    ),
+                    ),
+              const GifticonListPage(),
+                  ],
+                ),
+          floatingActionButton: CustomFloatingActionButton(),
           ),
-        ),
-        body: TabBarView(
-          children: [
-            Tab(
-              child: GridView.count(
-                primary: false,
-                padding: const EdgeInsets.all(30),
-                crossAxisSpacing: 40,
-                mainAxisSpacing: 20,
-                crossAxisCount: 3,
-                children: [
-                  ShadowedBrandIcon('lib/images/cat.jpg'),
-                  ShadowedBrandIcon('lib/images/cat.jpg'),
-                  ShadowedBrandIcon('lib/images/cat.jpg'),
-                  ShadowedBrandIcon('lib/images/cat.jpg'),
-                  ShadowedBrandIcon('lib/images/cat.jpg'),
-                  ShadowedBrandIcon('lib/images/cat.jpg'),
-                  ShadowedBrandIcon('lib/images/cat.jpg'),
-                  ShadowedBrandIcon('lib/images/cat.jpg'),
-                  ShadowedBrandIcon('lib/images/cat.jpg'),
-                ],
-              ),
-            ),
-          ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: const Icon(Icons.add),
-          backgroundColor: AppColor.GRAY,
-        ),
-      ),
-    );
+        );
   }
 }

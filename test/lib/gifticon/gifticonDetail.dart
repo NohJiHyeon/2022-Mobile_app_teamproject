@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../styles.dart';
 
+import '../styles.dart';
 import '../components/button.dart';
-import '../components/shadowed_brand_icon.dart';
+import '../components/calendar_button.dart';
 
 class GifticonDetail extends StatefulWidget {
   const GifticonDetail({Key? key}) : super(key: key);
@@ -13,9 +13,6 @@ class GifticonDetail extends StatefulWidget {
 }
 
 class _GifticonDetailState extends State<GifticonDetail> {
-  DateTime? expiredDate = DateTime.now();
-  String dateFormat = DateFormat('yyyy-MM-dd').format(DateTime.now());
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,51 +41,12 @@ class _GifticonDetailState extends State<GifticonDetail> {
                     child: Image.asset('lib/images/gifticon.jpg')),
               )),
           const SizedBox(height: 30),
-          SizedBox(
-            child: Container(
-              width: 205,
-              height: 33,
-              decoration: BoxDecoration(boxShadow: [
-                BoxShadow(
-                    color: Colors.black.withOpacity(0.9), blurRadius: 4, offset: const Offset(4,4))
-              ], borderRadius: BorderRadius.circular(20)),
-              child: ElevatedButton(
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    )),
-                    backgroundColor:
-                        MaterialStateProperty.all(AppColor.EXPIRED_DATE_COLOR),
-                    fixedSize: MaterialStateProperty.all(const Size(200, 30)),
-                  ),
-                  child: Text('유효기간: $dateFormat',
-                      style: CustomTextStyle.dateButtonTextStyle),
-                  onPressed: () async {
-                    await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.parse(expiredDate.toString()),
-                      firstDate: DateTime(2022),
-                      lastDate: DateTime(2030),
-                      initialEntryMode: DatePickerEntryMode.calendarOnly,
-                    ).then((selectedDate) {
-                      if (selectedDate != null) {
-                        setState(() {
-                          expiredDate = selectedDate;
-                          dateFormat =
-                              DateFormat('yyyy-MM-dd').format(selectedDate);
-                        });
-                      }
-                      //print(dateFormat);
-                    });
-                  }),
-            ),
-          ),
+          const CalendarButton(330, 30),
           const SizedBox(height: 30),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              customButton('사용 완료', 150, 50, AppColor.ORANGE),
+              customButton('멤버십 사용', 150, 50, AppColor.ORANGE),
               SizedBox(width: 15),
               customButton('저장', 80, 50, AppColor.GRAY),
               SizedBox(width: 15),
