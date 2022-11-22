@@ -46,9 +46,9 @@ class _GifticonDetailState extends State<GifticonDetail> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              customButton('멤버십 사용', 150, 50, AppColor.ORANGE),
+              customButton('멤버십 사용', 150, 50, AppColor.APPBAR_COLOR),
               SizedBox(width: 15),
-              customButton('저장', 80, 50, AppColor.GRAY),
+              customButton('저장', 80, 50, AppColor.APPBAR_COLOR),
               SizedBox(width: 15),
               customButton('삭제', 80, 50, AppColor.GRAY),
             ],
