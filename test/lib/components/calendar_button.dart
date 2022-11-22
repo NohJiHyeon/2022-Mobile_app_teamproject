@@ -26,12 +26,7 @@ class _CalendarButtonState extends State<CalendarButton> {
     return Container(
         width: widget.width,
         height: widget.height,
-        decoration: BoxDecoration(boxShadow: [
-          BoxShadow(
-              color: Colors.black.withOpacity(0.9),
-              blurRadius: 4,
-              offset: const Offset(4, 4))
-        ], borderRadius: BorderRadius.circular(20)),
+        decoration: BoxDecoration( borderRadius: BorderRadius.circular(20)),
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(

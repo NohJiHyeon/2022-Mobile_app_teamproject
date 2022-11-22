@@ -15,11 +15,14 @@ class customButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
       child: ElevatedButton(
-        onPressed: () => Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (BuildContext context) => const BrandMainPage()), (route) => false),
+        onPressed: () => Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => const BrandMainPage()),
+            (route) => false),
         style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
@@ -34,7 +37,6 @@ class customButton extends StatelessWidget {
                 fontSize: 18,
                 color: Colors.white)),
       ),
-
     );
   }
 }

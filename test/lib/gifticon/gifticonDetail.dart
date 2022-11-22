@@ -23,7 +23,7 @@ class _GifticonDetailState extends State<GifticonDetail> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-              width: 350,
+              width: 330,
               height: 500,
               decoration: BoxDecoration(
                   color: AppColor.GRAY,
@@ -31,7 +31,7 @@ class _GifticonDetailState extends State<GifticonDetail> {
                     BoxShadow(
                         color: Colors.black.withOpacity(0.9),
                         blurRadius: 4,
-                        offset: const Offset(4, 4))
+                        offset: const Offset(2, 2))
                   ],
                   borderRadius: BorderRadius.circular(20)),
               child: ClipRRect(
@@ -41,7 +41,7 @@ class _GifticonDetailState extends State<GifticonDetail> {
                     child: Image.asset('lib/images/gifticon.jpg')),
               )),
           const SizedBox(height: 30),
-          const CalendarButton(330, 30),
+          const CalendarButton(330, 50),
           const SizedBox(height: 30),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

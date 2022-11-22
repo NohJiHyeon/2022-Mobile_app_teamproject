@@ -20,33 +20,41 @@ class _BrandMainPageState extends State<BrandMainPage> {
         appBar: AppBar(
           centerTitle: true,
           title: Image.asset('lib/images/Brandicon.png'),
-          bottom: const TabBar(
+          bottom: TabBar(
             tabs: [
-              Tab(
-                child: GridView.count(
-                  primary: false,
-                  padding: const EdgeInsets.all(30),
-                  crossAxisSpacing: 40,
-                  mainAxisSpacing: 20,
-                  crossAxisCount: 3,
-                  children: [
-                        ShadowedBrandIcon('lib/images/cat.jpg'),
-                        ShadowedBrandIcon('lib/images/cat.jpg'),
-                        ShadowedBrandIcon('lib/images/cat.jpg'),
-                        ShadowedBrandIcon('lib/images/cat.jpg'),
-                        ShadowedBrandIcon('lib/images/cat.jpg'),
-                        ShadowedBrandIcon('lib/images/cat.jpg'),
-                        ShadowedBrandIcon('lib/images/cat.jpg'),
-                        ShadowedBrandIcon('lib/images/cat.jpg'),
-                        ShadowedBrandIcon('lib/images/cat.jpg'),
-                      ],
-                    ),
-                    ),
-              const GifticonListPage(),
+              Tab(text: '브랜드',),
+              Tab(text: '기프티콘',),
+
                   ],
                 ),
-          floatingActionButton: CustomFloatingActionButton(),
+
           ),
-        );
+        body: TabBarView(
+          children: [
+            Tab(
+              child: GridView.count(
+                primary: false,
+                padding: const EdgeInsets.all(30),
+                crossAxisSpacing: 40,
+                mainAxisSpacing: 20,
+                crossAxisCount: 3,
+                children: [
+                  ShadowedBrandIcon('lib/images/cat.jpg'),
+                  ShadowedBrandIcon('lib/images/cat.jpg'),
+                  ShadowedBrandIcon('lib/images/cat.jpg'),
+                  ShadowedBrandIcon('lib/images/cat.jpg'),
+                  ShadowedBrandIcon('lib/images/cat.jpg'),
+                  ShadowedBrandIcon('lib/images/cat.jpg'),
+                  ShadowedBrandIcon('lib/images/cat.jpg'),
+                  ShadowedBrandIcon('lib/images/cat.jpg'),
+                  ShadowedBrandIcon('lib/images/cat.jpg'),
+                ],
+              ),
+            ),
+            const GifticonListPage(),
+          ],
+        ),
+        floatingActionButton: CustomFloatingActionButton(),
+        ));
   }
 }

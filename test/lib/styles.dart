@@ -32,6 +32,6 @@ class CustomTextStyle {
   // 날짜 선택 버튼 글자 크기
   static const TextStyle dateButtonTextStyle = TextStyle(
     fontWeight: FontWeight.bold,
-    fontSize: 14,
+    fontSize: 18,
   );
 }
