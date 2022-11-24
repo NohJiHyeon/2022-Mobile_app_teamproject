@@ -53,35 +53,39 @@ class _BarcodeScanner extends State<BarcodeScanner> {
       body: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.file(imageFile),
-              // Text('Running on: $_platformVersion\n'),
-              Wrap(
-                children: [
-                  ElevatedButton(
-                    child: const Text("이미지에서 바코드 스캔하기", style: TextStyle(fontSize: 18),),
-                    onPressed: () async {
-                      String? str = await Scan.parse(imageFile!.path);
-                      if (str != null) {
-                        setState(() {
-                          qrcode = str;
-                        });
-                      }
-                    },
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text('바코드 번호 : $qrcode', style: TextStyle(fontSize: 18),),
-              SizedBox(
-                height: 20,
-              ),
-              CalendarButton(300, 50),
-            ],
+          SizedBox(
+            height: double.infinity,
+            child: ListView(
+              children: [
+                Image.file(imageFile),
+                // Text('Running on: $_platformVersion\n'),
+                Wrap(
+                  children: [
+                    ElevatedButton(
+                      child: const Text("이미지에서 바코드 스캔하기", style: TextStyle(fontSize: 18),),
+                      onPressed: () async {
+                        String? str = await Scan.parse(imageFile!.path);
+                        if (str != null) {
+                          setState(() {
+                            qrcode = str;
+                          });
+                        }
+                      },
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text('바코드 번호 : $qrcode', style: TextStyle(fontSize: 18),),
+                SizedBox(
+                  height: 20,
+                ),
+                CalendarButton(300, 50),
+                Expanded(child: TextField())
+
+              ],
+            ),
           ),
         ],
       ),
