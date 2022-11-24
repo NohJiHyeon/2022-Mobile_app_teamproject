@@ -45,43 +45,42 @@ class _GifticonAddFormState extends State<GifticonAddForm> {
             const SizedBox(
               height: 20,
             ),
-
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: '바코드',
-              ),
-              onChanged: (value) {
-              },
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: '상품명',
-              ),
-              onChanged: (value) {
-              },
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: '사용처',
-              ),
-              onChanged: (value) {
-              },
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            CalendarButton(100, 50),
-            const SizedBox(
-              height: 20,
-            ),
-
-            ElevatedButton(onPressed: (){}, child: const Text('등록', style: TextStyle(fontSize: 18),)),
+            // TextFormField(
+            //   decoration: const InputDecoration(
+            //     labelText: '바코드',
+            //   ),
+            //   onChanged: (value) {
+            //   },
+            // ),
+            // const SizedBox(
+            //   height: 20,
+            // ),
+            // TextFormField(
+            //   decoration: const InputDecoration(
+            //     labelText: '상품명',
+            //   ),
+            //   onChanged: (value) {
+            //   },
+            // ),
+            // const SizedBox(
+            //   height: 20,
+            // ),
+            // TextFormField(
+            //   decoration: const InputDecoration(
+            //     labelText: '사용처',
+            //   ),
+            //   onChanged: (value) {
+            //   },
+            // ),
+            // const SizedBox(
+            //   height: 20,
+            // ),
+            // CalendarButton(100, 50),
+            // const SizedBox(
+            //   height: 20,
+            // ),
+            //
+            // ElevatedButton(onPressed: (){}, child: const Text('등록', style: TextStyle(fontSize: 18),)),
           ],
         ),
 

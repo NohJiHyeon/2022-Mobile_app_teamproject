@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:async';
 import 'package:scan/scan.dart';
 import 'package:flutter/services.dart';
+import 'package:w3_class/components/calendar_button.dart';
 
 /*
   argument로 이미지 파일을 넣으면 이미지에서 바코드를 읽어오는 위젯입니다.
@@ -16,8 +17,10 @@ class BarcodeScanner extends StatefulWidget {
 }
 
 class _BarcodeScanner extends State<BarcodeScanner> {
+  final _controller = TextEditingController();
   String _platformVersion = 'Unknown';
   String qrcode = 'Unknown';
+  String brand = '';
 
   @override
   void initState() {
@@ -47,25 +50,39 @@ class _BarcodeScanner extends State<BarcodeScanner> {
       appBar: AppBar(
         title: const Text('이미지에서 바코드 스캔'),
       ),
-      body: Column(
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Text('Running on: $_platformVersion\n'),
-          Wrap(
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ElevatedButton(
-                child: const Text("이미지에서 바코드 스캔하기"),
-                onPressed: () async {
-                  String? str = await Scan.parse(imageFile!.path);
-                  if (str != null) {
-                    setState(() {
-                      qrcode = str;
-                    });
-                  }
-                },
+              Image.file(imageFile),
+              // Text('Running on: $_platformVersion\n'),
+              Wrap(
+                children: [
+                  ElevatedButton(
+                    child: const Text("이미지에서 바코드 스캔하기", style: TextStyle(fontSize: 18),),
+                    onPressed: () async {
+                      String? str = await Scan.parse(imageFile!.path);
+                      if (str != null) {
+                        setState(() {
+                          qrcode = str;
+                        });
+                      }
+                    },
+                  ),
+                ],
               ),
+              SizedBox(
+                height: 20,
+              ),
+              Text('바코드 번호 : $qrcode', style: TextStyle(fontSize: 18),),
+              SizedBox(
+                height: 20,
+              ),
+              CalendarButton(300, 50),
             ],
           ),
-          Text('scan result is $qrcode'),
         ],
       ),
     );
