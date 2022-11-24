@@ -1,37 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:w3_class/brand/brand_add.dart';
-import 'package:w3_class/gifticon/gifticon_add.dart';
-import './styles.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:w3_class/brand/brand_main.dart';
-import './components/shadowed_brand_icon.dart';
-import 'package:w3_class/gifticon/gifticonDetail.dart';
-import 'package:w3_class/brand/brand_detail.dart';
-import 'package:w3_class/gifticon/gifticon_list.dart';
-import 'package:barcode_widget/barcode_widget.dart';
-import 'package:w3_class/components/image_picker.dart';
-import 'package:w3_class/components/barcode_scan.dart';
-import 'package:w3_class/components/custom_floatingActionButton.dart';
+import 'brand/brand_add.dart';
+import 'components/barcode_scan.dart';
+import 'components/gifticonDetail.dart';
+import 'firebase_options.dart';
+import './components/UploadImage.dart';
+import 'gifticon/gifticon_add.dart';
+import 'styles.dart';
 
-// BrandMainPage -> 브랜드 메인 페이지 -> 플로팅 버튼 -> 브랜드 생성 페이지, 기프티콘 생성 페이지
-// BrandDetailPage -> 브랜드 상세 페이지
-// GifticonListPage -> 기프티콘 목록 페이지 -> 플로팅 버튼 -> GifticonDetail
-// GifticonDetail -> 기프티콘 상세 페이지
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(primarySwatch: AppColor.APPBAR_COLOR),
-      // home: const ImagePick(),
+      theme: ThemeData(
+        primarySwatch: AppColor.APPBAR_COLOR,
+      ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const BrandMainPage(),
+        '/': (context) => BrandMainPage(),
         '/gifticon_detail': (context) => const GifticonDetail(),
         '/barcode_scan': (context) => BarcodeScanner(),
         '/gifticon_add' : (context) => GifticonAddPage(),
