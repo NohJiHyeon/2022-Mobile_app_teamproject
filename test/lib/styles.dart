@@ -28,10 +28,11 @@ class AppColor {
 
 // 텍스트 스타일 모음
 class CustomTextStyle {
-  
   // 날짜 선택 버튼 글자 크기
   static const TextStyle dateButtonTextStyle = TextStyle(
-    fontWeight: FontWeight.bold,
     fontSize: 18,
   );
+
+  static const TextStyle expiredSoonTextStyle =
+      TextStyle(fontSize: 18, color: Colors.white);
 }
