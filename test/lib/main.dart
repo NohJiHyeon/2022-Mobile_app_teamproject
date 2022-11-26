@@ -5,9 +5,10 @@ import 'brand/brand_add.dart';
 import 'components/barcode_scan.dart';
 import 'components/gifticonDetail.dart';
 import 'firebase_options.dart';
-import './components/UploadImage.dart';
 import 'gifticon/gifticon_add.dart';
 import 'styles.dart';
+import './auth/login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,11 +29,12 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => BrandMainPage(),
+        '/': (context) => LoginPage(),
+        '/brand_main': (context) => BrandMainPage(),
         '/gifticon_detail': (context) => const GifticonDetail(),
         '/barcode_scan': (context) => BarcodeScanner(),
-        '/gifticon_add' : (context) => GifticonAddPage(),
-        '/brand_add' : (context) => BrandAddPage(),
+        '/gifticon_add': (context) => GifticonAddPage(),
+        '/brand_add': (context) => BrandAddPage(),
       },
     );
   }
