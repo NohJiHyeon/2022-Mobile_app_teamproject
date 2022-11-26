@@ -74,7 +74,7 @@ class _LoginFormState extends State<LoginForm> {
                           _formKey.currentState!.reset();
                           if (!mounted) return;
                           print("로그인 완료");
-                          Navigator.pushNamed(context, '/brand_main');
+                          // Navigator.pushNamed(context, '/brand_main');
                         }
                       } catch (e) {
                         print(e);

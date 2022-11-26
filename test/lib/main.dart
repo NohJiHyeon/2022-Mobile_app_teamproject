@@ -9,6 +9,7 @@ import 'gifticon/gifticon_add.dart';
 import 'styles.dart';
 import './auth/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'components/CRUD.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,15 +28,30 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: AppColor.APPBAR_COLOR,
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => LoginPage(),
-        '/brand_main': (context) => BrandMainPage(),
-        '/gifticon_detail': (context) => const GifticonDetail(),
-        '/barcode_scan': (context) => BarcodeScanner(),
-        '/gifticon_add': (context) => GifticonAddPage(),
-        '/brand_add': (context) => BrandAddPage(),
-      },
+      home: StreamBuilder(
+          // StreamBuilder: firebase에 변화가 생겼을 때 변화를 인지
+          stream: FirebaseAuth.instance.authStateChanges(), // 감지할 부분
+          builder: (context, snapshot) {
+            // snapshot: 변화가 감지됐을 때의 상태
+            if (snapshot.hasData) {
+              // Data가 있다면 로그인이 된 상태
+              return MaterialApp(
+                theme: ThemeData(
+                  primarySwatch: AppColor.APPBAR_COLOR,
+                ),
+                initialRoute: '/',
+                routes: {
+                  '/': (context) => CRUDTestPage(),
+                  '/gifticon_detail': (context) => const GifticonDetail(),
+                  '/barcode_scan': (context) => BarcodeScanner(),
+                  '/gifticon_add': (context) => GifticonAddPage(),
+                  '/brand_add': (context) => BrandAddPage(),
+                },
+              );
+            } else {
+              return const LoginPage();
+            }
+          }),
     );
   }
 }

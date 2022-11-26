@@ -91,11 +91,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         _formKey.currentState!.reset();
                         if (!mounted) return;
                         print("회원가입 성공");
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) =>
-                        //             const BrandMainPage()));
+                        Navigator.pop(context);
                       }
                     } catch (e) {
                       print(e);
