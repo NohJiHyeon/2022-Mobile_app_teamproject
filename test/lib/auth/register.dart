@@ -85,6 +85,7 @@ class _RegisterFormState extends State<RegisterForm> {
                           .set({
                         'userName': userName,
                         'email': email,
+                        'gifticon_num': 0,
                       });
 
                       if (newUser.user != null) {
