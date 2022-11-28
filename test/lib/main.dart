@@ -41,11 +41,12 @@ class MyApp extends StatelessWidget {
                 ),
                 initialRoute: '/',
                 routes: {
-                  '/': (context) => CRUDTestPage(),
+                  '/': (context) => BrandMainPage(),
                   '/gifticon_detail': (context) => const GifticonDetail(),
                   '/barcode_scan': (context) => BarcodeScanner(),
                   '/gifticon_add': (context) => GifticonAddPage(),
                   '/brand_add': (context) => BrandAddPage(),
+                  // '/crud_test_page': (context) => CRUDTestPage(),
                 },
               );
             } else {

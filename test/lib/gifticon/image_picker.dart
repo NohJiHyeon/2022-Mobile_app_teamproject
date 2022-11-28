@@ -24,7 +24,7 @@ class ImagePickState extends State<ImagePick> {
   // 갤러리에서 이미지를 가져온다.
   Future getImage(ImageSource imageSource, String nextPage) async {
     final image = await picker.pickImage(source: imageSource);
-    Navigator.pushNamed(context, '/barcode_scan',
+    Navigator.pushNamed(context, '/crud_test_page',
         arguments: File(image!.path)); // argument로 이미지 전달
 
     setState(() {

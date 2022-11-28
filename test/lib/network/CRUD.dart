@@ -8,14 +8,22 @@ import 'gifticon_crud.dart';
   자세한 사용 방법은 노션 회의록>firebase 진행상황에 적어두었습니다.
  */
 
-class CRUDTestPage extends StatelessWidget {
+class CRUDTestPage extends StatefulWidget {
   CRUDTestPage({Key? key}) : super(key: key);
-  final GifticonCRUD gifticonCRUD = GifticonCRUD();
-  final BrandCRUD brandCRUD = BrandCRUD();
-  File imageFile = File('lib/images/cat.jpg'); // example image
 
   @override
+  State<CRUDTestPage> createState() => _CRUDTestPageState();
+}
+
+class _CRUDTestPageState extends State<CRUDTestPage> {
+  final GifticonCRUD gifticonCRUD = GifticonCRUD();
+  final BrandCRUD brandCRUD = BrandCRUD();
+
+  // File imageFile = File('lib/images/cat.jpg');
+  // example image
+  @override
   Widget build(BuildContext context) {
+    final imageFile = ModalRoute.of(context)?.settings.arguments as File;
     return Column(
       children: [
         const SizedBox(
