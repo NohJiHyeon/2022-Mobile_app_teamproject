@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:async';
 import 'package:scan/scan.dart';
 import 'package:flutter/services.dart';
-import 'calendar_button.dart';
+import '../components/calendar_button.dart';
 
 /*
   argument로 이미지 파일을 넣으면 이미지에서 바코드를 읽어오는 위젯입니다.

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:w3_class/brand/brand_main.dart';
 import 'brand/brand_add.dart';
-import 'components/barcode_scan.dart';
+import 'gifticon/barcode_scan.dart';
 import 'components/gifticonDetail.dart';
 import 'firebase_options.dart';
 import 'gifticon/gifticon_add.dart';
 import 'styles.dart';
 import './auth/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'components/CRUD.dart';
+import 'network/CRUD.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

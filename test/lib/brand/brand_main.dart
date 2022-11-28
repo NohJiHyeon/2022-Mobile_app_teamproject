@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:w3_class/network/brand_crud.dart';
 import '../styles.dart';
 import '../components/shadowed_brand_icon.dart';
 import '../gifticon/gifticon_list.dart';
 import '../components/custom_floatingActionButton.dart';
-import 'package:w3_class/components/CRUD.dart';
+import '../network/gifticon_crud.dart';
 
 class BrandMainPage extends StatefulWidget {
   const BrandMainPage({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class BrandMainPage extends StatefulWidget {
 }
 
 class _BrandMainPageState extends State<BrandMainPage> {
-  final CRUD crud = CRUD();
+  final GifticonCRUD gifticonCRUD = GifticonCRUD();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class _BrandMainPageState extends State<BrandMainPage> {
             actions: [
               IconButton(
                   onPressed: () {
-                    crud.logout();
+                    gifticonCRUD.logout();
                   },
                   icon: const Icon(Icons.logout))
             ],

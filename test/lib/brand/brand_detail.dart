@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../styles.dart';
 import '../components/gifticon_stack.dart';
-import '../components/barcode_image_generation.dart';
+import 'barcode_image_generation.dart';
 
 class BrandeDetailPage extends StatefulWidget {
   const BrandeDetailPage({Key? key}) : super(key: key);
