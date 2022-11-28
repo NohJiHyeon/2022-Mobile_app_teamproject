@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:w3_class/components/barcode_scan.dart';
+import 'package:w3_class/gifticon/barcode_scan.dart';
 import 'package:w3_class/components/calendar_button.dart';
-import 'package:w3_class/components/image_picker.dart';
-
+import 'package:w3_class/gifticon/image_picker.dart';
 
 class GifticonAddPage extends StatelessWidget {
   const GifticonAddPage({Key? key}) : super(key: key);
@@ -83,7 +82,6 @@ class _GifticonAddFormState extends State<GifticonAddForm> {
             // ElevatedButton(onPressed: (){}, child: const Text('등록', style: TextStyle(fontSize: 18),)),
           ],
         ),
-
       ),
     );
   }
