@@ -52,14 +52,43 @@ class CRUDTestPage extends StatelessWidget {
         ),
         ElevatedButton(
             onPressed: () async {
-              crud.get_gifticon("gifticon 3");
-              // final data = await
-              // print(data);
+              final data = await crud.get_gifticon("gifticon 3");
+              print(data);
             },
             child: const Text("기프티콘 정보 읽어오기")),
         const SizedBox(
           height: 30,
         ),
+        ElevatedButton(
+            onPressed: () async {
+              crud.add_brand("스타벅스", "123");
+            },
+            child: const Text("브랜드 추가")),
+        const SizedBox(
+          height: 30,
+        ),
+        ElevatedButton(
+            onPressed: () async {
+              crud.add_discount_brand("스타벅스", "KT멤버쉽", "456234");
+            },
+            child: const Text("할인 브랜드 추가")),
+        const SizedBox(
+          height: 30,
+        ),
+        ElevatedButton(
+            onPressed: () async {
+              crud.add_membership_brand("스타벅스", "T멤버쉽", "1234543");
+            },
+            child: const Text("멤버쉽 브랜드 추가")),
+        const SizedBox(
+          height: 30,
+        ),
+        ElevatedButton(
+            onPressed: () async {
+              final data = await crud.get_gifticon_list();
+              print(data);
+            },
+            child: const Text("기프티콘 리스트 읽어오기")),
       ],
     );
   }
@@ -104,7 +133,7 @@ class CRUD {
       //     gifticon_db.doc("gifticon " + snapshot.docs.length.toString());
       // gifticon_doc.set({
       //   "name": gifticon_name,
-      //   "brand": "brand",
+      //   "brand": brand,
       //   "expiration_date": Timestamp.fromDate(
       //       DateTime(expire_year, expire_month, expire_day, 23, 59, 59)),
       //   "canUse": true,
@@ -142,12 +171,24 @@ class CRUD {
     }
   }
 
+  // 모든 기프티콘 리스트 읽어오기
+  Future get_gifticon_list() async {
+    QuerySnapshot snapshot = await gifticon_db.get();
+    final data = [];
+    for (var doc in snapshot.docs) {
+      var data_element = doc.data() as Map<String, dynamic>;
+      data_element["gifticon_id"] = doc.id;
+      data.add(data_element);
+    }
+    return data;
+  }
+
   // 특정 기프티콘 정보 읽어오기
-  void get_gifticon(String gifticon_id) async {
+  Future<Map<String, dynamic>> get_gifticon(String gifticon_id) async {
     final gifticon_doc = gifticon_db.doc(gifticon_id);
     DocumentSnapshot doc = await gifticon_doc.get();
     final data = doc.data() as Map<String, dynamic>;
-    print(data);
+    return data;
   }
 
   // 특정 기프티콘의 d-day만 읽어오기
@@ -187,6 +228,7 @@ class CRUD {
     brand_doc.set({
       "brand_barcode": barcode,
     });
+    print("$brand_name 바코드: $barcode, 브랜드 추가 완료");
   }
 
   void add_discount_brand(
@@ -194,14 +236,20 @@ class CRUD {
     final brand_doc = brand_db.doc(brand_name);
     brand_doc
         .collection('discount')
-        .doc(brand_name)
-        .set({"brand_name": discount_brand, "brand_barcode": discount_barcode});
+        .doc(discount_brand)
+        .set({"brand_barcode": discount_barcode});
+    print(
+        "$brand_name의 할인 브랜드 - $discount_brand 바코드: $discount_barcode, 추가 완료");
   }
 
   void add_membership_brand(String brand_name, String membership_brand,
       String membership_barcode) async {
     final brand_doc = brand_db.doc(brand_name);
-    brand_doc.collection('membership').doc(brand_name).set(
-        {"brand_name": membership_brand, "brand_barcode": membership_barcode});
+    brand_doc
+        .collection('membership')
+        .doc(membership_brand)
+        .set({"brand_barcode": membership_barcode});
+    print(
+        "$brand_name의 멤버쉽 브랜드 - $membership_brand 바코드: $membership_barcode, 추가 완료");
   }
 }
