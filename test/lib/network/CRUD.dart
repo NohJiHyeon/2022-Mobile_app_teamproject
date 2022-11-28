@@ -1,0 +1,96 @@
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'brand_crud.dart';
+import 'gifticon_crud.dart';
+
+/*
+  CRUD 메소드들을 모아놓은 클래스입니다.
+  자세한 사용 방법은 노션 회의록>firebase 진행상황에 적어두었습니다.
+ */
+
+class CRUDTestPage extends StatelessWidget {
+  CRUDTestPage({Key? key}) : super(key: key);
+  final GifticonCRUD gifticonCRUD = GifticonCRUD();
+  final BrandCRUD brandCRUD = BrandCRUD();
+  File imageFile = File('lib/images/cat.jpg'); // example image
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const SizedBox(
+          height: 30,
+        ),
+        ElevatedButton(
+            onPressed: () {
+              gifticonCRUD.logout();
+            },
+            child: const Text("로그아웃")),
+        const SizedBox(
+          height: 30,
+        ),
+        ElevatedButton(
+            onPressed: () {
+              gifticonCRUD.add_gifticon(
+                  "아메리카노 Tall", "스타벅스", 2023, 10, 10, imageFile);
+            },
+            child: const Text("기프티콘 추가")),
+        const SizedBox(
+          height: 30,
+        ),
+        // Image.asset("lib/images/cat.jpg"),
+        const SizedBox(
+          height: 30,
+        ),
+        ElevatedButton(
+            onPressed: () async {
+              final dDay = await gifticonCRUD.get_gifticon_dDay("gifticon 3");
+              print(dDay);
+            },
+            child: const Text("디데이 읽어오기")),
+        const SizedBox(
+          height: 30,
+        ),
+        ElevatedButton(
+            onPressed: () async {
+              final data = await gifticonCRUD.get_gifticon("gifticon 3");
+              print(data);
+            },
+            child: const Text("기프티콘 정보 읽어오기")),
+        const SizedBox(
+          height: 30,
+        ),
+        ElevatedButton(
+            onPressed: () async {
+              final data = await gifticonCRUD.get_gifticon_list();
+              print(data);
+            },
+            child: const Text("기프티콘 리스트 읽어오기")),
+        const SizedBox(
+          height: 30,
+        ),
+        ElevatedButton(
+            onPressed: () async {
+              brandCRUD.add_brand("스타벅스", "123");
+            },
+            child: const Text("브랜드 추가")),
+        const SizedBox(
+          height: 30,
+        ),
+        ElevatedButton(
+            onPressed: () async {
+              brandCRUD.add_discount_brand("스타벅스", "KT멤버쉽", "456234");
+            },
+            child: const Text("할인 브랜드 추가")),
+        const SizedBox(
+          height: 30,
+        ),
+        ElevatedButton(
+            onPressed: () async {
+              brandCRUD.add_membership_brand("스타벅스", "T멤버쉽", "1234543");
+            },
+            child: const Text("멤버쉽 브랜드 추가")),
+      ],
+    );
+  }
+}
