@@ -19,34 +19,38 @@ class GifticonCRUD {
   // 기프티콘 추가
   void add_gifticon(String gifticon_name, String brand, int expire_year,
       int expire_month, int expire_day, File imageFile) async {
-    try {
-      // storage에 파일 업로드
-      // _getImage(imageFile).then((url);
-      //   print("업로드 성공: " + url);
-      // 등록된 기프티콘 개수 -> firebase의 gifticon_num을 ID로
-      final user_data = await FirebaseFirestore.instance
-          .collection('user')
-          .doc(currentUser!.uid)
-          .get();
-      final gifticon_id = user_data.data()!["gifticon_num"];
+    // 등록된 기프티콘 개수 -> firebase의 gifticon_num을 ID로
+    final user_data = await FirebaseFirestore.instance
+        .collection('user')
+        .doc(currentUser!.uid)
+        .get();
+    final gifticon_id_num = user_data.data()!["gifticon_num"] as int;
 
-      // final gifticon_doc =
-      //     gifticon_db.doc("gifticon " + snapshot.docs.length.toString());
-      // gifticon_doc.set({
-      //   "name": gifticon_name,
-      //   "brand": brand,
-      //   "expiration_date": Timestamp.fromDate(
-      //       DateTime(expire_year, expire_month, expire_day, 23, 59, 59)),
-      //   "canUse": true,
-      //   "imageURL": url,
-      // });
-      // gifticon_doc.get().then((DocumentSnapshot doc) {
-      //   final data = doc.data() as Map<String, dynamic>;
-      //   print("등록한 기프티콘: " + data.toString());
-      // });
+    // storage에 파일 업로드
+    final _firebaseStorage = FirebaseStorage.instance;
+    var snapshot = await _firebaseStorage
+        .ref()
+        .child(currentUser!.uid + gifticon_id_num.toString())
+        .putFile(imageFile)
+        .whenComplete(() => print("업로드 완료"));
 
-    } catch (e) {
-      print(e);
+    if (snapshot.state == TaskState.success) {
+      var downloadURL = await snapshot.ref.getDownloadURL(); // 업로드한 이미지의 url
+      final gifticon_doc = gifticon_db.doc("gifticon $gifticon_id_num");
+
+      gifticon_doc.set({
+        "name": gifticon_name,
+        "brand": brand,
+        "expiration_date": Timestamp.fromDate(
+            DateTime(expire_year, expire_month, expire_day, 23, 59, 59)),
+        "canUse": true,
+        "imageURL": downloadURL,
+      });
+
+      gifticon_doc.get().then((DocumentSnapshot doc) {
+        final data = doc.data() as Map<String, dynamic>;
+        print("등록한 기프티콘: " + data.toString());
+      });
     }
   }
 
