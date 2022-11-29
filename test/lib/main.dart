@@ -11,6 +11,7 @@ import 'package:barcode_widget/barcode_widget.dart';
 import 'package:w3_class/components/image_picker.dart';
 import 'package:w3_class/components/barcode_scan.dart';
 import 'package:w3_class/components/custom_floatingActionButton.dart';
+import './components/brand_add_widget.dart';
 
 // BrandMainPage -> 브랜드 메인 페이지 -> 플로팅 버튼 -> 브랜드 생성 페이지, 기프티콘 생성 페이지
 // BrandDetailPage -> 브랜드 상세 페이지

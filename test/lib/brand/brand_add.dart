@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:w3_class/components/barcode_scan.dart';
 import 'package:w3_class/components/image_picker.dart';
+import '../components/brand_add_widget.dart';
 
 
 class BrandAddPage extends StatelessWidget {
@@ -39,7 +40,7 @@ class _BrandAddFormState extends State<BrandAddForm> {
       child: Form(
         key: _formkey,
         child: ListView(
-          children: [
+          children: <Widget>[
             DropdownButtonFormField(
                 decoration: const InputDecoration(
                   labelText: '브랜드명',
@@ -51,9 +52,9 @@ class _BrandAddFormState extends State<BrandAddForm> {
                 );
               }),
               onChanged: (value){
-                  print(value);
               },
             ),
+            //AddStarbucks(),
             const SizedBox(
               height: 20,
             ),
@@ -83,3 +84,4 @@ class _BrandAddFormState extends State<BrandAddForm> {
     );
   }
 }
+
