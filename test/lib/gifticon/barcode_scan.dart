@@ -82,7 +82,7 @@ class _BarcodeScanner extends State<BarcodeScanner> {
             SizedBox(
               height: 20,
             ),
-            CalendarButton(300, 50,'', DateTime.now()),
+            CalendarButton(300, 50),
             Expanded(child: TextField())
           ],
         ),

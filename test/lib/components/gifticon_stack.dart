@@ -9,7 +9,7 @@ Widget GifticonStackState(dynamic data, BuildContext context) {
   String expiredDate = DateFormat('yyyy-MM-dd')
       .format(DateTime(dDay.year, dDay.month, dDay.day));
   int getDifference(String dDay) {
-    return DateTime.parse(dDay).difference(DateTime.now()).inDays;
+    return (DateTime.parse(dDay).difference(DateTime.now()).inHours / 24).ceil();
   }
 
   // 유효기간 표시
@@ -19,7 +19,8 @@ Widget GifticonStackState(dynamic data, BuildContext context) {
 
   // Animation 수정 작업 필요
   return GestureDetector(
-    onTap: () => Navigator.pushNamed(context, '/gifticon_detail', arguments: data),
+    onTap: () =>
+        Navigator.pushNamed(context, '/gifticon_detail', arguments: data),
     child: AnimatedContainer(
       duration: const Duration(seconds: 4),
       curve: Curves.fastOutSlowIn,
@@ -43,12 +44,14 @@ Widget GifticonStackState(dynamic data, BuildContext context) {
             decoration: const BoxDecoration(
                 color: AppColor.APPBAR_COLOR,
                 borderRadius:
-                BorderRadius.only(bottomRight: Radius.circular(10))),
+                    BorderRadius.only(bottomRight: Radius.circular(10))),
             // 중앙 정렬
             height: 29,
             width: 69,
             child: Text(
-              'D - ${setMessage(expiredDate)}',
+              int.parse(setMessage(expiredDate)) >= 0
+                  ? 'D - ${setMessage(expiredDate)}'
+                  : '만기됨',
               style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
             ),
           ),
@@ -56,15 +59,16 @@ Widget GifticonStackState(dynamic data, BuildContext context) {
           getDifference(expiredDate) >= 3
               ? Container()
               : Positioned.fill(
-              child: Align(
-                  child: Container(
-                      alignment: Alignment.center,
-                      width: 200,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.7)),
-                      child: Text(getDifference(expiredDate) > 0 ? '만기 임박' : '만기',
-                          style: CustomTextStyle.expiredSoonTextStyle)))),
+                  child: Align(
+                      child: Container(
+                          alignment: Alignment.center,
+                          width: 200,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.7)),
+                          child: Text(
+                              getDifference(expiredDate) >= 0 ? '만기 임박' : '만기',
+                              style: CustomTextStyle.expiredSoonTextStyle)))),
         ]),
       ),
     ),
