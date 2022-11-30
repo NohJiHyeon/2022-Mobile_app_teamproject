@@ -116,4 +116,12 @@ class GifticonCRUD {
     final gifticonDoc = gifticonDB.doc(gifticonId);
     gifticonDoc.delete().then((doc) => print("기프티콘 삭제 완료"));
   }
+
+  // 기프티콘 유효기간 변경
+  Future update_expired_date(String gifticonId, DateTime expiredDate) async {
+    final gifticonDoc = gifticonDB.doc(gifticonId);
+    gifticonDoc.update({"expiration_date": Timestamp.fromDate(DateTime(
+        expiredDate.year, expiredDate.month, expiredDate.day, 23, 59, 59))}).then((value) => print("유효기간 변경 완료"));
+  }
 }
+

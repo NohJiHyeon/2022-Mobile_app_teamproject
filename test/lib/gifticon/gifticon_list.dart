@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../styles.dart';
 import '../components/gifticon_stack.dart';
+import '../network/gifticon_crud.dart';
+import 'dart:async';
+
 
 class GifticonListPage extends StatefulWidget {
   const GifticonListPage({Key? key}) : super(key: key);
@@ -10,25 +14,31 @@ class GifticonListPage extends StatefulWidget {
 }
 
 class _GifticonListPageState extends State<GifticonListPage> {
-  final items = List.generate(20, (i) => i).toList();
+  final GifticonCRUD gifticonCRUD = GifticonCRUD();
+
+  Future<List<dynamic>> getGifticonList() async {
+    final List gifticon_list = await gifticonCRUD.get_gifticon_list();
+    return gifticon_list;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Tab(
-      // gifticon Tab
-      child: Scaffold(
-        body: GridView.count(
-            crossAxisCount: 2,
-            children: items
-                .map((i) => GifticonStackState('lib/images/cat.jpg', '$i', context))
-                .toList()),
-        bottomNavigationBar: BottomNavigationBar(
-          items: [
-            const BottomNavigationBarItem(icon: Icon(Icons.photo), label: '사용 전'),
-            const BottomNavigationBarItem(icon: Icon(Icons.done), label: '사용 완료'),
-          ],
-        ),
-      ),
+    return FutureBuilder<List<dynamic>>(
+      future: getGifticonList(),
+      builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
+
+        if (snapshot.hasData) {
+          List? data = snapshot.data;
+
+          print(data);
+          return GridView.count(
+              crossAxisCount: 2,
+              children: data!.map((item) => GifticonStackState(item, context)).toList()
+          );
+        } else {
+          return Center(child: CircularProgressIndicator());
+        }
+      },
     );
   }
 }
