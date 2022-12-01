@@ -15,14 +15,22 @@ class customButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void showSnackBarAndNaivgate() {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: const Text('날짜가 변경됐습니다.'),
+        backgroundColor: Colors.black45,
+      ));
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => const BrandMainPage()),
+          (route) => false);
+    }
+
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
       child: ElevatedButton(
-        onPressed: () => Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (BuildContext context) => const BrandMainPage()),
-            (route) => false),
+        onPressed: () => showSnackBarAndNaivgate(),
         style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
