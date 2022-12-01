@@ -18,7 +18,6 @@ Widget GifticonStackState(dynamic data, BuildContext context) {
     return getDifference(dDay).toString();
   }
 
-  // Animation 수정 작업 필요
   return GestureDetector(
     onTap: () =>
         Navigator.pushNamed(context, '/gifticon_detail', arguments: data),
@@ -31,18 +30,20 @@ Widget GifticonStackState(dynamic data, BuildContext context) {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              //overflow 방지
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Stack(alignment: Alignment.topLeft, children: [
+                    // 이미지 크기 고정
                     FittedBox(
                       child: Container(
                           width: 200,
                           height: 200,
                           decoration:
-                              BoxDecoration(color: AppColor.GRAY, boxShadow: [
+                              BoxDecoration(color: Colors.white70, boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.7),
+                              color: Colors.black.withOpacity(0.3),
                               blurRadius: 4,
                               offset: const Offset(0, 4),
                             )

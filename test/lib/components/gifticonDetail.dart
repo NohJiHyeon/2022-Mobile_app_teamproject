@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:w3_class/gifticon/gifticon_list.dart';
 import '../network/gifticon_crud.dart';
 import '../styles.dart';
 import '../components/calendar_button.dart';
@@ -24,6 +25,26 @@ class CustomButton extends StatelessWidget {
   final Color color;
   final info;
 
+  String getAlertMessage() {
+    String message = '';
+    switch (text) {
+      case '사용하기':
+        message = '기프티콘을 사용하시겠습니까?';
+        break;
+      case '복원하기':
+        message = '사용한 기프티콘을 복원하시겠습니까?';
+        break;
+      case '저장':
+        message = '유효기간을 변경하시겠습니까?';
+        break;
+      case '삭제':
+        message = '기프티콘을 삭제하시겠습니까?';
+        break;
+      default:
+        break;
+    }
+    return message;
+  }
   @override
   Widget build(BuildContext context) {
     // 저장 info: ['gifticon_id', Datetime]
@@ -46,9 +67,10 @@ class CustomButton extends StatelessWidget {
           break;
         case '삭제':
           snackBarMessage = '기프티콘이 삭제됐습니다.';
-          //console.delete_gifticon(info);
+          console.delete_gifticon(info);
           break;
       }
+
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(snackBarMessage),
         duration: const Duration(seconds: 2),
@@ -61,10 +83,23 @@ class CustomButton extends StatelessWidget {
           (route) => false);
     }
 
+
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
       child: ElevatedButton(
-        onPressed: () => navigateAfterProcess(),
+        onPressed: () =>       showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (BuildContext context) => AlertDialog(
+                title: Text('안내'),
+                content: Text(getAlertMessage()),
+                actions: [
+                  TextButton(child: const Text('확인'), onPressed: (){
+                    Navigator.of(context).pop();
+                    navigateAfterProcess();
+                  }),
+                  TextButton(child: const Text('취소'), onPressed: () {Navigator.of(context).pop();})
+                ])),
         style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
@@ -104,15 +139,16 @@ class _GifticonDetailState extends State<GifticonDetail> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Container(
-                width: 350,
-                height: 500,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.black,
-                ),
-                alignment: Alignment.center,
-                child: Image.network(data['imageURL'])),
+            FittedBox(
+              child: Container(
+                  width: 300,
+                  height: 450,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: AppColor.BRIGHT_GRAY),
+                  alignment: Alignment.center,
+                  child: Image.network(data['imageURL'])),
+            ),
             const SizedBox(height: 20),
             Text('\'저장\'을 눌러 유효기간을 저장하세요.',
                 style: TextStyle(
@@ -124,36 +160,38 @@ class _GifticonDetailState extends State<GifticonDetail> {
                 height: 30,
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(20)),
-                child: data['canUse'] ? ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      backgroundColor: AppColor.EXPIRED_DATE_COLOR,
-                      fixedSize: const Size(330, 30),
-                    ),
-                    child: Text(
-                        '유효기간: ${dateFormat ?? DateFormat('yyyy-MM-dd').format(data['expiration_date'].toDate())}',
-                        style: CustomTextStyle.dateButtonTextStyle),
-                    onPressed: () async {
-                      await showDatePicker(
-                        context: context,
-                        initialDate: data['expiration_date'].toDate(),
-                        firstDate: DateTime(DateTime.now().year),
-                        lastDate: DateTime(DateTime.now().year + 10),
-                        initialEntryMode: DatePickerEntryMode.calendarOnly,
-                      ).then((selectedDate) async {
-                        if (selectedDate != null) {
-                          print(selectedDate);
+                child: data['canUse']
+                    ? ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          backgroundColor: AppColor.EXPIRED_DATE_COLOR,
+                          fixedSize: const Size(330, 30),
+                        ),
+                        child: Text(
+                            '유효기간: ${dateFormat ?? DateFormat('yyyy-MM-dd').format(data['expiration_date'].toDate())}',
+                            style: CustomTextStyle.dateButtonTextStyle),
+                        onPressed: () async {
+                          await showDatePicker(
+                            context: context,
+                            initialDate: data['expiration_date'].toDate(),
+                            firstDate: DateTime(DateTime.now().year),
+                            lastDate: DateTime(DateTime.now().year + 10),
+                            initialEntryMode: DatePickerEntryMode.calendarOnly,
+                          ).then((selectedDate) async {
+                            if (selectedDate != null) {
+                              print(selectedDate);
 
-                          setState(() {
-                            dateFormat =
-                                DateFormat('yyyy-MM-dd').format(selectedDate);
+                              setState(() {
+                                dateFormat = DateFormat('yyyy-MM-dd')
+                                    .format(selectedDate);
+                              });
+                            }
+                            //print(dateFormat);
                           });
-                        }
-                        //print(dateFormat);
-                      });
-                    }): null),
+                        })
+                    : null),
             const SizedBox(height: 40),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -165,12 +203,14 @@ class _GifticonDetailState extends State<GifticonDetail> {
                     data['canUse'] ? AppColor.ORANGE : Colors.indigoAccent,
                     data['gifticon_id']),
                 const SizedBox(width: 15),
-                data['canUse'] ? CustomButton('저장', 100, 50, AppColor.ORANGE, [
-                  data['gifticon_id'],
-                  dateFormat == null
-                      ? data['expiration_date'].toDate()
-                      : DateTime.parse(dateFormat!)
-                ]) : Container(),
+                data['canUse']
+                    ? CustomButton('저장', 100, 50, AppColor.ORANGE, [
+                        data['gifticon_id'],
+                        dateFormat == null
+                            ? data['expiration_date'].toDate()
+                            : DateTime.parse(dateFormat!)
+                      ])
+                    : Container(),
                 const SizedBox(width: 15),
                 CustomButton('삭제', 100, 50, AppColor.GRAY, data['gifticon_id']),
               ],
