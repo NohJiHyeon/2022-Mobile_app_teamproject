@@ -8,6 +8,7 @@ class AppColor {
   static const GRAY = Color(0xFFA5A198);
   static const BRIGHT_GRAY = Color(0xFFBFBEBA);
   static const EXPIRED_DATE_COLOR = Color(0xFFEBF0F2);
+  static const GRAY_WITH_OPACITY = Color(0xFFBFBEAA);
 
   static const MaterialColor APPBAR_COLOR = MaterialColor(
     0xffE8B28D,
