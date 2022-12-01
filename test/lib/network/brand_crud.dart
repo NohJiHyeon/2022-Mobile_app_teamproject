@@ -60,6 +60,20 @@ class BrandCRUD {
     return data;
   }
 
+  // 특정 브랜드 리스트 읽어오기
+  Future get_brand_info(String brand) async {
+    final brandDoc = brandDb.doc(brand);
+    DocumentSnapshot doc = await brandDoc.get();
+    final data = doc.data() as Map<String, dynamic>;
+    // 할인 브랜드 리스트
+    var brand_list = await get_discount_brand_list(brand);
+    data["discount_list"] = brand_list;
+    // 적립 브랜드 리스트
+    var membership_list = await get_membership_brand_list(brand);
+    data["membership_list"] = membership_list;
+    return data;
+  }
+
   // 할인 브랜드 읽어오기
   Future get_discount_brand_list(String brand) async {
     final QuerySnapshot snapshot =
