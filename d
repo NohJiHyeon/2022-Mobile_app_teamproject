@@ -1,0 +1,66 @@
+[1mdiff --git a/test/lib/main.dart b/test/lib/main.dart[m
+[1mindex caa01f6..e0ad9d0 100644[m
+[1m--- a/test/lib/main.dart[m
+[1m+++ b/test/lib/main.dart[m
+[36m@@ -1,37 +1,34 @@[m
+ import 'package:flutter/material.dart';[m
+[31m-import 'package:w3_class/brand/brand_add.dart';[m
+[31m-import 'package:w3_class/gifticon/gifticon_add.dart';[m
+[31m-import './styles.dart';[m
+[32m+[m[32mimport 'package:firebase_core/firebase_core.dart';[m
+ import 'package:w3_class/brand/brand_main.dart';[m
+[31m-import './components/shadowed_brand_icon.dart';[m
+[31m-import 'package:w3_class/gifticon/gifticonDetail.dart';[m
+[31m-import 'package:w3_class/brand/brand_detail.dart';[m
+[31m-import 'package:w3_class/gifticon/gifticon_list.dart';[m
+[31m-import 'package:barcode_widget/barcode_widget.dart';[m
+[31m-import 'package:w3_class/components/image_picker.dart';[m
+[31m-import 'package:w3_class/components/barcode_scan.dart';[m
+[31m-import 'package:w3_class/components/custom_floatingActionButton.dart';[m
+[32m+[m[32mimport 'brand/brand_add.dart';[m
+[32m+[m[32mimport 'components/barcode_scan.dart';[m
+[32m+[m[32mimport 'components/gifticonDetail.dart';[m
+[32m+[m[32mimport 'firebase_options.dart';[m
+[32m+[m[32mimport './components/UploadImage.dart';[m
+[32m+[m[32mimport 'gifticon/gifticon_add.dart';[m
+[32m+[m[32mimport 'styles.dart';[m
+ [m
+[31m-// BrandMainPage -> 브랜드 메인 페이지 -> 플로팅 버튼 -> 브랜드 생성 페이지, 기프티콘 생성 페이지[m
+[31m-// BrandDetailPage -> 브랜드 상세 페이지[m
+[31m-// GifticonListPage -> 기프티콘 목록 페이지 -> 플로팅 버튼 -> GifticonDetail[m
+[31m-// GifticonDetail -> 기프티콘 상세 페이지[m
+[31m-void main() {[m
+[32m+[m[32mvoid main() async {[m
+[32m+[m[32m  WidgetsFlutterBinding.ensureInitialized();[m
+[32m+[m[32m  await Firebase.initializeApp([m
+[32m+[m[32m    options: DefaultFirebaseOptions.currentPlatform,[m
+[32m+[m[32m  );[m
+   runApp(const MyApp());[m
+ }[m
+ [m
+ class MyApp extends StatelessWidget {[m
+   const MyApp({super.key});[m
+[31m-[m
+   @override[m
+   Widget build(BuildContext context) {[m
+     return MaterialApp([m
+       title: 'Flutter Demo',[m
+[31m-      theme: ThemeData(primarySwatch: AppColor.APPBAR_COLOR),[m
+[31m-      // home: const ImagePick(),[m
+[32m+[m[32m      theme: ThemeData([m
+[32m+[m[32m        primarySwatch: AppColor.APPBAR_COLOR,[m
+[32m+[m[32m      ),[m
+       initialRoute: '/',[m
+       routes: {[m
+[31m-        '/': (context) => const BrandMainPage(),[m
+[32m+[m[32m        '/': (context) => BrandMainPage(),[m
+         '/gifticon_detail': (context) => const GifticonDetail(),[m
+         '/barcode_scan': (context) => BarcodeScanner(),[m
+         '/gifticon_add' : (context) => GifticonAddPage(),[m
+[36m@@ -39,4 +36,4 @@[m [mclass MyApp extends StatelessWidget {[m
+       },[m
+     );[m
+   }[m
+[31m-}[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
