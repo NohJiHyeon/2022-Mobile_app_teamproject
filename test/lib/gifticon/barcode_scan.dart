@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import '../components/calendar_button.dart';
 import '../network/gifticon_crud.dart';
 
-
 /*
   argument로 이미지 파일을 넣으면 이미지에서 바코드를 읽어오는 위젯입니다.
   사용 방법: image_picker에서 선택한 사진을 argument로 넘기기
@@ -21,7 +20,6 @@ class BarcodeScanner extends StatefulWidget {
 class _BarcodeScanner extends State<BarcodeScanner> {
   String _platformVersion = 'Unknown';
   String qrcode = 'Unknown';
-
 
   @override
   void initState() {
@@ -95,21 +93,25 @@ class _BarcodeScanner extends State<BarcodeScanner> {
               height: 20,
             ),
             CalendarButton(300, 50),
-            Expanded(child: TextField(
+            Expanded(
+                child: TextField(
               controller: _controller,
-              onChanged: (value){
+              onChanged: (value) {
                 gifticon_name = value;
               },
             )),
-            Expanded(child: TextField(
+            Expanded(
+                child: TextField(
               controller: _brandcontroller,
-              onChanged: (value){
+              onChanged: (value) {
                 brand = value;
               },
             )),
-            ElevatedButton(onPressed: (){
-              crud.add_gifticon(gifticon_name, brand, 2022, 11, 28, imageFile);
-            }, child: Text("등록"))
+            ElevatedButton(
+                onPressed: () {
+                  // crud.add_gifticon(gifticon_name, brand, 2022, 11, 28, imageFile);
+                },
+                child: Text("등록"))
           ],
         ),
       ),

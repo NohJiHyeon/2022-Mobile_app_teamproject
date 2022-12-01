@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:w3_class/components/barcode_scan.dart';
-import 'package:w3_class/components/image_picker.dart';
 import '../components/brand_add_widget.dart';
 import 'package:w3_class/gifticon/barcode_scan.dart';
 import 'package:w3_class/gifticon/image_picker.dart';
+import '../gifticon/barcode_scan.dart';
+import '../gifticon/image_picker.dart';
 
 class BrandAddPage extends StatelessWidget {
   const BrandAddPage({Key? key}) : super(key: key);
@@ -66,8 +66,7 @@ class _BrandAddFormState extends State<BrandAddForm> {
                 return DropdownMenuItem(
                     value: _brandList[i], child: Text(_brandList[i]));
               }),
-              onChanged: (value){
-              },
+              onChanged: (value) {},
             ),
             //AddStarbucks(),
             const SizedBox(
@@ -102,4 +101,3 @@ class _BrandAddFormState extends State<BrandAddForm> {
     );
   }
 }
-
