@@ -65,6 +65,10 @@ class BrandCRUD {
     final brandDoc = brandDb.doc(brand);
     DocumentSnapshot doc = await brandDoc.get();
     final data = doc.data() as Map<String, dynamic>;
+    if (data == null) {
+      // 브랜드에 등록된 기프티콘이 없을 경우
+      return {};
+    }
     // 할인 브랜드 리스트
     var brand_list = await get_discount_brand_list(brand);
     data["discount_list"] = brand_list;

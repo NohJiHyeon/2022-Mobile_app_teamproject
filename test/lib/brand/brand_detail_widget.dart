@@ -41,6 +41,10 @@ class BrandDetailWidget extends StatelessWidget {
     print(gifticonData);
     //TODO: 스타벅스에 기프티콘 없을 때 어떻게
     print(brandData);
+    final discount_list = brandData['discount_list'];
+    final membership_list = brandData['membership_list'];
+    print(discount_list);
+    print(membership_list);
 
     return Scaffold(
       appBar: AppBar(),
@@ -51,11 +55,10 @@ class BrandDetailWidget extends StatelessWidget {
           브랜드 이미지, 바코드
            */
           Padding(
-            padding: const EdgeInsets.only(top: 20, bottom: 8),
+            padding: const EdgeInsets.only(top: 10, bottom: 8),
             child: Image.asset(
               'lib/images/${_brand_image_path[brand_name]}',
-              height: 34,
-              width: 1032,
+              height: 50,
             ),
           ),
           Padding(
@@ -66,19 +69,15 @@ class BrandDetailWidget extends StatelessWidget {
           /*
           할인 바코드
            */
+          const Text("할인 바코드"),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Container(
               decoration: BoxDecoration(
                 border:
                     Border.all(color: AppColor.GRAY_WITH_OPACITY, width: 3.5),
-                borderRadius: const BorderRadius.only(
-                  bottomRight: Radius.circular(30),
-                  bottomLeft: Radius.circular(30),
-                ),
+                borderRadius: const BorderRadius.all(Radius.circular(30)),
               ),
-              height: 300,
-              width: 300,
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
@@ -86,7 +85,9 @@ class BrandDetailWidget extends StatelessWidget {
                     Image.asset(
                       'lib/images/${_brand_image_path[brand_name]}',
                       height: 34,
-                      width: 1032,
+                    ),
+                    const SizedBox(
+                      height: 5,
                     ),
                     BarcodeImage('2390809809842342'),
                   ],
@@ -94,6 +95,9 @@ class BrandDetailWidget extends StatelessWidget {
               ),
             ),
           ),
+          /*
+          브랜드에 등록된 기프티콘 리스트
+           */
           SizedBox(
             height: 500,
             child: GridView.count(

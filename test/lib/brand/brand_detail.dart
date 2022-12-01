@@ -14,7 +14,7 @@ class _BrandDetailPageState extends State<BrandDetailPage> {
   @override
   Widget build(BuildContext context) {
     // final brand = ModalRoute.of(context)!.settings.arguments as Map;
-    const brandName = '스타벅스';
+    const brandName = '투썸플레이스';
 
     return FutureBuilder(
       future: Future.wait([
@@ -46,7 +46,7 @@ class _BrandDetailPageState extends State<BrandDetailPage> {
     return brand_data;
   }
 
-  Future<List<dynamic>> getGifticonData(String brand) async {
+  Future getGifticonData(String brand) async {
     // DB 데이터 읽어오기
     final gifticonCRUDcrud = GifticonCRUD();
     final gifticon_data = await gifticonCRUDcrud.get_brand_gifticon_list(brand);
