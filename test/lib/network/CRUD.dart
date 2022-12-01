@@ -73,25 +73,25 @@ class _CRUDTestPageState extends State<CRUDTestPage> {
         ),
         ElevatedButton(
             onPressed: () async {
-              brandCRUD.add_brand("스타벅스", "123");
+              brandCRUD.add_brand("투썸", "456");
             },
             child: const Text("브랜드 추가")),
-        const SizedBox(
-          height: 30,
-        ),
         ElevatedButton(
             onPressed: () async {
-              brandCRUD.add_discount_brand("스타벅스", "KT멤버쉽", "456234");
+              brandCRUD.add_discount_brand("투썸2", "땡떙멤버쉽", "238049");
             },
             child: const Text("할인 브랜드 추가")),
-        const SizedBox(
-          height: 30,
-        ),
         ElevatedButton(
             onPressed: () async {
-              brandCRUD.add_membership_brand("스타벅스", "T멤버쉽", "1234543");
+              brandCRUD.add_membership_brand("투썸", "QQ멤버쉽", "489305");
             },
             child: const Text("멤버쉽 브랜드 추가")),
+        ElevatedButton(
+            onPressed: () async {
+              final data = await brandCRUD.get_brand_list();
+              print(data);
+            },
+            child: const Text("멤버쉽 리스트 읽어오기")),
       ],
     );
   }

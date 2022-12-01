@@ -9,7 +9,6 @@ import 'gifticon/gifticon_add.dart';
 import 'styles.dart';
 import './auth/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'network/CRUD.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,7 +45,6 @@ class MyApp extends StatelessWidget {
                   '/barcode_scan': (context) => BarcodeScanner(),
                   '/gifticon_add': (context) => GifticonAddPage(),
                   '/brand_add': (context) => BrandAddPage(),
-                  // '/crud_test_page': (context) => CRUDTestPage(),
                 },
               );
             } else {
