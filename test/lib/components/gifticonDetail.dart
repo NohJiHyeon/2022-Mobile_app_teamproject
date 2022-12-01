@@ -87,7 +87,7 @@ class CustomButton extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
       child: ElevatedButton(
-        onPressed: () =>       showDialog(
+        onPressed: () => showDialog(
             context: context,
             barrierDismissible: false,
             builder: (BuildContext context) => AlertDialog(

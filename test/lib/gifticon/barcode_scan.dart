@@ -25,8 +25,6 @@ class _BarcodeScanner extends State<BarcodeScanner> {
   String _platformVersion = 'Unknown';
   String qrcode = 'Unknown';
 
-
-
   @override
   void initState() {
     super.initState();
@@ -88,25 +86,25 @@ class _BarcodeScanner extends State<BarcodeScanner> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Center(
                 child: Text(
                   '바코드 번호 : $qrcode',
-                  style: TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              CalendarButton(300, 50),
-              SizedBox(
+              const CalendarButton(300, 50),
+              const SizedBox(
                 height: 20,
               ),
               Row(
                 children: [
-                  Text("상품명 : ", style: TextStyle(fontSize: 18),),
+                  const Text("상품명 : ", style: TextStyle(fontSize: 18),),
                   Expanded(
                       child: TextField(
                     controller: _controller,
@@ -116,12 +114,12 @@ class _BarcodeScanner extends State<BarcodeScanner> {
                   )),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(
                 children: [
-                  Text("브랜드명 : ", style: TextStyle(fontSize: 18),),
+                  const Text("브랜드명 : ", style: TextStyle(fontSize: 18),),
                   Expanded(
                       child: TextField(
                     controller: _brandcontroller,
@@ -131,14 +129,14 @@ class _BarcodeScanner extends State<BarcodeScanner> {
                   )),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               ElevatedButton(
                   onPressed: () {
                      crud.add_gifticon(gifticon_name, brand, context.read<Date>().expDate, imageFile, qrcode);
                   },
-                  child: Text("등록"))
+                  child: const Text("등록"))
             ],
           ),
         ),

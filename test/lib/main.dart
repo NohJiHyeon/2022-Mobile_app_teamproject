@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:w3_class/brand/brand_main.dart';
+import 'package:w3_class/gifticon/gifticon_list.dart';
 import 'brand/brand_add.dart';
 import 'gifticon/barcode_scan.dart';
 import 'components/gifticonDetail.dart';

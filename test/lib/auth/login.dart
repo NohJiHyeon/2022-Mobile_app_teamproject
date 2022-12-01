@@ -10,7 +10,8 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        centerTitle: true,
+        title: Image.asset('lib/images/Brandicon.png'),
       ),
       body: const LoginForm(),
     );
@@ -43,7 +44,7 @@ class _LoginFormState extends State<LoginForm> {
               children: [
                 TextFormField(
                   decoration: const InputDecoration(
-                    labelText: 'Email',
+                    labelText: '이메일',
                   ),
                   onChanged: (value) {
                     email = value;
@@ -55,7 +56,7 @@ class _LoginFormState extends State<LoginForm> {
                 TextFormField(
                   obscureText: true,
                   decoration: const InputDecoration(
-                    labelText: 'Password',
+                    labelText: '비밀번호',
                   ),
                   onChanged: (value) {
                     password = value;
@@ -74,19 +75,23 @@ class _LoginFormState extends State<LoginForm> {
                           _formKey.currentState!.reset();
                           if (!mounted) return;
                           print("로그인 완료");
-                          // Navigator.pushNamed(context, '/brand_main');
                         }
                       } catch (e) {
                         print(e);
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('이메일 또는 비밀번호를 다시 확인해주세요.'),
+                          duration: const Duration(seconds: 2),
+                          backgroundColor: Colors.black45,
+                        ));
                       }
                     },
-                    child: const Text('Enter')),
+                    child: const Text('로그인')),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const Text('If you did not register, '),
+                    const Text('계정이 없다면?'),
                     TextButton(
-                      child: const Text('Register your email.'),
+                      child: const Text('계정 등록하기'),
                       onPressed: () {
                         Navigator.push(
                             context,
