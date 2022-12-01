@@ -89,9 +89,9 @@ class _LoginFormState extends State<LoginForm> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const Text('계정이 없다면?'),
+                    const Text('계정이 없으신가요?'),
                     TextButton(
-                      child: const Text('계정 등록하기'),
+                      child: const Text('회원가입'),
                       onPressed: () {
                         Navigator.push(
                             context,
