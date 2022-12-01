@@ -41,7 +41,7 @@ class CustomButton extends StatelessWidget {
           console.activate_gifticon(info);
           break;
         case '저장':
-          snackBarMessage = '날짜가 변경됐습니다.';
+          snackBarMessage = '유효기간이 변경됐습니다.';
           console.update_expiration_date(info[0], info[1]);
           break;
         case '삭제':

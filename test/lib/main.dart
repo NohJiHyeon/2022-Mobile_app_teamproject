@@ -26,13 +26,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      localizationsDelegates: [
+      localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate
+        DefaultMaterialLocalizations.delegate,
+        DefaultWidgetsLocalizations.delegate,
       ],
-      supportedLocales: [
-        const Locale('ko'),
-        const Locale('KR'),
+      supportedLocales: const [
+        Locale('ko'),
+        Locale('KR'),
       ],
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -51,11 +52,11 @@ class MyApp extends StatelessWidget {
                 ),
                 initialRoute: '/',
                 routes: {
-                  '/': (context) => BrandMainPage(),
+                  '/': (context) => const BrandMainPage(),
                   '/gifticon_detail': (context) => const GifticonDetail(),
                   '/barcode_scan': (context) => BarcodeScanner(),
-                  '/gifticon_add': (context) => GifticonAddPage(),
-                  '/brand_add': (context) => BrandAddPage(),
+                  '/gifticon_add': (context) => const GifticonAddPage(),
+                  '/brand_add': (context) => const BrandAddPage(),
                 },
               );
             } else {
