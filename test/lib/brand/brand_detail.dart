@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../styles.dart';
 import '../components/gifticon_stack.dart';
-import '../components/barcode_image_generation.dart';
+import 'barcode_image_generation.dart';
 
 class BrandeDetailPage extends StatefulWidget {
   const BrandeDetailPage({Key? key}) : super(key: key);
@@ -43,21 +43,21 @@ class _BrandeDetailPageState extends State<BrandeDetailPage> {
                 // ),
                 child: BarcodeImage('1234567890247389234789'),
               ),
-              SizedBox(
-                height: 500,
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  children: [
-                    GifticonStackState('lib/images/cat.jpg', '34', context),
-                    GifticonStackState('lib/images/cat.jpg', '56', context),
-                    GifticonStackState('lib/images/cat.jpg', '90', context),
-                    GifticonStackState('lib/images/cat.jpg', '34', context),
-                    GifticonStackState('lib/images/cat.jpg', '34', context),
-                    GifticonStackState('lib/images/cat.jpg', '34', context),
-                    GifticonStackState('lib/images/cat.jpg', '34', context),
-                  ],
-                ),
-              ),
+              // SizedBox(
+              //   height: 500,
+              //   child: GridView.count(
+              //     crossAxisCount: 2,
+              //     children: [
+              //       GifticonStackState('lib/images/cat.jpg', '34', context),
+              //       GifticonStackState('lib/images/cat.jpg', '56', context),
+              //       GifticonStackState('lib/images/cat.jpg', '90', context),
+              //       GifticonStackState('lib/images/cat.jpg', '34', context),
+              //       GifticonStackState('lib/images/cat.jpg', '34', context),
+              //       GifticonStackState('lib/images/cat.jpg', '34', context),
+              //       GifticonStackState('lib/images/cat.jpg', '34', context),
+              //     ],
+              //   ),
+              // ),
             ],
           ),
         ),
