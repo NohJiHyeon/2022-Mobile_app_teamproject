@@ -1,3 +1,4 @@
+import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../gifticon/barcode_scan.dart';
@@ -32,15 +33,6 @@ Widget AddMembershipHelper(String brand, String format) {
       const SizedBox(
         height: 20,
       ),
-      TextFormField(
-        decoration: const InputDecoration(
-          labelText: '바코드',
-        ),
-        onChanged: (value) {},
-      ),
-      const SizedBox(
-        height: 40,
-      ),
     ],
   );
 }
@@ -52,7 +44,7 @@ class AddMegabox extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: ListView(
-        children: [
+        children: <Widget>[
           Image.asset('lib/images/메가박스 헤더.jpg', width: 700),
           const SizedBox(
             height: 20,
@@ -79,7 +71,7 @@ class AddCGV extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          AddMembershipHelper('kt', 'png'),
+          AddMembershipHelper('kt', 'jpg'),
           AddMembershipHelper('U+', 'jpg'),
           AddMembershipHelper('OK캐쉬백', 'png'),
           AddMembershipHelper('기아멤버스', 'png'),
