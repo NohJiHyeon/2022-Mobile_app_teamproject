@@ -36,7 +36,7 @@ class _GifticonAddFormState extends State<GifticonAddForm> {
         key: _formkey,
         child: ListView(
           children: [
-            const Text('기프티콘 이미지 선택', style: TextStyle(fontSize: 16)),
+            const Text('기프티콘 이미지 선택', style: TextStyle(fontSize: 18)),
             const SizedBox(
               height: 20,
             ),

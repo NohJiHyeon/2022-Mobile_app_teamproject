@@ -35,7 +35,7 @@ class _CalendarButtonState extends State<CalendarButton> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                backgroundColor: AppColor.APPBAR_COLOR,
+                backgroundColor: AppColor.BRIGHT_GRAY,
                 fixedSize: Size(widget.width, widget.height),
               ),
               child: Text('유효기간: $dateFormat',

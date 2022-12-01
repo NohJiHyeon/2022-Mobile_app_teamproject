@@ -8,6 +8,7 @@ import '../components/calendar_button.dart';
 import '../network/gifticon_crud.dart';
 import 'package:provider/provider.dart';
 import '../provider/date_provider.dart';
+import '../styles.dart';
 
 /*
   argument로 이미지 파일을 넣으면 이미지에서 바코드를 읽어오는 위젯입니다.
@@ -24,6 +25,8 @@ class BarcodeScanner extends StatefulWidget {
 class _BarcodeScanner extends State<BarcodeScanner> {
   String _platformVersion = 'Unknown';
   String qrcode = 'Unknown';
+  final _controller = TextEditingController();
+  final _brandcontroller = TextEditingController();
 
 
 
@@ -51,8 +54,6 @@ class _BarcodeScanner extends State<BarcodeScanner> {
   Widget build(BuildContext context) {
     final imageFile = ModalRoute.of(context)?.settings.arguments as File;
     final GifticonCRUD crud = GifticonCRUD();
-    final _controller = TextEditingController();
-    final _brandcontroller = TextEditingController();
     String gifticon_name = '';
     String brand = '';
 
@@ -72,10 +73,6 @@ class _BarcodeScanner extends State<BarcodeScanner> {
                 child: Wrap(
                   children: [
                     ElevatedButton(
-                      child: const Text(
-                        "이미지에서 바코드 스캔하기",
-                        style: TextStyle(fontSize: 18),
-                      ),
                       onPressed: () async {
                         String? str = await Scan.parse(imageFile!.path);
                         if (str != null) {
@@ -84,61 +81,89 @@ class _BarcodeScanner extends State<BarcodeScanner> {
                           });
                         }
                       },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        backgroundColor: AppColor.BRIGHT_GRAY,
+                        fixedSize: const Size(350, 50),
+                      ),
+                      child: const Text(
+                        "이미지에서 바코드 스캔하기",
+                        style: TextStyle(fontSize: 18),
+                      ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Center(
                 child: Text(
                   '바코드 번호 : $qrcode',
-                  style: TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              CalendarButton(300, 50),
-              SizedBox(
+              Center(child: Wrap(children: const [CalendarButton(350, 50)])),
+              const SizedBox(
                 height: 20,
               ),
-              Row(
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  children: [
+                    const Text("상품명 : ", style: TextStyle(fontSize: 18),),
+                    Expanded(
+                        child: TextField(
+                      controller: _controller,
+                      onChanged: (value) {
+                        gifticon_name = value;
+                      },
+                    )),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  children: [
+                    const Text("브랜드명 : ", style: TextStyle(fontSize: 18),),
+                    Expanded(
+                        child: TextField(
+                      controller: _brandcontroller,
+                      onChanged: (value) {
+                        brand = value;
+                      },
+                    )),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Wrap(
                 children: [
-                  Text("상품명 : ", style: TextStyle(fontSize: 18),),
-                  Expanded(
-                      child: TextField(
-                    controller: _controller,
-                    onChanged: (value) {
-                      gifticon_name = value;
-                    },
-                  )),
-                ],
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                         crud.add_gifticon(gifticon_name, brand, context.read<Date>().expDate, imageFile, qrcode);
+                      },
+                      child: const Text("등록", style: TextStyle(fontSize: 18)),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        backgroundColor: AppColor.APPBAR_COLOR,
+                        fixedSize: const Size(400, 50),
+                      ),
+                ),
+                  ),
+                ]
               ),
-              SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  Text("브랜드명 : ", style: TextStyle(fontSize: 18),),
-                  Expanded(
-                      child: TextField(
-                    controller: _brandcontroller,
-                    onChanged: (value) {
-                      brand = value;
-                    },
-                  )),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                  onPressed: () {
-                     crud.add_gifticon(gifticon_name, brand, context.read<Date>().expDate, imageFile, qrcode);
-                  },
-                  child: Text("등록"))
             ],
           ),
         ),
