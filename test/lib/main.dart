@@ -9,6 +9,7 @@ import 'gifticon/gifticon_add.dart';
 import 'styles.dart';
 import './auth/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'brand/brand_detail.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
