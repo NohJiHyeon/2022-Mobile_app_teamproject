@@ -4,17 +4,17 @@ import 'package:flutter/material.dart';
 
 class SortOption with ChangeNotifier{
   // DEFAULT: 시간순
-  String option = 'TIME';
+  String option = 'EXPIRATION';
 
 
-  // 브랜드 순
-  void set_brand_mode(){
-    option = 'BRAND';
+  // 등록순
+  void set_registration_mode(){
+    option = 'REGISTRATION';
     notifyListeners();
   }
 
-  void set_time_mode(){
-    option = 'TIME';
+  void set_expiration_mode(){
+    option = 'EXPIRATION';
     notifyListeners();
   }
 

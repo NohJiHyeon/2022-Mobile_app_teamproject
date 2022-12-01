@@ -36,7 +36,7 @@ class _GifticonListPageState extends State<GifticonListPage> {
 
           //print(data);
           var sortOption = context.select((SortOption o) => o.option);
-          if (sortOption == 'TIME') {
+          if (sortOption == 'EXPIRATION') {
             return Container(
               child: Column(children: [
                 Padding(
@@ -46,17 +46,17 @@ class _GifticonListPageState extends State<GifticonListPage> {
                       children: [
                         ElevatedButton(
                             onPressed: () {
-                              sortOption == 'TIME'
+                              sortOption == 'EXPIRATION'
                                   ? data!.sort((e1, e2) {
                                       return e1['expiration_date']
                                           .compareTo(e2['expiration_date']);
                                     })
                                   : () {};
-                              sortOption == 'TIME'
-                                  ? context.read<SortOption>().set_brand_mode()
-                                  : context.read<SortOption>().set_time_mode();
+                              sortOption == 'EXPIRATION'
+                                  ? context.read<SortOption>().set_registration_mode()
+                                  : context.read<SortOption>().set_expiration_mode();
                             },
-                            child: Text(sortOption == 'TIME' ? '시간순' : '브랜드순'))
+                            child: Text(sortOption == 'EXPIRATION' ? '시간순' : '브랜드순'))
                       ]),
                 ),
                 Expanded(
@@ -88,11 +88,11 @@ class _GifticonListPageState extends State<GifticonListPage> {
                     Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                   ElevatedButton(
                       onPressed: () {
-                        sortOption == 'TIME'
-                            ? context.read<SortOption>().set_brand_mode()
-                            : context.read<SortOption>().set_time_mode();
+                        sortOption == 'EXPIRATION'
+                            ? context.read<SortOption>().set_registration_mode()
+                            : context.read<SortOption>().set_expiration_mode();
                       },
-                      child: Text(sortOption == 'TIME' ? '시간순' : '브랜드순'))
+                      child: Text(sortOption == 'EXPIRATION' ? '시간순' : '브랜드순'))
                 ]),
               ),
               Expanded(child: Container()),

@@ -9,7 +9,8 @@ Widget GifticonStackState(dynamic data, BuildContext context) {
   String expiredDate = DateFormat('yyyy-MM-dd')
       .format(DateTime(dDay.year, dDay.month, dDay.day));
   int getDifference(String dDay) {
-    return (DateTime.parse(dDay).difference(DateTime.now()).inHours / 24).ceil();
+    return (DateTime.parse(dDay).difference(DateTime.now()).inHours / 24)
+        .ceil();
   }
 
   // 유효기간 표시
@@ -34,33 +35,35 @@ Widget GifticonStackState(dynamic data, BuildContext context) {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Stack(alignment: Alignment.topLeft, children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.7),
-                              blurRadius: 4,
-                              offset: const Offset(0, 4),
-                            )
-                          ]),
-                        child: Image.network(imgFileName),
-                      ),
                     Container(
-                      alignment: const Alignment(0, 0),
-                      decoration: const BoxDecoration(
-                          color: AppColor.APPBAR_COLOR,
-                          borderRadius:
-                              BorderRadius.only(bottomRight: Radius.circular(10))),
-                      // 중앙 정렬
-                      height: 29,
-                      width: 69,
-                      child: Text(
-                        int.parse(setMessage(expiredDate)) >= 0
-                            ? 'D - ${setMessage(expiredDate)}'
-                            : '만기됨',
-                        style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
-                      ),
-                    ),
+                        decoration: BoxDecoration(boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.7),
+                            blurRadius: 4,
+                            offset: const Offset(0, 4),
+                          )
+                        ]),
+                        child: Opacity(
+                            opacity: data['canUse'] ? 1 : 0.5,
+                            child: Image.network(imgFileName))),
+                    Container(
+                        alignment: const Alignment(0, 0),
+                        decoration: const BoxDecoration(
+                            color: AppColor.APPBAR_COLOR,
+                            borderRadius: BorderRadius.only(
+                                bottomRight: Radius.circular(10))),
+                        // 중앙 정렬
+                        height: 29,
+                        width: 69,
+                        child: Text(
+                          data['canUse']
+                              ? int.parse(setMessage(expiredDate)) >= 0
+                                  ? 'D - ${setMessage(expiredDate)}'
+                                  : '만기됨'
+                              : ' ',
+                          style: const TextStyle(
+                              fontSize: 10, fontWeight: FontWeight.bold),
+                        )),
                     // 유효기간 3일 이하 기프티콘 상태 메시지
                     getDifference(expiredDate) >= 3
                         ? Container()
@@ -73,8 +76,13 @@ Widget GifticonStackState(dynamic data, BuildContext context) {
                                     decoration: BoxDecoration(
                                         color: Colors.black.withOpacity(0.7)),
                                     child: Text(
-                                        getDifference(expiredDate) >= 0 ? '만기 임박' : '만기',
-                                        style: CustomTextStyle.expiredSoonTextStyle)))),
+                                        data['canUse']
+                                            ? getDifference(expiredDate) >= 0
+                                                ? '만기 임박'
+                                                : '만기'
+                                            : '사용됨',
+                                        style: CustomTextStyle
+                                            .expiredSoonTextStyle)))),
                   ]),
                 ),
               ),
