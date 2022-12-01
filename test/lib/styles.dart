@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class AppColor {
   static const ORANGE = Color(0xFFE59673); // 브랜드/기프티콘 탭 선택, 기프티콘 선택 완료 버튼 색깔
   static const GRAY = Color(0xFFA5A198);
-  static const BRIGHT_GRAY = Color(0XFFBFBEBA);
+  static const BRIGHT_GRAY = Color(0xFFBFBEBA);
   static const EXPIRED_DATE_COLOR = Color(0xFFEBF0F2);
 
   static const MaterialColor APPBAR_COLOR = MaterialColor(
