@@ -40,7 +40,7 @@ class _GifticonListPageState extends State<GifticonListPage> {
             return Container(
               child: Column(children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(left: 16.0, top: 8.0),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -53,12 +53,18 @@ class _GifticonListPageState extends State<GifticonListPage> {
                                     })
                                   : () {};
                               sortOption == 'EXPIRATION'
-                                  ? context.read<SortOption>().set_registration_mode()
-                                  : context.read<SortOption>().set_expiration_mode();
+                                  ? context
+                                      .read<SortOption>()
+                                      .set_registration_mode()
+                                  : context
+                                      .read<SortOption>()
+                                      .set_expiration_mode();
                             },
-                            child: Text(sortOption == 'EXPIRATION' ? '시간순' : '브랜드순'))
+                            child: Text(
+                                sortOption == 'EXPIRATION' ? '시간순' : '브랜드순'))
                       ]),
                 ),
+                const Divider(color: AppColor.APPBAR_COLOR),
                 Expanded(
                     child: data!.isEmpty
                         ? const Center(
@@ -83,7 +89,7 @@ class _GifticonListPageState extends State<GifticonListPage> {
           else {
             return Column(children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(left: 16.0, top: 8.0),
                 child:
                     Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                   ElevatedButton(
@@ -92,9 +98,10 @@ class _GifticonListPageState extends State<GifticonListPage> {
                             ? context.read<SortOption>().set_registration_mode()
                             : context.read<SortOption>().set_expiration_mode();
                       },
-                      child: Text(sortOption == 'EXPIRATION' ? '시간순' : '브랜드순'))
+                      child: Text(sortOption == 'EXPIRATION' ? '시간순' : '등록순'))
                 ]),
               ),
+              const Divider(color: AppColor.APPBAR_COLOR),
               Expanded(child: Container()),
             ]);
           }

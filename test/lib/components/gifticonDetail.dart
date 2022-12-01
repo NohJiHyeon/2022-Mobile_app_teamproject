@@ -118,13 +118,13 @@ class _GifticonDetailState extends State<GifticonDetail> {
                 style: TextStyle(
                     color:
                         dateFormat == null ? Colors.transparent : Colors.red)),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             Container(
                 width: 330,
                 height: 30,
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(20)),
-                child: ElevatedButton(
+                child: data['canUse'] ? ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -153,20 +153,26 @@ class _GifticonDetailState extends State<GifticonDetail> {
                         }
                         //print(dateFormat);
                       });
-                    })),
+                    }): null),
             const SizedBox(height: 40),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CustomButton(data['canUse'] ? '사용하기' : '복원하기', 180, 50,
-                    data['canUse'] ? AppColor.ORANGE : Colors.indigoAccent, data['gifticon_id']),
-                SizedBox(width: 15),
-                CustomButton('저장', 80, 50, AppColor.GRAY, [
+                CustomButton(
+                    data['canUse'] ? '사용하기' : '복원하기',
+                    140,
+                    50,
+                    data['canUse'] ? AppColor.ORANGE : Colors.indigoAccent,
+                    data['gifticon_id']),
+                const SizedBox(width: 15),
+                data['canUse'] ? CustomButton('저장', 100, 50, AppColor.ORANGE, [
                   data['gifticon_id'],
-                  dateFormat == null ? data['expiration_date'].toDate() : DateTime.parse(dateFormat!)
-                ]),
-                SizedBox(width: 15),
-                CustomButton('삭제', 80, 50, AppColor.GRAY, data['gifticon_id']),
+                  dateFormat == null
+                      ? data['expiration_date'].toDate()
+                      : DateTime.parse(dateFormat!)
+                ]) : Container(),
+                const SizedBox(width: 15),
+                CustomButton('삭제', 100, 50, AppColor.GRAY, data['gifticon_id']),
               ],
             )
           ],
