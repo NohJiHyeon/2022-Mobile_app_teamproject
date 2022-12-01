@@ -37,8 +37,9 @@ class _GifticonListPageState extends State<GifticonListPage> {
           //print(data);
           var sortOption = context.select((SortOption o) => o.option);
           if (sortOption == 'TIME') {
-            return Container(
-              child: Column(children: [
+            return Scaffold(
+              body: Column(
+                  children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -77,26 +78,40 @@ class _GifticonListPageState extends State<GifticonListPage> {
                                     (item) => GifticonStackState(item, context))
                                 .toList())),
               ]),
+              bottomNavigationBar: BottomNavigationBar(
+              items: [
+              const BottomNavigationBarItem(icon: Icon(Icons.card_giftcard_sharp), label: '사용 전'),
+              const BottomNavigationBarItem(icon: Icon(Icons.done), label: '사용 완료'),
+              ],
+              )
             );
           }
           // 브랜드별 순
           else {
-            return Column(children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        sortOption == 'TIME'
-                            ? context.read<SortOption>().set_brand_mode()
-                            : context.read<SortOption>().set_time_mode();
-                      },
-                      child: Text(sortOption == 'TIME' ? '시간순' : '브랜드순'))
-                ]),
-              ),
-              Expanded(child: Container()),
-            ]);
+            return Scaffold(
+              body: Column(children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child:
+                      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          sortOption == 'TIME'
+                              ? context.read<SortOption>().set_brand_mode()
+                              : context.read<SortOption>().set_time_mode();
+                        },
+                        child: Text(sortOption == 'TIME' ? '시간순' : '브랜드순'))
+                  ]),
+                ),
+                Expanded(child: Container()),
+              ]),
+              bottomNavigationBar: BottomNavigationBar(
+                items: [
+                  const BottomNavigationBarItem(icon: Icon(Icons.card_giftcard_sharp), label: '사용 전'),
+                  const BottomNavigationBarItem(icon: Icon(Icons.done), label: '사용 완료'),
+                ],
+              )
+            );
           }
         } else {
           return const Center(child: CircularProgressIndicator());
