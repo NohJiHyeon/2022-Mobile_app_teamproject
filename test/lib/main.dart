@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:w3_class/brand/brand_main.dart';
+import './components/shadowed_brand_icon.dart';
+import 'package:w3_class/gifticon/gifticonDetail.dart';
+import 'package:w3_class/brand/brand_detail.dart';
+import 'package:w3_class/gifticon/gifticon_list.dart';
+import 'package:barcode_widget/barcode_widget.dart';
+import 'package:w3_class/components/image_picker.dart';
+import 'package:w3_class/components/barcode_scan.dart';
+import 'package:w3_class/components/custom_floatingActionButton.dart';
+import './components/brand_add_widget.dart';
 import 'brand/brand_add.dart';
 import 'gifticon/barcode_scan.dart';
 import 'components/gifticonDetail.dart';
