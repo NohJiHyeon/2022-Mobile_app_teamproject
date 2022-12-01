@@ -56,7 +56,7 @@ class _GifticonListPageState extends State<GifticonListPage> {
           if (_bottomNaviIndex == 0) {
             data = data.where((i) => i['canUse'] == true).toList();
           } else {
-            data = data.where((i) => i['canUse'] == false).toList();
+            data = snapshot!.data!.where((i) => i['canUse'] == false).toList();
           }
 
           return Scaffold(
@@ -100,12 +100,13 @@ class _GifticonListPageState extends State<GifticonListPage> {
                                               TextButton(child: const Text('확인'), onPressed: (){
                                                 for (var item in data!) {
                                                   gifticonCRUD.delete_gifticon(item['gifticon_id']);
-                                                  setState((){data;});
                                                 }
+                                                setState((){data;});
                                                 Navigator.of(context).pop();
                                               }),
                                               TextButton(child: const Text('취소'), onPressed: () {Navigator.of(context).pop();})
                                             ]));
+
                                   },
                                   child: const Text('일괄 삭제')) : Container()
                         ]),
