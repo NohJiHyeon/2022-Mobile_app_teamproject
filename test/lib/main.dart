@@ -10,6 +10,8 @@ import 'styles.dart';
 import './auth/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -20,9 +22,18 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate
+      ],
+      supportedLocales: [
+        const Locale('ko'),
+        const Locale('KR'),
+      ],
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: AppColor.APPBAR_COLOR,

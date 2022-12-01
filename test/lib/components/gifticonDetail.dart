@@ -159,7 +159,7 @@ class _GifticonDetailState extends State<GifticonDetail> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomButton(data['canUse'] ? '사용하기' : '복원하기', 180, 50,
-                    AppColor.ORANGE, data['gifticon_id']),
+                    data['canUse'] ? AppColor.ORANGE : Colors.indigoAccent, data['gifticon_id']),
                 SizedBox(width: 15),
                 CustomButton('저장', 80, 50, AppColor.GRAY, [
                   data['gifticon_id'],
