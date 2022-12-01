@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../network/gifticon_crud.dart';
@@ -15,45 +16,42 @@ customButton('사용 완료', 180, 50, AppColor.ORANGE)
 */
 
 class CustomButton extends StatelessWidget {
-  const CustomButton(this.text, this.width, this.height, this.color, {Key? key})
-      : super(key: key); //@required this.onPressed
+  const CustomButton(this.text, this.width, this.height, this.color,
+      [this.info]); //@required this.onPressed
   final String text;
   final double width;
   final double height;
   final Color color;
+  final info;
 
   @override
   Widget build(BuildContext context) {
-    // 저장
-    void modifyDateNaivgate() {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('날짜가 변경됐습니다.'),
-        backgroundColor: Colors.black45,
-      ));
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (BuildContext context) => const BrandMainPage()),
-          (route) => false);
-    }
+    // 저장 info: ['gifticon_id', Datetime]
 
-    // 사용하기 -> canUse 변경
-    void useGifticonNavigate() {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('기프티콘을 사용하셨습니다.'),
-        backgroundColor: Colors.black45,
-      ));
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (BuildContext context) => const BrandMainPage()),
-          (route) => false);
-    }
-
-    // 삭제 -> 기프티콘 삭제
-    void deleteGifticonNavigate() {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('기프티콘이 삭제됐습니다.'),
+    void navigateAfterProcess() {
+      String snackBarMessage = '';
+      GifticonCRUD console = GifticonCRUD();
+      switch (text) {
+        case '사용하기':
+          snackBarMessage = '기프티콘을 사용하셨습니다.';
+          console.deactivate_gifticon(info);
+          break;
+        case '복원하기':
+          snackBarMessage = '기프티콘을 재사용할 수 있습니다.';
+          console.activate_gifticon(info);
+          break;
+        case '저장':
+          snackBarMessage = '날짜가 변경됐습니다.';
+          console.update_expiration_date(info[0], info[1]);
+          break;
+        case '삭제':
+          snackBarMessage = '기프티콘이 삭제됐습니다.';
+          //console.delete_gifticon(info);
+          break;
+      }
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(snackBarMessage),
+        duration: const Duration(seconds: 2),
         backgroundColor: Colors.black45,
       ));
       Navigator.pushAndRemoveUntil(
@@ -66,13 +64,7 @@ class CustomButton extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
       child: ElevatedButton(
-        onPressed: () => {
-          text == '사용하기'
-              ? useGifticonNavigate()
-              : text == '저장'
-                  ? modifyDateNaivgate()
-                  : deleteGifticonNavigate()
-        },
+        onPressed: () => navigateAfterProcess(),
         style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
@@ -101,7 +93,7 @@ class _GifticonDetailState extends State<GifticonDetail> {
   @override
   Widget build(BuildContext context) {
     final data = ModalRoute.of(context)!.settings.arguments as Map;
-
+    print(data);
     //print('기프티콘 데이터 ${data}');
     return Scaffold(
       appBar: AppBar(
@@ -153,8 +145,7 @@ class _GifticonDetailState extends State<GifticonDetail> {
                       ).then((selectedDate) async {
                         if (selectedDate != null) {
                           print(selectedDate);
-                          await GifticonCRUD().update_expired_date(
-                              data['gifticon_id'], selectedDate);
+
                           setState(() {
                             dateFormat =
                                 DateFormat('yyyy-MM-dd').format(selectedDate);
@@ -166,12 +157,16 @@ class _GifticonDetailState extends State<GifticonDetail> {
             const SizedBox(height: 40),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                CustomButton('사용하기', 180, 50, AppColor.ORANGE),
+              children: [
+                CustomButton(data['canUse'] ? '사용하기' : '복원하기', 180, 50,
+                    AppColor.ORANGE, data['gifticon_id']),
                 SizedBox(width: 15),
-                CustomButton('저장', 80, 50, AppColor.GRAY),
+                CustomButton('저장', 80, 50, AppColor.GRAY, [
+                  data['gifticon_id'],
+                  dateFormat == null ? data['expiration_date'].toDate() : DateTime.parse(dateFormat!)
+                ]),
                 SizedBox(width: 15),
-                CustomButton('삭제', 80, 50, AppColor.GRAY),
+                CustomButton('삭제', 80, 50, AppColor.GRAY, data['gifticon_id']),
               ],
             )
           ],
