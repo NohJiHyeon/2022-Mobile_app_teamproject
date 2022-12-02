@@ -18,7 +18,7 @@ class BrandCRUD {
   }
 
   // TODO: 할인 브랜드, 적립 브랜드 없는 브랜드에 추가할 때 exception 만들기
-  // TODO: 없는 컬렉션에 접근햇을 때 어떻게 나오는지
+  // TODO: 없는 컬렉션에 접근했을 때 어떻게 나오는지
   // 할인 브랜드 추가
   Future add_discount_brand(
       String brandName, String discountBrand, String discountBarcode) async {
@@ -85,7 +85,7 @@ class BrandCRUD {
     final data = [];
     for (var doc in snapshot.docs) {
       var dataElement = doc.data() as Map<String, dynamic>;
-      dataElement["discount_brand_name"] = doc.id;
+      dataElement["brand_name"] = doc.id;
       data.add(dataElement);
     }
     return data;
@@ -98,7 +98,7 @@ class BrandCRUD {
     final data = [];
     for (var doc in snapshot.docs) {
       var dataElement = doc.data() as Map<String, dynamic>;
-      dataElement["membership_brand_name"] = doc.id;
+      dataElement["brand_name"] = doc.id;
       data.add(dataElement);
     }
     return data;
