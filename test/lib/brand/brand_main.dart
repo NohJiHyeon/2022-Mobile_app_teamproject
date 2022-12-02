@@ -5,7 +5,7 @@ import '../components/shadowed_brand_icon.dart';
 import '../gifticon/gifticon_list.dart';
 import '../components/custom_floatingActionButton.dart';
 import '../network/gifticon_crud.dart';
-
+import 'brand_detail.dart';
 import 'package:provider/provider.dart';
 import '../provider/sort_provider.dart';
 
