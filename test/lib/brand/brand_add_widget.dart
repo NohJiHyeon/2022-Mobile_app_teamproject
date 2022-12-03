@@ -1,46 +1,73 @@
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import '../gifticon/barcode_scan.dart';
-import '../gifticon/image_picker.dart';
+import 'brand_barcode_scan.dart';
+import 'brand_image_picker.dart';
 
-class AddTester extends StatelessWidget {
-  const AddTester({Key? key}) : super(key: key);
 
+class AddTMembership extends StatefulWidget {
+  String brand = '';
+  AddTMembership(this.brand);
+  @override
+  State<AddTMembership> createState() => _AddTMembershipState(brand);
+}
+
+class _AddTMembershipState extends State<AddTMembership> {
+  String barcode = 'null';
+  String brand = '';
+  _AddTMembershipState(this.brand);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('브랜드 등록하기'),
-      ),
-      body: const AddMegabox(),
+    return Column(
+      children: [
+        Image.asset('lib/images/T 헤더.png', width: 700),
+        const SizedBox(
+          height: 20,
+        ),
+        Text('T 멤버십 바코드 이미지'),
+        const SizedBox(
+          height: 20,
+        ),
+        BrandImagePick(brand, 'T'),
+      ],
     );
   }
 }
 
-Widget AddMembershipHelper(String brand, String format) {
-  return Column(
-    children: [
-      Image.asset('lib/images/$brand 헤더.$format', width: 700),
-      const SizedBox(
-        height: 20,
-      ),
-      Text('$brand 멤버십 바코드 이미지'),
-      const SizedBox(
-        height: 20,
-      ),
-      ImagePick(),
-      const SizedBox(
-        height: 20,
-      ),
-    ],
-  );
+class AddStarbucks extends StatelessWidget {
+  const AddStarbucks({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Image.asset('lib/images/T 헤더.png', width: 700),
+        const SizedBox(
+          height: 20,
+        ),
+        Text('T 멤버십 바코드 이미지'),
+        const SizedBox(
+          height: 20,
+        ),
+        BrandImagePick('스타벅스','스타벅스'),
+        ElevatedButton(
+          child: const Text(
+            "등록하기",
+            style: TextStyle(fontSize: 18),
+          ),
+          onPressed: () async {
+          },
+        ),
+      ],
+    );
+  }
 }
 
+/*
 class AddMegabox extends StatelessWidget {
   const AddMegabox({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final barcode = ModalRoute.of(context)?.settings.arguments;
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: ListView(
@@ -49,10 +76,10 @@ class AddMegabox extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          AddMembershipHelper('kt', 'jpg'),
-          AddMembershipHelper('U+', 'jpg'),
-          AddMembershipHelper('L Point', 'png'),
-          AddMembershipHelper('OK캐쉬백', 'png'),
+          AddMembershipHelper('Megabox','kt', 'jpg'),
+          AddMembershipHelper('Megabox','U+', 'jpg'),
+          AddMembershipHelper('Megabox','L Point', 'png'),
+          AddMembershipHelper('Megabox','OK캐쉬백', 'png'),
         ],
       ),
     );
@@ -71,10 +98,10 @@ class AddCGV extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          AddMembershipHelper('kt', 'jpg'),
-          AddMembershipHelper('U+', 'jpg'),
-          AddMembershipHelper('OK캐쉬백', 'png'),
-          AddMembershipHelper('기아멤버스', 'png'),
+          AddMembershipHelper('CGV','kt', 'jpg'),
+          AddMembershipHelper('CGV','U+', 'jpg'),
+          AddMembershipHelper('CGV','OK캐쉬백', 'png'),
+          AddMembershipHelper('CGV','기아멤버스', 'png'),
         ],
       ),
     );
@@ -93,10 +120,10 @@ class AddLotteCinema extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          AddMembershipHelper('T', 'png'),
-          AddMembershipHelper('kt', 'jpg'),
-          AddMembershipHelper('OK캐쉬백', 'png'),
-          AddMembershipHelper('기아멤버스', 'png'),
+          AddMembershipHelper('롯데시네마','T', 'png'),
+          AddMembershipHelper('롯데시네마','kt', 'jpg'),
+          AddMembershipHelper('롯데시네마','OK캐쉬백', 'png'),
+          AddMembershipHelper('롯데시네마','기아멤버스', 'png'),
         ],
       ),
     );
@@ -111,7 +138,7 @@ class AddBurgerKing extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: ListView(
         children: [
-          AddMembershipHelper('버거킹', 'jpg'),
+          AddMembershipHelper('버거킹','버거킹', 'jpg'),
         ],
       ),
     );
@@ -126,7 +153,7 @@ class AddMcDonalds extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: ListView(
         children: [
-          AddMembershipHelper('맥도날드', 'jpg'),
+          AddMembershipHelper('맥도날드','맥도날드', 'jpg'),
         ],
       ),
     );
@@ -144,7 +171,7 @@ class AddBBQ extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          AddMembershipHelper('bbq', 'jpg'),
+          AddMembershipHelper('bbq','bbq', 'jpg'),
         ],
       ),
     );
@@ -159,7 +186,7 @@ class AddKyochon extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: ListView(
         children: [
-          AddMembershipHelper('교촌치킨', 'png'),
+          AddMembershipHelper('교촌치킨','교촌치킨', 'png'),
         ],
       ),
     );
@@ -178,10 +205,10 @@ class AddTous extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          AddMembershipHelper('CJ ONE', 'jpg'),
-          AddMembershipHelper('T', 'png'),
-          AddMembershipHelper('kt', 'jpg'),
-          AddMembershipHelper('U+', 'jpg'),
+          AddMembershipHelper('뚜레쥬르','CJ ONE', 'jpg'),
+          AddMembershipHelper('뚜레쥬르','T', 'png'),
+          AddMembershipHelper('뚜레쥬르','kt', 'jpg'),
+          AddMembershipHelper('뚜레쥬르','U+', 'jpg'),
         ],
       ),
     );
@@ -200,8 +227,8 @@ class Add711 extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          AddMembershipHelper('T', 'png'),
-          AddMembershipHelper('L Point', 'png'),
+          AddMembershipHelper('7 11','T', 'png'),
+          AddMembershipHelper('7 11','L Point', 'png'),
         ],
       ),
     );
@@ -220,7 +247,7 @@ class AddMinistop extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          AddMembershipHelper('OK캐쉬백', 'png'),
+          AddMembershipHelper('Ministop','OK캐쉬백', 'png'),
         ],
       ),
     );
@@ -239,9 +266,9 @@ class AddGS extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          AddMembershipHelper('kt', 'jpg'),
-          AddMembershipHelper('U+', 'jpg'),
-          AddMembershipHelper('기아멤버스', 'png'),
+          AddMembershipHelper('GS25','kt', 'jpg'),
+          AddMembershipHelper('GS25','U+', 'jpg'),
+          AddMembershipHelper('GS25','기아멤버스', 'png'),
         ],
       ),
     );
@@ -256,8 +283,8 @@ class AddCU extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: ListView(
         children: [
-          AddMembershipHelper('CU', 'jpg'),
-          AddMembershipHelper('T', 'jpg'),
+          AddMembershipHelper('CU','CU', 'jpg'),
+          AddMembershipHelper('CU','T', 'jpg'),
         ],
       ),
     );
@@ -272,8 +299,8 @@ class AddGongcha extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: ListView(
         children: [
-          AddMembershipHelper('공차', 'jpg'),
-          AddMembershipHelper('T', 'jpg'),
+          AddMembershipHelper('공차','공차', 'jpg'),
+          AddMembershipHelper('공차','T', 'jpg'),
         ],
       ),
     );
@@ -288,7 +315,7 @@ class AddSulbing extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: ListView(
         children: [
-          AddMembershipHelper('설빙', 'jpg'),
+          AddMembershipHelper('설빙','설빙', 'jpg'),
         ],
       ),
     );
@@ -303,23 +330,7 @@ class AddEdiya extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: ListView(
         children: [
-          AddMembershipHelper('이디야', 'jpg'),
-        ],
-      ),
-    );
-  }
-}
-
-class AddStarbucks extends StatelessWidget {
-  const AddStarbucks({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: ListView(
-        children: [
-          AddMembershipHelper('스타벅스', 'jpg'),
-          AddMembershipHelper('kt', 'jpg'),
+          AddMembershipHelper('이디야','이디야', 'jpg'),
         ],
       ),
     );
@@ -338,12 +349,14 @@ class AddTwosome extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          AddMembershipHelper('CJ ONE', 'jpg'),
-          AddMembershipHelper('T', 'png'),
-          AddMembershipHelper('kt', 'jpg'),
-          AddMembershipHelper('U+', 'jpg'),
+          AddMembershipHelper('투썸','CJ ONE', 'jpg'),
+          AddMembershipHelper('투썸','T', 'png'),
+          AddMembershipHelper('투썸','kt', 'jpg'),
+          AddMembershipHelper('투썸','U+', 'jpg'),
         ],
       ),
     );
   }
 }
+*/
+

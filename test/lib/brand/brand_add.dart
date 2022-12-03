@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:w3_class/gifticon/barcode_scan.dart';
 import 'package:w3_class/gifticon/image_picker.dart';
-import '../components/brand_add_widget.dart';
+import 'brand_add_widget.dart';
 import 'package:w3_class/gifticon/barcode_scan.dart';
 import 'package:w3_class/gifticon/image_picker.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import '../components/brand_add_widget.dart';
 
 class BrandAddPage extends StatelessWidget {
   const BrandAddPage({Key? key}) : super(key: key);
@@ -75,12 +74,19 @@ class _BrandAddFormState extends State<BrandAddForm> {
               },
             ),
             SizedBox(
-              height: 550,
+              height: 430,
               child: Builder(
                   builder: (context){
                     switch (brand){
                       case '스타벅스':
-                        return const AddStarbucks();
+                        return ListView(
+                          scrollDirection: Axis.vertical,
+                          children: const [
+                            AddStarbucks();
+                            AddTMembership('스타벅스'),
+                          ],
+                        );
+                        /*
                       case '설빙':
                         return const AddSulbing();
                       case '투썸플레이스':
@@ -113,6 +119,8 @@ class _BrandAddFormState extends State<BrandAddForm> {
                         return const AddMegabox();
                       case '이디야커피':
                         return const AddEdiya();
+
+                         */
                       default:
                         return Text('브랜드를 선택해주세요');
                     }

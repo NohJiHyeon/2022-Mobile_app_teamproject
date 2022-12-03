@@ -13,12 +13,12 @@ import '../network/brand_crud.dart';
   '이미지에서 바코드 스캔하기' 버튼을 누르면 스캔한 결과가 화면에 나타납니다.
  */
 
-class BarcodeScanner extends StatefulWidget {
+class BrandBarcodeScanner extends StatefulWidget {
   @override
-  _BarcodeScanner createState() => _BarcodeScanner();
+  _BrandBarcodeScanner createState() => _BrandBarcodeScanner();
 }
 
-class _BarcodeScanner extends State<BarcodeScanner> {
+class _BrandBarcodeScanner extends State<BrandBarcodeScanner> {
   String _platformVersion = 'Unknown';
   String qrcode = 'Unknown';
 
@@ -49,7 +49,6 @@ class _BarcodeScanner extends State<BarcodeScanner> {
     final _controller = TextEditingController();
     final _brandcontroller = TextEditingController();
     String gifticon_name = '';
-    String brand = '';
 
     return Scaffold(
       appBar: AppBar(
@@ -93,23 +92,9 @@ class _BarcodeScanner extends State<BarcodeScanner> {
             SizedBox(
               height: 20,
             ),
-            CalendarButton(300, 50),
-            Expanded(
-                child: TextField(
-              controller: _controller,
-              onChanged: (value) {
-                gifticon_name = value;
-              },
-            )),
-            Expanded(
-                child: TextField(
-              controller: _brandcontroller,
-              onChanged: (value) {
-                brand = value;
-              },
-            )),
             ElevatedButton(
-                onPressed: () {
+                onPressed: (){
+                  Navigator.pop(context, qrcode);
                 },
                 child: Text("등록"))
           ],
