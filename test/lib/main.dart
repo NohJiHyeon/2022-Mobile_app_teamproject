@@ -10,6 +10,7 @@ import 'gifticon/gifticon_add.dart';
 import 'styles.dart';
 import './auth/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'brand/brand_detail.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 
