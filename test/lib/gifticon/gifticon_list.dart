@@ -15,7 +15,9 @@ class GifticonListPage extends StatefulWidget {
 
 class _GifticonListPageState extends State<GifticonListPage> {
   final GifticonCRUD gifticonCRUD = GifticonCRUD();
+  int _bottomNaviIndex = 0;
 
+  // DB 기프티콘 구하기
   Future<List<dynamic>> getGifticonList() async {
     final List gifticon_list = await gifticonCRUD.get_gifticon_list();
     return gifticon_list;
@@ -36,12 +38,8 @@ class _GifticonListPageState extends State<GifticonListPage> {
       future: getGifticonList(),
       builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
         if (snapshot.hasData) {
-          List? data = snapshot.data;
-          if (data != null) {
-            data.sort((e1, e2) {
-              return e1['expiration_date'].compareTo(e2['expiration_date']);
-            });
-          }
+          // 깊은 복사
+          List? data = [...snapshot!.data!];
 
           //print(data);
           var sortOption = context.select((SortOption o) => o.option);
@@ -122,12 +120,15 @@ class _GifticonListPageState extends State<GifticonListPage> {
               ),
               bottomNavigationBar: BottomNavigationBar(
                 items: [
-                  const BottomNavigationBarItem(icon: Icon(Icons.card_giftcard_sharp), label: '사용 전'),
-                  const BottomNavigationBarItem(icon: Icon(Icons.done), label: '사용 완료'),
+                  const BottomNavigationBarItem(
+                      icon: Icon(Icons.card_giftcard_sharp), label: '사용 전'),
+                  const BottomNavigationBarItem(
+                      icon: Icon(Icons.done), label: '사용 완료'),
                 ],
-              )
-            );
-          }
+                currentIndex: _bottomNaviIndex,
+                selectedItemColor: AppColor.APPBAR_COLOR,
+                onTap: naviTapped,
+              ));
         } else {
           return const Center(child: CircularProgressIndicator());
         }
