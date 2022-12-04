@@ -15,9 +15,7 @@ class GifticonListPage extends StatefulWidget {
 
 class _GifticonListPageState extends State<GifticonListPage> {
   final GifticonCRUD gifticonCRUD = GifticonCRUD();
-  int _bottomNaviIndex = 0;
 
-  // DB 기프티콘 구하기
   Future<List<dynamic>> getGifticonList() async {
     final List gifticon_list = await gifticonCRUD.get_gifticon_list();
     return gifticon_list;
@@ -31,21 +29,18 @@ class _GifticonListPageState extends State<GifticonListPage> {
     return Future<void>.value();
   }
 
-  // Bottom Navigation Bar onTap 함수
-  void naviTapped(int index) {
-    setState(() {
-      _bottomNaviIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<dynamic>>(
       future: getGifticonList(),
       builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
         if (snapshot.hasData) {
-          // 깊은 복사
-          List? data = [...snapshot!.data!];
+          List? data = snapshot.data;
+          if (data != null) {
+            data.sort((e1, e2) {
+              return e1['expiration_date'].compareTo(e2['expiration_date']);
+            });
+          }
 
           //print(data);
           var sortOption = context.select((SortOption o) => o.option);
