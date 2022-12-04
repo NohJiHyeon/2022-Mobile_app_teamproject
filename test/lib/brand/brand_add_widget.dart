@@ -34,34 +34,295 @@ class _AddTMembershipState extends State<AddTMembership> {
   }
 }
 
+class AddKTMembership extends StatefulWidget {
+  String brand = '';
+  AddKTMembership(this.brand);
+  @override
+  State<AddKTMembership> createState() => _AddKTMembershipState(brand);
+}
+
+class _AddKTMembershipState extends State<AddKTMembership> {
+  String barcode = 'null';
+  String brand = '';
+  _AddKTMembershipState(this.brand);
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Image.asset('lib/images/kt 헤더.jpg', width: 700),
+        const SizedBox(
+          height: 20,
+        ),
+        Text('KT 멤버십 바코드 이미지'),
+        const SizedBox(
+          height: 20,
+        ),
+        BrandImagePick(brand, 'KT'),
+      ],
+    );
+  }
+}
+
+class AddUPlusMembership extends StatefulWidget {
+  String brand = '';
+  AddUPlusMembership(this.brand);
+  @override
+  State<AddUPlusMembership> createState() => _AddUPlusMembershipState(brand);
+}
+
+class _AddUPlusMembershipState extends State<AddUPlusMembership> {
+  String barcode = 'null';
+  String brand = '';
+  _AddUPlusMembershipState(this.brand);
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Image.asset('lib/images/U+ 헤더.jpg', width: 700),
+        const SizedBox(
+          height: 20,
+        ),
+        Text('U+ 멤버십 바코드 이미지'),
+        const SizedBox(
+          height: 20,
+        ),
+        BrandImagePick(brand, 'UPlus'),
+      ],
+    );
+  }
+}
+
+class AddKiaMembership extends StatefulWidget {
+  String brand = '';
+  AddKiaMembership(this.brand);
+  @override
+  State<AddKiaMembership> createState() => _AddKiaMembershipState(brand);
+}
+
+class _AddKiaMembershipState extends State<AddKiaMembership> {
+  String barcode = 'null';
+  String brand = '';
+  _AddKiaMembershipState(this.brand);
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Image.asset('lib/images/기아멤버스 헤더.png', width: 700),
+        const SizedBox(
+          height: 20,
+        ),
+        Text('기아멤버스 바코드 이미지'),
+        const SizedBox(
+          height: 20,
+        ),
+        BrandImagePick(brand, 'Kia'),
+      ],
+    );
+  }
+}
+
+class AddOKMembership extends StatefulWidget {
+  String brand = '';
+  AddOKMembership(this.brand);
+  @override
+  State<AddOKMembership> createState() => _AddOKMembershipState(brand);
+}
+
+class _AddOKMembershipState extends State<AddOKMembership> {
+  String barcode = 'null';
+  String brand = '';
+  _AddOKMembershipState(this.brand);
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Image.asset('lib/images/OK캐쉬백 헤더.png', width: 700),
+        const SizedBox(
+          height: 20,
+        ),
+        Text('OK캐쉬백 바코드 이미지'),
+        const SizedBox(
+          height: 20,
+        ),
+        BrandImagePick(brand, 'OK'),
+      ],
+    );
+  }
+}
+
+class AddLPointMembership extends StatefulWidget {
+  String brand = '';
+  AddLPointMembership(this.brand);
+  @override
+  State<AddLPointMembership> createState() => _AddLPointMembershipState(brand);
+}
+
+class _AddLPointMembershipState extends State<AddLPointMembership> {
+  String barcode = 'null';
+  String brand = '';
+  _AddLPointMembershipState(this.brand);
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Image.asset('lib/images/L Point 헤더.png', width: 700),
+        const SizedBox(
+          height: 20,
+        ),
+        Text('L Point 바코드 이미지'),
+        const SizedBox(
+          height: 20,
+        ),
+        BrandImagePick(brand, 'LPoint'),
+      ],
+    );
+  }
+}
+
+class AddCJOneMembership extends StatefulWidget {
+  String brand = '';
+  AddCJOneMembership(this.brand);
+  @override
+  State<AddCJOneMembership> createState() => _AddCJOneMembershipState(brand);
+}
+
+class _AddCJOneMembershipState extends State<AddCJOneMembership> {
+  String barcode = 'null';
+  String brand = '';
+  _AddCJOneMembershipState(this.brand);
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Image.asset('lib/images/CJ ONE 헤더.jpg', width: 700),
+        const SizedBox(
+          height: 20,
+        ),
+        Text('CJ ONE 바코드 이미지'),
+        const SizedBox(
+          height: 20,
+        ),
+        BrandImagePick(brand, 'CJ ONE'),
+      ],
+    );
+  }
+}
+
 class AddStarbucks extends StatelessWidget {
   const AddStarbucks({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.asset('lib/images/T 헤더.png', width: 700),
-        const SizedBox(
-          height: 20,
-        ),
-        Text('T 멤버십 바코드 이미지'),
-        const SizedBox(
-          height: 20,
-        ),
+        Image.asset('lib/images/스타벅스 헤더.jpg', width: 700),
         BrandImagePick('스타벅스','스타벅스'),
-        ElevatedButton(
-          child: const Text(
-            "등록하기",
-            style: TextStyle(fontSize: 18),
-          ),
-          onPressed: () async {
-          },
-        ),
       ],
     );
   }
 }
 
+class AddEdiya extends StatelessWidget {
+  const AddEdiya({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Image.asset('lib/images/이디야 헤더.jpg', width: 700),
+        BrandImagePick('이디야','이디야'),
+      ],
+    );
+  }
+}
+
+class AddGongcha extends StatelessWidget {
+  const AddGongcha({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Image.asset('lib/images/공차 헤더.jpg', width: 700),
+        BrandImagePick('공차','공차'),
+      ],
+    );
+  }
+}
+
+class AddSulbing extends StatelessWidget {
+  const AddSulbing({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Image.asset('lib/images/설빙 헤더.jpg', width: 700),
+        BrandImagePick('설빙','설빙'),
+      ],
+    );
+  }
+}
+class AddCU extends StatelessWidget {
+  const AddCU({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Image.asset('lib/images/CU 헤더.jpg', width: 700),
+        BrandImagePick('CU','CU'),
+      ],
+    );
+  }
+}
+
+class AddKyochon extends StatelessWidget {
+  const AddKyochon({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Image.asset('lib/images/교촌치킨 헤더.png', width: 700),
+        BrandImagePick('교촌치킨','교촌치킨'),
+      ],
+    );
+  }
+}
+
+class AddBBQ extends StatelessWidget {
+  const AddBBQ({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Image.asset('lib/images/bbq 헤더.jpg', width: 700),
+        BrandImagePick('BBQ','BBQ'),
+      ],
+    );
+  }
+}
+
+class AddMcDonalds extends StatelessWidget {
+  const AddMcDonalds({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Image.asset('lib/images/맥도날드 헤더.jpg', width: 700),
+        BrandImagePick('맥도날드','맥도날드'),
+      ],
+    );
+  }
+}
+
+class AddBurgerKing extends StatelessWidget {
+  const AddBurgerKing({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Image.asset('lib/images/버거킹 헤더.jpg', width: 700),
+        BrandImagePick('버거킹','버거킹'),
+      ],
+    );
+  }
+}
 /*
 class AddMegabox extends StatelessWidget {
   const AddMegabox({Key? key}) : super(key: key);
@@ -359,4 +620,3 @@ class AddTwosome extends StatelessWidget {
   }
 }
 */
-

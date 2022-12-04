@@ -1,67 +1,56 @@
 import 'package:flutter/material.dart';
-import '../styles.dart';
-import '../components/gifticon_stack.dart';
-import 'barcode_image_generation.dart';
+import '../network/brand_crud.dart';
+import '../network/gifticon_crud.dart';
+import 'brand_detail_widget.dart';
 
-class BrandeDetailPage extends StatefulWidget {
-  const BrandeDetailPage({Key? key}) : super(key: key);
+class BrandDetailPage extends StatefulWidget {
+  const BrandDetailPage({Key? key, required this.brandName}) : super(key: key);
+  final String brandName;
 
   @override
-  State<BrandeDetailPage> createState() => _BrandeDetailPageState();
+  State<BrandDetailPage> createState() => _BrandDetailPageState();
 }
 
-class _BrandeDetailPageState extends State<BrandeDetailPage> {
-  final items = List.generate(100, (i) => i).toList();
-
+class _BrandDetailPageState extends State<BrandDetailPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Tab(
-        // brand Tab
-        child: SizedBox(
-          height: double.infinity,
-          child: ListView(
-            scrollDirection: Axis.vertical,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(29.0),
-                child: Image.asset(
-                  'lib/images/starbucks.png',
-                  height: 34,
-                  width: 332,
-                ),
-              ),
-              Padding(
-                // padding: const EdgeInsets.only(bottom: 29),
-                padding:
-                    const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 29.0),
-                // child: Image.asset(
-                //   'lib/images/barcode_example.png',
-                //   width: 347,
-                //   height: 92,
-                // ),
-                child: BarcodeImage('1234567890247389234789'),
-              ),
-              // SizedBox(
-              //   height: 500,
-              //   child: GridView.count(
-              //     crossAxisCount: 2,
-              //     children: [
-              //       GifticonStackState('lib/images/cat.jpg', '34', context),
-              //       GifticonStackState('lib/images/cat.jpg', '56', context),
-              //       GifticonStackState('lib/images/cat.jpg', '90', context),
-              //       GifticonStackState('lib/images/cat.jpg', '34', context),
-              //       GifticonStackState('lib/images/cat.jpg', '34', context),
-              //       GifticonStackState('lib/images/cat.jpg', '34', context),
-              //       GifticonStackState('lib/images/cat.jpg', '34', context),
-              //     ],
-              //   ),
-              // ),
-            ],
-          ),
-        ),
-      ),
+    // const brandName = '투썸플레이스';
+    final String brandName = widget.brandName;
+
+    return FutureBuilder(
+      future: Future.wait([
+        getBrandData(brandName),
+        getGifticonData(brandName),
+      ]),
+      builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
+        if (snapshot.hasData) {
+          final brandData = snapshot.data![0];
+          List gifticonData = snapshot.data![1];
+          return BrandDetailWidget(brandData, gifticonData!, brandName);
+        } else {
+          return const Center(
+            child: SizedBox(
+              height: 50,
+              width: 50,
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+      },
     );
+  }
+
+  Future getBrandData(String brand) async {
+    // DB 데이터 읽어오기
+    final brandCRUD = BrandCRUD();
+    final brand_data = await brandCRUD.get_brand_info(brand);
+    return brand_data;
+  }
+
+  Future getGifticonData(String brand) async {
+    // DB 데이터 읽어오기
+    final gifticonCRUDcrud = GifticonCRUD();
+    final gifticon_data = await gifticonCRUDcrud.get_brand_gifticon_list(brand);
+    return gifticon_data;
   }
 }

@@ -18,7 +18,7 @@ class BrandCRUD {
   }
 
   // TODO: 할인 브랜드, 적립 브랜드 없는 브랜드에 추가할 때 exception 만들기
-  // TODO: 없는 컬렉션에 접근햇을 때 어떻게 나오는지
+  // TODO: 없는 컬렉션에 접근했을 때 어떻게 나오는지
   // 할인 브랜드 추가
   Future add_discount_brand(
       String brandName, String discountBrand, String discountBarcode) async {
@@ -60,14 +60,32 @@ class BrandCRUD {
     return data;
   }
 
+  // 특정 브랜드 리스트 읽어오기
+  Future get_brand_info(String brand) async {
+    final brandDoc = brandDb.doc(brand);
+    DocumentSnapshot doc = await brandDoc.get();
+    final data = doc.data() as Map<String, dynamic>;
+    if (data == null) {
+      // 브랜드에 등록된 기프티콘이 없을 경우
+      return {};
+    }
+    // 할인 브랜드 리스트
+    var brand_list = await get_discount_brand_list(brand);
+    data["discount_list"] = brand_list;
+    // 적립 브랜드 리스트
+    var membership_list = await get_membership_brand_list(brand);
+    data["membership_list"] = membership_list;
+    return data;
+  }
+
   // 할인 브랜드 읽어오기
   Future get_discount_brand_list(String brand) async {
     final QuerySnapshot snapshot =
-        await brandDb.doc(brand).collection("discount").get();
+    await brandDb.doc(brand).collection("discount").get();
     final data = [];
     for (var doc in snapshot.docs) {
       var dataElement = doc.data() as Map<String, dynamic>;
-      dataElement["discount_brand_name"] = doc.id;
+      dataElement["brand_name"] = doc.id;
       data.add(dataElement);
     }
     return data;
@@ -76,11 +94,11 @@ class BrandCRUD {
   // 적립 브랜드 읽어오기
   Future get_membership_brand_list(String brand) async {
     final QuerySnapshot snapshot =
-        await brandDb.doc(brand).collection("membership").get();
+    await brandDb.doc(brand).collection("membership").get();
     final data = [];
     for (var doc in snapshot.docs) {
       var dataElement = doc.data() as Map<String, dynamic>;
-      dataElement["membership_brand_name"] = doc.id;
+      dataElement["brand_name"] = doc.id;
       data.add(dataElement);
     }
     return data;
