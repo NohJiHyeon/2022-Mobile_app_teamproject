@@ -4,7 +4,8 @@ import '../network/gifticon_crud.dart';
 import 'brand_detail_widget.dart';
 
 class BrandDetailPage extends StatefulWidget {
-  const BrandDetailPage({Key? key}) : super(key: key);
+  const BrandDetailPage({Key? key, required this.brandName}) : super(key: key);
+  final String brandName;
 
   @override
   State<BrandDetailPage> createState() => _BrandDetailPageState();
@@ -13,8 +14,8 @@ class BrandDetailPage extends StatefulWidget {
 class _BrandDetailPageState extends State<BrandDetailPage> {
   @override
   Widget build(BuildContext context) {
-    // final brand = ModalRoute.of(context)!.settings.arguments as Map;
-    const brandName = '투썸플레이스';
+    // const brandName = '투썸플레이스';
+    final String brandName = widget.brandName;
 
     return FutureBuilder(
       future: Future.wait([

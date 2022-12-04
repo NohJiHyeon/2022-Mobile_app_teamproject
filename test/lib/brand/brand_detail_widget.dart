@@ -39,14 +39,10 @@ class BrandDetailWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(gifticonData);
-    print(brandData);
+    // print(gifticonData);
+    // print(brandData['brand_barcode'] != null ? "null아님" : "null임");
     final discount_list = brandData['discount_list'];
     final membership_list = brandData['membership_list'];
-    print(discount_list);
-    print(membership_list);
-    print(_brand_image_path[discount_list[0]['brand_name']]);
-    // print('lib/images/${_brand_image_path[discount_list[0]]}');
 
     return Scaffold(
       appBar: AppBar(
@@ -70,13 +66,15 @@ class BrandDetailWidget extends StatelessWidget {
             padding: const EdgeInsets.only(top: 10, bottom: 8),
             child: Image.asset(
               'lib/images/${_brand_image_path[brand_name]}',
-              height: 50,
+              height: 80,
             ),
           ),
           Padding(
             padding:
                 const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 29.0),
-            child: BarcodeImage(brandData['brand_barcode']),
+            child: brandData['brand_barcode'] != null
+                ? BarcodeImage(brandData['brand_barcode'])
+                : Container(),
           ),
           /*
           바코드 리스트
@@ -93,12 +91,9 @@ class BrandDetailWidget extends StatelessWidget {
             height: 500,
             child: GridView.count(
               crossAxisCount: 2,
-              children: [
-                GifticonStackState(gifticonData[0], context),
-                GifticonStackState(gifticonData[0], context),
-                GifticonStackState(gifticonData[0], context),
-                GifticonStackState(gifticonData[0], context),
-              ],
+              children: gifticonData
+                  .map((item) => GifticonStackState(item, context))
+                  .toList(),
             ),
           ),
         ],
@@ -107,7 +102,8 @@ class BrandDetailWidget extends StatelessWidget {
   }
 
   Widget barcodeListWidget(String listName, List barcodeList) {
-    if (barcodeList.isEmpty) {
+    print(barcodeList);
+    if (barcodeList == null) {
       return Container();
     }
     return Column(
