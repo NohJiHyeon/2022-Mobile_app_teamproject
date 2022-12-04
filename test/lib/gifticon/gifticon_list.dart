@@ -23,12 +23,14 @@ class _GifticonListPageState extends State<GifticonListPage> {
     return gifticon_list;
   }
 
-  // Bottom Navigation Bar onTap 함수
-  void naviTapped(int index) {
+  Future<void> _onRefresh() {
     setState(() {
-      _bottomNaviIndex = index;
+      getGifticonList();
+      build(context);
     });
+    return Future<void>.value();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -41,94 +43,79 @@ class _GifticonListPageState extends State<GifticonListPage> {
 
           //print(data);
           var sortOption = context.select((SortOption o) => o.option);
-          if (sortOption == 'EXPIRATION') {
-            if (data != null) {
-              data.sort((e1, e2) {
-                return e1['expiration_date'].compareTo(e2['expiration_date']);
-              });
-            }
-          } else {
-            if (data != null) {
-              print('스냅샷 ${snapshot.data}');
-              data = [...snapshot!.data!];
-            }
-          }
-          if (_bottomNaviIndex == 0) {
-            data = data.where((i) => i['canUse'] == true).toList();
-          } else {
-            data = snapshot!.data!.where((i) => i['canUse'] == false).toList();
-          }
-
-          return Scaffold(
-              body: Container(
-                child: Column(children: [
+          if (sortOption == 'TIME') {
+            return Scaffold(
+              body: RefreshIndicator(
+                onRefresh: _onRefresh,
+                child: Column(
+                    children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 16.0, top: 8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          _bottomNaviIndex == 0
-                              ? ElevatedButton(
-                                  onPressed: () {
-                                    sortOption == 'EXPIRATION'
-                                        ? data = [...snapshot!.data!]
-                                        : data!.sort((e1, e2) {
-                                            return e1['expiration_date']
-                                                .compareTo(
-                                                    e2['expiration_date']);
-                                          });
-                                    sortOption == 'EXPIRATION'
-                                        ? context
-                                            .read<SortOption>()
-                                            .set_registration_mode()
-                                        : context
-                                            .read<SortOption>()
-                                            .set_expiration_mode();
-                                  },
-                                  child: Text(sortOption == 'EXPIRATION'
-                                      ? '시간순'
-                                      : '등록순'))
-                              : !data.isEmpty ? ElevatedButton(
-                                  onPressed: () {
-                                    showDialog(
-                                        context: context,
-                                        barrierDismissible: false,
-                                        builder: (BuildContext context) => AlertDialog(
-                                            title: const Text('안내'),
-                                            content: const Text('사용된 기프티콘을 모두 삭제합니다.'),
-                                            actions: [
-                                              TextButton(child: const Text('확인'), onPressed: (){
-                                                for (var item in data!) {
-                                                  gifticonCRUD.delete_gifticon(item['gifticon_id']);
-                                                }
-                                                setState((){data;});
-                                                Navigator.of(context).pop();
-                                              }),
-                                              TextButton(child: const Text('취소'), onPressed: () {Navigator.of(context).pop();})
-                                            ]));
-
-                                  },
-                                  child: const Text('일괄 삭제')) : Container()
+                          ElevatedButton(
+                              onPressed: () {
+                                sortOption == 'TIME'
+                                    ? data!.sort((e1, e2) {
+                                        return e1['expiration_date']
+                                            .compareTo(e2['expiration_date']);
+                                      })
+                                    : () {};
+                                sortOption == 'TIME'
+                                    ? context.read<SortOption>().set_brand_mode()
+                                    : context.read<SortOption>().set_time_mode();
+                              },
+                              child: Text(sortOption == 'TIME' ? '시간순' : '브랜드순'))
                         ]),
                   ),
-                  const Divider(color: AppColor.APPBAR_COLOR),
                   Expanded(
                       child: data!.isEmpty
-                          ? Center(
+                          ? const Center(
                               child: Padding(
-                                padding: const EdgeInsets.only(bottom: 80),
+                                padding: EdgeInsets.only(bottom: 80),
                                 child: Text(
-                                  _bottomNaviIndex == 0 ? '기프티콘을 추가하세요!' : '사용한 기프티콘이 없습니다.',
-                                  style: const TextStyle(fontSize: 25, color: AppColor.GRAY),
+                                  '기프티콘을 추가하세요!',
+                                  style: TextStyle(fontSize: 25),
                                 ),
                               ),
                             )
                           : GridView.count(
                               crossAxisCount: 2,
                               children: data!
-                                  .map((item) =>
-                                      GifticonStackState(item, context))
+                                  .map(
+                                      (item) => GifticonStackState(item, context))
                                   .toList())),
+                ]),
+              ),
+              bottomNavigationBar: BottomNavigationBar(
+              items: [
+              const BottomNavigationBarItem(icon: Icon(Icons.card_giftcard_sharp), label: '사용 전'),
+              const BottomNavigationBarItem(icon: Icon(Icons.done), label: '사용 완료'),
+              ],
+              )
+            );
+          }
+          // 브랜드별 순
+          else {
+            return Scaffold(
+              body: RefreshIndicator(
+                onRefresh: _onRefresh,
+                child: Column(children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child:
+                        Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                      ElevatedButton(
+                          onPressed: () {
+                            sortOption == 'TIME'
+                                ? context.read<SortOption>().set_brand_mode()
+                                : context.read<SortOption>().set_time_mode();
+                          },
+                          child: Text(sortOption == 'TIME' ? '시간순' : '브랜드순'))
+                    ]),
+                  ),
+                  Expanded(child: Container()),
                 ]),
               ),
               bottomNavigationBar: BottomNavigationBar(
