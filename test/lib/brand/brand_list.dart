@@ -72,6 +72,7 @@ String BrandMainIcon(String brand){
     case '메가박스':
     case '맥도날드':
     case 'CGV':
+    case 'bbq':
       fileType = 'png';
       break;
   }
