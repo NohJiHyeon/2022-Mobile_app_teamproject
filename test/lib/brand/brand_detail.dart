@@ -118,7 +118,7 @@ class BrandDetailWidget extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 border:
-                    Border.all(color: AppColor.GRAY_WITH_OPACITY, width: 3.5),
+                    Border.all(color: AppColor.BRIGHT_GRAY, width: 3.5),
                 borderRadius: const BorderRadius.only(
                   bottomRight: Radius.circular(30),
                   bottomLeft: Radius.circular(30),
@@ -146,7 +146,7 @@ class BrandDetailWidget extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 border:
-                    Border.all(color: AppColor.GRAY_WITH_OPACITY, width: 3.5),
+                    Border.all(color: AppColor.GRAY, width: 3.5),
                 borderRadius: const BorderRadius.only(
                   bottomRight: Radius.circular(30),
                   bottomLeft: Radius.circular(30),

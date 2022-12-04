@@ -4,6 +4,8 @@ import 'dart:io';
 import 'dart:async';
 import 'package:scan/scan.dart';
 import 'package:flutter/services.dart';
+import 'package:w3_class/brand/brand_main.dart';
+import 'package:w3_class/gifticon/gifticon_list.dart';
 import '../components/calendar_button.dart';
 import '../network/gifticon_crud.dart';
 import 'package:provider/provider.dart';
@@ -151,6 +153,9 @@ class _BarcodeScanner extends State<BarcodeScanner> {
                     child: ElevatedButton(
                       onPressed: () {
                          crud.add_gifticon(gifticon_name, brand, context.read<Date>().expDate, imageFile, qrcode);
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => BrandMainPage())).then((value) {
+                           setState(() {});
+                         });
                       },
                       child: const Text("등록", style: TextStyle(fontSize: 18)),
                       style: ElevatedButton.styleFrom(
