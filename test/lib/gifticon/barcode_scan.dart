@@ -30,8 +30,6 @@ class _BarcodeScanner extends State<BarcodeScanner> {
   final _controller = TextEditingController();
   final _brandcontroller = TextEditingController();
 
-
-
   @override
   void initState() {
     super.initState();
