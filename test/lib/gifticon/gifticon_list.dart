@@ -21,6 +21,15 @@ class _GifticonListPageState extends State<GifticonListPage> {
     return gifticon_list;
   }
 
+  Future<void> _onRefresh() {
+    setState(() {
+      getGifticonList();
+      build(context);
+    });
+    return Future<void>.value();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<dynamic>>(
@@ -37,66 +46,87 @@ class _GifticonListPageState extends State<GifticonListPage> {
           //print(data);
           var sortOption = context.select((SortOption o) => o.option);
           if (sortOption == 'TIME') {
-            return Container(
-              child: Column(children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        ElevatedButton(
-                            onPressed: () {
-                              sortOption == 'TIME'
-                                  ? data!.sort((e1, e2) {
-                                      return e1['expiration_date']
-                                          .compareTo(e2['expiration_date']);
-                                    })
-                                  : () {};
-                              sortOption == 'TIME'
-                                  ? context.read<SortOption>().set_brand_mode()
-                                  : context.read<SortOption>().set_time_mode();
-                            },
-                            child: Text(sortOption == 'TIME' ? '시간순' : '브랜드순'))
-                      ]),
-                ),
-                Expanded(
-                    child: data!.isEmpty
-                        ? const Center(
-                            child: Padding(
-                              padding: EdgeInsets.only(bottom: 80),
-                              child: Text(
-                                '기프티콘을 추가하세요!',
-                                style: TextStyle(fontSize: 25),
+            return Scaffold(
+              body: RefreshIndicator(
+                onRefresh: _onRefresh,
+                child: Column(
+                    children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          ElevatedButton(
+                              onPressed: () {
+                                sortOption == 'TIME'
+                                    ? data!.sort((e1, e2) {
+                                        return e1['expiration_date']
+                                            .compareTo(e2['expiration_date']);
+                                      })
+                                    : () {};
+                                sortOption == 'TIME'
+                                    ? context.read<SortOption>().set_brand_mode()
+                                    : context.read<SortOption>().set_time_mode();
+                              },
+                              child: Text(sortOption == 'TIME' ? '시간순' : '브랜드순'))
+                        ]),
+                  ),
+                  Expanded(
+                      child: data!.isEmpty
+                          ? const Center(
+                              child: Padding(
+                                padding: EdgeInsets.only(bottom: 80),
+                                child: Text(
+                                  '기프티콘을 추가하세요!',
+                                  style: TextStyle(fontSize: 25),
+                                ),
                               ),
-                            ),
-                          )
-                        : GridView.count(
-                            crossAxisCount: 2,
-                            children: data!
-                                .map(
-                                    (item) => GifticonStackState(item, context))
-                                .toList())),
-              ]),
+                            )
+                          : GridView.count(
+                              crossAxisCount: 2,
+                              children: data!
+                                  .map(
+                                      (item) => GifticonStackState(item, context))
+                                  .toList())),
+                ]),
+              ),
+              bottomNavigationBar: BottomNavigationBar(
+              items: [
+              const BottomNavigationBarItem(icon: Icon(Icons.card_giftcard_sharp), label: '사용 전'),
+              const BottomNavigationBarItem(icon: Icon(Icons.done), label: '사용 완료'),
+              ],
+              )
             );
           }
           // 브랜드별 순
           else {
-            return Column(children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        sortOption == 'TIME'
-                            ? context.read<SortOption>().set_brand_mode()
-                            : context.read<SortOption>().set_time_mode();
-                      },
-                      child: Text(sortOption == 'TIME' ? '시간순' : '브랜드순'))
+            return Scaffold(
+              body: RefreshIndicator(
+                onRefresh: _onRefresh,
+                child: Column(children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child:
+                        Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                      ElevatedButton(
+                          onPressed: () {
+                            sortOption == 'TIME'
+                                ? context.read<SortOption>().set_brand_mode()
+                                : context.read<SortOption>().set_time_mode();
+                          },
+                          child: Text(sortOption == 'TIME' ? '시간순' : '브랜드순'))
+                    ]),
+                  ),
+                  Expanded(child: Container()),
                 ]),
               ),
-              Expanded(child: Container()),
-            ]);
+              bottomNavigationBar: BottomNavigationBar(
+                items: [
+                  const BottomNavigationBarItem(icon: Icon(Icons.card_giftcard_sharp), label: '사용 전'),
+                  const BottomNavigationBarItem(icon: Icon(Icons.done), label: '사용 완료'),
+                ],
+              )
+            );
           }
         } else {
           return const Center(child: CircularProgressIndicator());
