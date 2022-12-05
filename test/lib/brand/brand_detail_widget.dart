@@ -103,7 +103,7 @@ class BrandDetailWidget extends StatelessWidget {
 
   Widget barcodeListWidget(String listName, List barcodeList) {
     print(barcodeList);
-    if (barcodeList == null) {
+    if (barcodeList.isEmpty) {
       return Container();
     }
     return Column(
