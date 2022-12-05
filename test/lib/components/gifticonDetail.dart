@@ -203,7 +203,7 @@ class _GifticonDetailState extends State<GifticonDetail> {
                 //             dateFormat == null ? Colors.transparent : Colors.red)),
                 const SizedBox(height: 10),
                 Container(
-                    width: 200,
+                    width: 300,
                     height: 30,
                     decoration:
                         BoxDecoration(borderRadius: BorderRadius.circular(20)),
@@ -244,6 +244,7 @@ class _GifticonDetailState extends State<GifticonDetail> {
                                     dateFormat = DateFormat('yyyy-MM-dd')
                                         .format(selectedDate);
                                   });
+                                  Navigator.of(context).pop();
                                 }
                                 //print(dateFormat);
                               });
@@ -258,10 +259,12 @@ class _GifticonDetailState extends State<GifticonDetail> {
                       // mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        const SizedBox(height: 10),
                         Text(
                           data['brand'],
                           style: CustomTextStyle.smallButtonTextStyle,
                         ),
+                        const SizedBox(height: 10),
                         Text(
                           data['name'],
                           style: CustomTextStyle.dateButtonTextStyle,
@@ -270,11 +273,14 @@ class _GifticonDetailState extends State<GifticonDetail> {
                     ),
                   ),
                 ),
+                const SizedBox(height: 30),
                 InkWell(
-                  onTap: (){
-                    Navigator.pushNamed(context, '/barcode', arguments: BarcodeImage(data['gifticon_barcode']));
-                  },
-                    child: Container(child: BarcodeImage(data['gifticon_barcode']))),
+                    onTap: () {
+                      Navigator.pushNamed(context, '/barcode',
+                          arguments: BarcodeImage(data['gifticon_barcode']));
+                    },
+                    child: Container(
+                        child: BarcodeImage(data['gifticon_barcode']))),
                 const SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -300,7 +306,8 @@ class _GifticonDetailState extends State<GifticonDetail> {
                     CustomButton(
                         '삭제', 100, 50, AppColor.GRAY, data['gifticon_id']),
                   ],
-                )
+                ),
+                const SizedBox(height: 70)
               ],
             ),
           ),
