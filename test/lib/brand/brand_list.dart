@@ -16,12 +16,11 @@ class _BrandListPageState extends State<BrandListPage> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: brandCRUD.get_brand(),
+      future: brandCRUD.get_brand_list(),
       builder: (context,snapshot){
         if (snapshot.hasData){
           List data = snapshot.data!.toList();
           print(data);
-          //List data = ['스타벅스','맥도날드'];
           if (data.length > 0) {
             return Padding(
               padding: const EdgeInsets.all(15),
@@ -33,6 +32,8 @@ class _BrandListPageState extends State<BrandListPage> {
                     crossAxisCount: 3,
                   ),
                   itemBuilder: (context, index) {
+                    print(data[index]["brand_name"].runtimeType);
+
                     return IconButton(
                       icon: ShadowedBrandIcon(
                           data[index], BrandMainIcon(data[index])),
@@ -41,7 +42,8 @@ class _BrandListPageState extends State<BrandListPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) =>
-                                BrandDetailPage(brandName: data[index],)));
+                                BrandDetailPage(brandName: data[index]["brand_name"],))
+                        );
                       },
                     );;
                   }

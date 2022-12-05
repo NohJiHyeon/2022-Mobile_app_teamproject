@@ -67,7 +67,7 @@ class BrandImagePickState extends State<BrandImagePick> {
             style: TextStyle(fontSize: 18),
           ),
           onPressed: () async {
-           user.add_membership_brand(brand, discount, barcode);
+           user.add_membership_brand(brand, discount, '123456');
           },
         ),
       ],
