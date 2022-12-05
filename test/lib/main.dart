@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:w3_class/brand/brand_main.dart';
+import 'package:w3_class/components/barcode.dart';
 import 'package:w3_class/gifticon/gifticon_list.dart';
 import 'brand/brand_add.dart';
 import 'gifticon/barcode_scan.dart';
@@ -11,7 +12,7 @@ import 'styles.dart';
 import './auth/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'brand/brand_detail.dart';
-
+import 'package:barcode/barcode.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
@@ -61,6 +62,7 @@ class MyApp extends StatelessWidget {
                   '/barcode_scan': (context) => BarcodeScanner(),
                   '/gifticon_add': (context) => const GifticonAddPage(),
                   '/brand_add': (context) => const BrandAddPage(),
+                  '/barcode' : (context) => const BarcodePage(),
                 },
               );
             } else {
