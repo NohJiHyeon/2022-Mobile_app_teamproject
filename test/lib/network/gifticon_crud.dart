@@ -59,13 +59,16 @@ class GifticonCRUD {
 
   // 모든 기프티콘 리스트 읽어오기
   Future get_gifticon_list() async {
-    QuerySnapshot snapshot = await gifticonDB.get();
+    QuerySnapshot snapshot =
+        await gifticonDB.orderBy('created_date', descending: false).get();
     final data = [];
     for (var doc in snapshot.docs) {
       var dataElement = doc.data() as Map<String, dynamic>;
       dataElement["gifticon_id"] = doc.id;
       data.add(dataElement);
     }
+    print("=========================");
+    print(data);
     return data;
   }
 

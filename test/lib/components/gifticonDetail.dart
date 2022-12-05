@@ -6,15 +6,14 @@ import '../network/gifticon_crud.dart';
 import '../styles.dart';
 import '../components/calendar_button.dart';
 import '../brand/brand_main.dart';
-
 import 'package:provider/provider.dart';
 import '../provider/sort_provider.dart';
-
 import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'dart:typed_data';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
+import '../brand/barcode_image_generation.dart';
 
 /*
 사용법: customButton(텍스트, 너비, 높이, 색깔)
@@ -174,105 +173,134 @@ class _GifticonDetailState extends State<GifticonDetail> {
   Widget build(BuildContext context) {
     GifticonCRUD console = GifticonCRUD();
     var data = ModalRoute.of(context)!.settings.arguments as Map;
-    //print(data);
+    print(data.toString() + "끝");
     //print('기프티콘 데이터 ${data}');
     return Scaffold(
       appBar: AppBar(
         title: const Text('기프티콘 정보'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 30),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            FittedBox(
-              child: Container(
-                  width: 350,
-                  height: 350,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: AppColor.BRIGHT_GRAY),
-                  alignment: Alignment.center,
-                  child: Image.network(data['imageURL'])),
-            ),
-            const SizedBox(height: 20),
-            // Text('\'저장\'을 눌러 유효기간을 저장하세요.',
-            //     style: TextStyle(
-            //         color:
-            //             dateFormat == null ? Colors.transparent : Colors.red)),
-            const SizedBox(height: 10),
-            Container(
-                width: 330,
-                height: 30,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(20)),
-                child: data['canUse']
-                    ? ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          backgroundColor: AppColor.EXPIRED_DATE_COLOR,
-                          fixedSize: const Size(330, 30),
-                        ),
-                        child: Text(
-                            '유효기간: ${dateFormat ?? DateFormat('yyyy-MM-dd').format(data['expiration_date'].toDate())}',
-                            style: CustomTextStyle.dateButtonTextStyle),
-                        onPressed: () async {
-                          await showDatePicker(
-                            context: context,
-                            initialDate: data['expiration_date'].toDate(),
-                            firstDate: DateTime(DateTime.now().year),
-                            lastDate: DateTime(DateTime.now().year + 10),
-                            initialEntryMode: DatePickerEntryMode.calendarOnly,
-                          ).then((selectedDate) async {
-                            if (selectedDate != null) {
-                              print(selectedDate);
-                              console.update_expiration_date(
-                                  data['gifticon_id'],
-                                  DateTime.parse(DateFormat('yyyy-MM-dd')
-                                      .format(selectedDate)));
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(const SnackBar(
-                                content: Text('유효기간이 변경됐습니다.'),
-                                duration: Duration(seconds: 2),
-                                backgroundColor: Colors.black45,
-                              ));
-                              setState(() {
-                                dateFormat = DateFormat('yyyy-MM-dd')
-                                    .format(selectedDate);
-                              });
-                              Navigator.of(context).pop();
-                            }
-                            //print(dateFormat);
-                          });
-                        })
-                    : null),
-            const SizedBox(height: 40),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+      body: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 30),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                CustomButton(
-                    data['canUse'] ? '사용하기' : '복원하기',
-                    140,
-                    50,
-                    data['canUse'] ? AppColor.APPBAR_COLOR : AppColor.ORANGE,
-                    data['gifticon_id']),
-                const SizedBox(width: 15),
-                data['canUse']
-                    ? CustomButton('저장', 100, 50, AppColor.APPBAR_COLOR, [
-                        data,
-                        dateFormat == null
-                            ? data['expiration_date'].toDate()
-                            : DateTime.parse(dateFormat!)
-                      ])
-                    : Container(),
-                const SizedBox(width: 15),
-                CustomButton('삭제', 100, 50, AppColor.GRAY, data['gifticon_id']),
+                FittedBox(
+                  child: Container(
+                      width: 300,
+                      height: 450,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: AppColor.BRIGHT_GRAY),
+                      alignment: Alignment.center,
+                      child: Image.network(data['imageURL'])),
+                ),
+                const SizedBox(height: 20),
+                // Text('\'저장\'을 눌러 유효기간을 저장하세요.',
+                //     style: TextStyle(
+                //         color:
+                //             dateFormat == null ? Colors.transparent : Colors.red)),
+                const SizedBox(height: 10),
+                Container(
+                    width: 200,
+                    height: 30,
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                    child: data['canUse']
+                        ? ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              backgroundColor: AppColor.EXPIRED_DATE_COLOR,
+                              fixedSize: const Size(200, 30),
+                            ),
+                            child: Text(
+                                '유효기간: ${dateFormat ?? DateFormat('yyyy-MM-dd').format(data['expiration_date'].toDate())}',
+                                style: CustomTextStyle.smallButtonTextStyle),
+                            onPressed: () async {
+                              await showDatePicker(
+                                context: context,
+                                initialDate: data['expiration_date'].toDate(),
+                                firstDate: DateTime(DateTime.now().year),
+                                lastDate: DateTime(DateTime.now().year + 10),
+                                initialEntryMode:
+                                    DatePickerEntryMode.calendarOnly,
+                              ).then((selectedDate) async {
+                                if (selectedDate != null) {
+                                  print(selectedDate);
+                                  console.update_expiration_date(
+                                      data['gifticon_id'],
+                                      DateTime.parse(DateFormat('yyyy-MM-dd')
+                                          .format(selectedDate)));
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(const SnackBar(
+                                    content: Text('유효기간이 변경됐습니다.'),
+                                    duration: Duration(seconds: 2),
+                                    backgroundColor: Colors.black45,
+                                  ));
+                                  setState(() {
+                                    dateFormat = DateFormat('yyyy-MM-dd')
+                                        .format(selectedDate);
+                                  });
+                                }
+                                //print(dateFormat);
+                              });
+                            })
+                        : null),
+                const SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.only(left: 30),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Column(
+                      // mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          data['brand'],
+                          style: CustomTextStyle.smallButtonTextStyle,
+                        ),
+                        Text(
+                          data['name'],
+                          style: CustomTextStyle.dateButtonTextStyle,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                BarcodeImage(data['gifticon_barcode']),
+                const SizedBox(height: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomButton(
+                        data['canUse'] ? '사용하기' : '복원하기',
+                        140,
+                        50,
+                        data['canUse']
+                            ? AppColor.APPBAR_COLOR
+                            : AppColor.ORANGE,
+                        data['gifticon_id']),
+                    const SizedBox(width: 15),
+                    data['canUse']
+                        ? CustomButton('저장', 100, 50, AppColor.APPBAR_COLOR, [
+                            data,
+                            dateFormat == null
+                                ? data['expiration_date'].toDate()
+                                : DateTime.parse(dateFormat!)
+                          ])
+                        : Container(),
+                    const SizedBox(width: 15),
+                    CustomButton(
+                        '삭제', 100, 50, AppColor.GRAY, data['gifticon_id']),
+                  ],
+                )
               ],
-            )
-          ],
-        ),
+            ),
+          ),
+        ],
       ),
     );
   }
