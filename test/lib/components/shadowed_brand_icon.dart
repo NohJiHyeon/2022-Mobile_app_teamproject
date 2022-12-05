@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:w3_class/styles.dart';
 
 Widget ShadowedBrandIcon(String imgFileName,String fileFormat){
   return Container(
     decoration: BoxDecoration(
+      border: Border.all(
+          color: AppColor.EXPIRED_DATE_COLOR,
+          width: 1),
       borderRadius: const BorderRadius.only(
         topLeft: Radius.circular(30),
         topRight: Radius.circular(30),
