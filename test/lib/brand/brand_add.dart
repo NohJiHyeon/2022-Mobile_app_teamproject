@@ -75,6 +75,9 @@ class _BrandAddFormState extends State<BrandAddForm> {
               },
             ),
             SizedBox(
+              height: 15,
+            ),
+            SizedBox(
               height: 430,
               child: Builder(
                   builder: (context){
@@ -220,6 +223,10 @@ class _BrandAddFormState extends State<BrandAddForm> {
                         return ListView(
                             scrollDirection: Axis.vertical,
                             children: [
+                              AddCJOneMembership('CGV'),
+                              const SizedBox(
+                                height: 20,
+                              ),
                               AddKTMembership('CGV'),
                               const SizedBox(
                                 height: 20,
@@ -269,7 +276,7 @@ class _BrandAddFormState extends State<BrandAddForm> {
                   Navigator.pop(context);
                 },
                 child: const Text(
-                  '등록',
+                  '완료',
                   style: TextStyle(fontSize: 18),
                 )),
           ],
