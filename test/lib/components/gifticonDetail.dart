@@ -270,7 +270,11 @@ class _GifticonDetailState extends State<GifticonDetail> {
                     ),
                   ),
                 ),
-                BarcodeImage(data['gifticon_barcode']),
+                InkWell(
+                  onTap: (){
+                    Navigator.pushNamed(context, '/barcode', arguments: BarcodeImage(data['gifticon_barcode']));
+                  },
+                    child: Container(child: BarcodeImage(data['gifticon_barcode']))),
                 const SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
