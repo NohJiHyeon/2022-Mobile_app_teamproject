@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget ShadowedBrandIcon(String imgFileName){
+Widget ShadowedBrandIcon(String imgFileName,String fileFormat){
   return Container(
     decoration: BoxDecoration(
       borderRadius: const BorderRadius.only(
@@ -9,6 +9,7 @@ Widget ShadowedBrandIcon(String imgFileName){
         bottomLeft: Radius.circular(30),
         bottomRight: Radius.circular(30),
       ),
+      /*
       boxShadow: [
         BoxShadow(
           color: Colors.black.withOpacity(0.7),
@@ -16,10 +17,11 @@ Widget ShadowedBrandIcon(String imgFileName){
           offset: const Offset(0,4),
         )
       ],
+       */
     ),
     child: ClipRRect(
       borderRadius: BorderRadius.circular(30.0),
-      child: Image.asset(imgFileName,),
+      child: Image.asset('lib/images/$imgFileName 로고.$fileFormat'),
     ),
   );
 }
