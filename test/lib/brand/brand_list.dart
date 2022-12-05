@@ -20,7 +20,6 @@ class _BrandListPageState extends State<BrandListPage> {
       builder: (context,snapshot){
         if (snapshot.hasData){
           List data = snapshot.data!.toList();
-          print(data);
           if (data.length > 0) {
             return Padding(
               padding: const EdgeInsets.all(15),
