@@ -12,7 +12,7 @@ class BrandDetailWidget extends StatelessWidget {
   final _brand_image_path = {
     '스타벅스': '스타벅스 헤더.jpg',
     '투썸플레이스': '투썸 헤더.jpg',
-    '이디야커피': '이디야 헤더.jpg',
+    '이디야': '이디야 헤더.jpg',
     '설빙': '설빙 헤더.jpg',
     '공차': '공차 헤더.jpg',
     'CU': 'CU 헤더.jpg',
@@ -22,7 +22,7 @@ class BrandDetailWidget extends StatelessWidget {
     '뚜레쥬르': '뚜레쥬르 헤더.jpg',
     '교촌치킨': '교촌치킨 헤더.png',
     'BHC': 'bhc 헤더.jpg',
-    'BBQ': 'bbq 헤더.jpg',
+    'bbq': 'bbq 헤더.jpg',
     '맥도날드': '맥도날드 헤더.jpg',
     '버거킹': '버거킹 헤더.jpg',
     '롯데시네마': '롯데시네마 헤더.jpg',
@@ -30,11 +30,11 @@ class BrandDetailWidget extends StatelessWidget {
     '메가박스': '메가박스 헤더.jpg',
     'CJ ONE': 'CJ ONE 헤더.jpg',
     'T': 'T 헤더.png',
-    'kt': 'kt 헤더.jpg',
-    'U+': 'U+ 헤더.jpg',
-    '기아멤버스': '기아멤버스 헤더.png',
+    'KT': 'kt 헤더.jpg',
+    'UPlus': 'U+ 헤더.jpg',
+    'Kia': '기아멤버스 헤더.png',
     'OK캐쉬백': 'OK캐쉬백 헤더.png',
-    'L Point': 'L Point 헤더.png',
+    'LPoint': 'L Point 헤더.png',
   };
 
   @override
@@ -135,12 +135,12 @@ class BrandDetailWidget extends StatelessWidget {
                       children: [
                         Image.asset(
                           'lib/images/${_brand_image_path[barcodeList[i]['brand_name']]}',
-                          height: 34,
+                          height: 55,
                         ),
                         const SizedBox(
                           height: 5,
                         ),
-                        BarcodeImage('2390809809842342'),
+                        BarcodeImage(barcodeList[i]['brand_barcode']),
                         if (i != barcodeList.length - 1)
                           const SizedBox(
                             height: 20,

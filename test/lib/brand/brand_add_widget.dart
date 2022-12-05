@@ -292,7 +292,7 @@ class AddBBQ extends StatelessWidget {
     return Column(
       children: [
         Image.asset('lib/images/bbq 헤더.jpg', width: 700),
-        BrandAddImagePick('BBQ'),
+        BrandAddImagePick('bbq'),
       ],
     );
   }

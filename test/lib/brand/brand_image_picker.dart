@@ -66,7 +66,7 @@ class BrandAddImagePickState extends State<BrandAddImagePick> {
             style: TextStyle(fontSize: 18),
           ),
           onPressed: () async {
-            user.add_brand(brand, '123456');
+            user.add_brand(brand, barcode);
           },
         ),
       ],
@@ -131,7 +131,7 @@ class BrandMembershipImagePickState extends State<BrandMembershipImagePick> {
             style: TextStyle(fontSize: 18),
           ),
           onPressed: () async {
-            user.add_membership_brand(brand, discount, '123456');
+            user.add_membership_brand(brand, discount, barcode);
           },
         ),
       ],
@@ -196,7 +196,7 @@ class BrandDiscountImagePickState extends State<BrandDiscountImagePick> {
             style: TextStyle(fontSize: 18),
           ),
           onPressed: () async {
-           user.add_discount_brand(brand, discount, '123456');
+           user.add_discount_brand(brand, discount, barcode);
           },
         ),
       ],

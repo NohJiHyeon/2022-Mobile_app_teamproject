@@ -5,7 +5,6 @@ import 'package:w3_class/gifticon/image_picker.dart';
 import 'brand_add_widget.dart';
 import 'package:w3_class/gifticon/barcode_scan.dart';
 import 'package:w3_class/gifticon/image_picker.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:w3_class/network/brand_crud.dart';
 
 class BrandAddPage extends StatelessWidget {
@@ -76,12 +75,11 @@ class _BrandAddFormState extends State<BrandAddForm> {
               },
             ),
             SizedBox(
-              height: 500,
+              height: 430,
               child: Builder(
                   builder: (context){
                     switch (brand){
                       case '스타벅스':
-                        user.add_brand_without_barcode('스타벅스');
                         return ListView(
                           scrollDirection: Axis.vertical,
                           children: [
@@ -101,10 +99,6 @@ class _BrandAddFormState extends State<BrandAddForm> {
                         return ListView(
                           scrollDirection: Axis.vertical,
                           children: [
-                            Image.asset('lib/images/투썸 헤더.jpg', width: 700),
-                            const SizedBox(
-                              height: 20,
-                            ),
                             AddCJOneMembership('투썸플레이스'),
                             const SizedBox(
                               height: 20,
@@ -149,10 +143,6 @@ class _BrandAddFormState extends State<BrandAddForm> {
                         return ListView(
                             scrollDirection: Axis.vertical,
                             children: [
-                              Image.asset('lib/images/GS25 헤더.png', width: 700),
-                              const SizedBox(
-                                height: 20,
-                              ),
                               AddKTMembership('GS25'),
                               const SizedBox(
                                 height: 20,
@@ -164,13 +154,10 @@ class _BrandAddFormState extends State<BrandAddForm> {
                         user.add_brand_without_barcode('미니스톱');
                         return AddOKMembership('미니스톱');
                       case '세븐일레븐':
+                        user.add_brand_without_barcode('세븐일레븐');
                         return ListView(
                             scrollDirection: Axis.vertical,
                             children: [
-                              Image.asset('lib/images/세븐일레븐 헤더.jpg', width: 700),
-                              const SizedBox(
-                                height: 20,
-                              ),
                               AddTMembership('세븐일레븐'),
                               const SizedBox(
                                 height: 20,
@@ -183,10 +170,6 @@ class _BrandAddFormState extends State<BrandAddForm> {
                         return ListView(
                             scrollDirection: Axis.vertical,
                             children: [
-                              Image.asset('lib/images/뚜레쥬르 헤더.jpg', width: 700),
-                              const SizedBox(
-                                height: 20,
-                              ),
                               AddCJOneMembership('뚜레쥬르'),
                               const SizedBox(
                                 height: 20,
@@ -217,10 +200,6 @@ class _BrandAddFormState extends State<BrandAddForm> {
                         return ListView(
                             scrollDirection: Axis.vertical,
                             children: [
-                              Image.asset('lib/images/롯데시네마 헤더.jpg', width: 700),
-                              const SizedBox(
-                                height: 20,
-                              ),
                               AddTMembership('롯데시네마'),
                               const SizedBox(
                                 height: 20,
@@ -241,10 +220,6 @@ class _BrandAddFormState extends State<BrandAddForm> {
                         return ListView(
                             scrollDirection: Axis.vertical,
                             children: [
-                              Image.asset('lib/images/cgv 헤더.png', width: 700),
-                              const SizedBox(
-                                height: 20,
-                              ),
                               AddKTMembership('CGV'),
                               const SizedBox(
                                 height: 20,
@@ -265,10 +240,6 @@ class _BrandAddFormState extends State<BrandAddForm> {
                         return ListView(
                             scrollDirection: Axis.vertical,
                             children: [
-                              Image.asset('lib/images/메가박스 헤더.jpg', width: 700),
-                              const SizedBox(
-                                height: 20,
-                              ),
                               AddKTMembership('메가박스'),
                               const SizedBox(
                                 height: 20,
