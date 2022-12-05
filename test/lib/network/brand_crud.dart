@@ -17,7 +17,6 @@ class BrandCRUD {
     print("$brandName 바코드: $barcode, 브랜드 추가 완료");
   }
 
-  // 브랜드 추가 without barcode
   Future add_brand_without_barcode(String brandName) async {
     final brandDoc = brandDb.doc(brandName);
     brandDoc.set({
@@ -51,7 +50,7 @@ class BrandCRUD {
         "$brandName의 멤버쉽 브랜드 - $membershipBrand 바코드: $membershipBarcode, 추가 완료");
   }
 
-  Future<List<String>> get_brand() async {
+  Future get_brand() async {
     final QuerySnapshot snapshot = await brandDb.get();
     List<String> data = [];
     for (var doc in snapshot.docs) {

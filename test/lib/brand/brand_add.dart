@@ -5,6 +5,8 @@ import 'package:w3_class/gifticon/image_picker.dart';
 import 'brand_add_widget.dart';
 import 'package:w3_class/gifticon/barcode_scan.dart';
 import 'package:w3_class/gifticon/image_picker.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:w3_class/network/brand_crud.dart';
 
 class BrandAddPage extends StatelessWidget {
   const BrandAddPage({Key? key}) : super(key: key);
@@ -30,6 +32,7 @@ class BrandAddForm extends StatefulWidget {
 class _BrandAddFormState extends State<BrandAddForm> {
   final _formkey = GlobalKey<FormState>();
   String? brand = '';
+  final user = BrandCRUD();
   final _brandList = [
     '스타벅스',
     '투썸플레이스',
@@ -73,11 +76,12 @@ class _BrandAddFormState extends State<BrandAddForm> {
               },
             ),
             SizedBox(
-              height: 430,
+              height: 500,
               child: Builder(
                   builder: (context){
                     switch (brand){
                       case '스타벅스':
+                        user.add_brand_without_barcode('스타벅스');
                         return ListView(
                           scrollDirection: Axis.vertical,
                           children: [
@@ -90,8 +94,10 @@ class _BrandAddFormState extends State<BrandAddForm> {
                         );
 
                       case '설빙':
+                        user.add_brand_without_barcode('설빙');
                         return const AddSulbing();
                       case '투썸플레이스':
+                        user.add_brand_without_barcode('투썸플레이스');
                         return ListView(
                           scrollDirection: Axis.vertical,
                           children: [
@@ -115,6 +121,7 @@ class _BrandAddFormState extends State<BrandAddForm> {
                           ],
                         );
                       case '공차':
+                        user.add_brand_without_barcode('공차');
                         return ListView(
                             scrollDirection: Axis.vertical,
                             children: [
@@ -126,6 +133,7 @@ class _BrandAddFormState extends State<BrandAddForm> {
                             ]
                         );
                       case 'CU':
+                        user.add_brand_without_barcode('CU');
                         return ListView(
                             scrollDirection: Axis.vertical,
                             children: [
@@ -137,6 +145,7 @@ class _BrandAddFormState extends State<BrandAddForm> {
                             ]
                         );
                       case 'GS25':
+                        user.add_brand_without_barcode('GS25');
                         return ListView(
                             scrollDirection: Axis.vertical,
                             children: [
@@ -152,7 +161,8 @@ class _BrandAddFormState extends State<BrandAddForm> {
                             ]
                         );
                       case '미니스톱':
-                        return AddOKMembership('Ministop');
+                        user.add_brand_without_barcode('미니스톱');
+                        return AddOKMembership('미니스톱');
                       case '세븐일레븐':
                         return ListView(
                             scrollDirection: Axis.vertical,
@@ -169,6 +179,7 @@ class _BrandAddFormState extends State<BrandAddForm> {
                             ]
                         );
                       case '뚜레쥬르':
+                        user.add_brand_without_barcode('뚜레쥬르');
                         return ListView(
                             scrollDirection: Axis.vertical,
                             children: [
@@ -202,6 +213,7 @@ class _BrandAddFormState extends State<BrandAddForm> {
                       case '버거킹':
                         return const AddBurgerKing();
                       case '롯데시네마':
+                        user.add_brand_without_barcode('롯데시네마');
                         return ListView(
                             scrollDirection: Axis.vertical,
                             children: [
@@ -225,6 +237,7 @@ class _BrandAddFormState extends State<BrandAddForm> {
                             ]
                         );
                       case 'CGV':
+                        user.add_brand_without_barcode('CGV');
                         return ListView(
                             scrollDirection: Axis.vertical,
                             children: [
@@ -248,6 +261,7 @@ class _BrandAddFormState extends State<BrandAddForm> {
                             ]
                         );
                       case '메가박스':
+                        user.add_brand_without_barcode('메가박스');
                         return ListView(
                             scrollDirection: Axis.vertical,
                             children: [
