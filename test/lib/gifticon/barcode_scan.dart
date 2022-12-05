@@ -8,6 +8,7 @@ import 'package:w3_class/brand/brand_main.dart';
 import 'package:w3_class/gifticon/gifticon_list.dart';
 import '../components/calendar_button.dart';
 import '../network/gifticon_crud.dart';
+import '../network/brand_crud.dart';
 import 'package:provider/provider.dart';
 import '../provider/date_provider.dart';
 import '../styles.dart';
@@ -167,8 +168,39 @@ class _BarcodeScanner extends State<BarcodeScanner> {
                   ),
                 ]
               ),
-            ],
-          ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Center(
+              child: Text(
+                '바코드 번호 : $qrcode',
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            CalendarButton(300, 50),
+            Expanded(
+                child: TextField(
+              controller: _controller,
+              onChanged: (value) {
+                gifticon_name = value;
+              },
+            )),
+            Expanded(
+                child: TextField(
+              controller: _brandcontroller,
+              onChanged: (value) {
+                brand = value;
+              },
+            )),
+            ElevatedButton(
+                onPressed: () {
+                },
+                child: Text("등록"))
+          ],
         ),
       ),
     );

@@ -51,6 +51,15 @@ class BrandCRUD {
         "$brandName의 멤버쉽 브랜드 - $membershipBrand 바코드: $membershipBarcode, 추가 완료");
   }
 
+  Future get_brand() async {
+    final QuerySnapshot snapshot = await brandDb.get();
+    List<String> data = [];
+    for (var doc in snapshot.docs) {
+      data.add(doc.id);
+    }
+    return data;
+  }
+
   // 브랜드 리스트 읽어오기
   Future get_brand_list() async {
     final QuerySnapshot snapshot = await brandDb.get();
@@ -90,7 +99,7 @@ class BrandCRUD {
   // 할인 브랜드 읽어오기
   Future get_discount_brand_list(String brand) async {
     final QuerySnapshot snapshot =
-        await brandDb.doc(brand).collection("discount").get();
+    await brandDb.doc(brand).collection("discount").get();
     final data = [];
     for (var doc in snapshot.docs) {
       var dataElement = doc.data() as Map<String, dynamic>;
@@ -103,7 +112,7 @@ class BrandCRUD {
   // 적립 브랜드 읽어오기
   Future get_membership_brand_list(String brand) async {
     final QuerySnapshot snapshot =
-        await brandDb.doc(brand).collection("membership").get();
+    await brandDb.doc(brand).collection("membership").get();
     final data = [];
     for (var doc in snapshot.docs) {
       var dataElement = doc.data() as Map<String, dynamic>;
