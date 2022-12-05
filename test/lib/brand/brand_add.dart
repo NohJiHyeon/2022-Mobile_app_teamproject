@@ -5,7 +5,6 @@ import 'package:w3_class/gifticon/image_picker.dart';
 import 'brand_add_widget.dart';
 import 'package:w3_class/gifticon/barcode_scan.dart';
 import 'package:w3_class/gifticon/image_picker.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class BrandAddPage extends StatelessWidget {
   const BrandAddPage({Key? key}) : super(key: key);

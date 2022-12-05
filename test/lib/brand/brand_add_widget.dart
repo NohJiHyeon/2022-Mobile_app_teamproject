@@ -28,7 +28,7 @@ class _AddTMembershipState extends State<AddTMembership> {
         const SizedBox(
           height: 20,
         ),
-        BrandImagePick(brand, 'T'),
+        BrandDiscountImagePick(brand, 'T'),
       ],
     );
   }
@@ -57,7 +57,7 @@ class _AddKTMembershipState extends State<AddKTMembership> {
         const SizedBox(
           height: 20,
         ),
-        BrandImagePick(brand, 'KT'),
+        BrandDiscountImagePick(brand, 'KT'),
       ],
     );
   }
@@ -86,7 +86,7 @@ class _AddUPlusMembershipState extends State<AddUPlusMembership> {
         const SizedBox(
           height: 20,
         ),
-        BrandImagePick(brand, 'UPlus'),
+        BrandDiscountImagePick(brand, 'UPlus'),
       ],
     );
   }
@@ -115,7 +115,7 @@ class _AddKiaMembershipState extends State<AddKiaMembership> {
         const SizedBox(
           height: 20,
         ),
-        BrandImagePick(brand, 'Kia'),
+        BrandMembershipImagePick(brand, 'Kia'),
       ],
     );
   }
@@ -144,7 +144,7 @@ class _AddOKMembershipState extends State<AddOKMembership> {
         const SizedBox(
           height: 20,
         ),
-        BrandImagePick(brand, 'OK'),
+        BrandMembershipImagePick(brand, 'OK캐쉬백'),
       ],
     );
   }
@@ -173,7 +173,7 @@ class _AddLPointMembershipState extends State<AddLPointMembership> {
         const SizedBox(
           height: 20,
         ),
-        BrandImagePick(brand, 'LPoint'),
+        BrandMembershipImagePick(brand, 'LPoint'),
       ],
     );
   }
@@ -202,7 +202,7 @@ class _AddCJOneMembershipState extends State<AddCJOneMembership> {
         const SizedBox(
           height: 20,
         ),
-        BrandImagePick(brand, 'CJ ONE'),
+        BrandMembershipImagePick(brand, 'CJ ONE'),
       ],
     );
   }
@@ -215,7 +215,7 @@ class AddStarbucks extends StatelessWidget {
     return Column(
       children: [
         Image.asset('lib/images/스타벅스 헤더.jpg', width: 700),
-        BrandImagePick('스타벅스','스타벅스'),
+        BrandAddImagePick('스타벅스'),
       ],
     );
   }
@@ -228,7 +228,7 @@ class AddEdiya extends StatelessWidget {
     return Column(
       children: [
         Image.asset('lib/images/이디야 헤더.jpg', width: 700),
-        BrandImagePick('이디야','이디야'),
+        BrandAddImagePick('이디야'),
       ],
     );
   }
@@ -241,7 +241,7 @@ class AddGongcha extends StatelessWidget {
     return Column(
       children: [
         Image.asset('lib/images/공차 헤더.jpg', width: 700),
-        BrandImagePick('공차','공차'),
+        BrandAddImagePick('공차'),
       ],
     );
   }
@@ -254,7 +254,7 @@ class AddSulbing extends StatelessWidget {
     return Column(
       children: [
         Image.asset('lib/images/설빙 헤더.jpg', width: 700),
-        BrandImagePick('설빙','설빙'),
+        BrandAddImagePick('설빙'),
       ],
     );
   }
@@ -266,7 +266,7 @@ class AddCU extends StatelessWidget {
     return Column(
       children: [
         Image.asset('lib/images/CU 헤더.jpg', width: 700),
-        BrandImagePick('CU','CU'),
+        BrandAddImagePick('CU'),
       ],
     );
   }
@@ -279,7 +279,7 @@ class AddKyochon extends StatelessWidget {
     return Column(
       children: [
         Image.asset('lib/images/교촌치킨 헤더.png', width: 700),
-        BrandImagePick('교촌치킨','교촌치킨'),
+        BrandAddImagePick('교촌치킨'),
       ],
     );
   }
@@ -292,7 +292,7 @@ class AddBBQ extends StatelessWidget {
     return Column(
       children: [
         Image.asset('lib/images/bbq 헤더.jpg', width: 700),
-        BrandImagePick('BBQ','BBQ'),
+        BrandAddImagePick('BBQ'),
       ],
     );
   }
@@ -305,7 +305,7 @@ class AddMcDonalds extends StatelessWidget {
     return Column(
       children: [
         Image.asset('lib/images/맥도날드 헤더.jpg', width: 700),
-        BrandImagePick('맥도날드','맥도날드'),
+        BrandAddImagePick('맥도날드'),
       ],
     );
   }
@@ -318,7 +318,7 @@ class AddBurgerKing extends StatelessWidget {
     return Column(
       children: [
         Image.asset('lib/images/버거킹 헤더.jpg', width: 700),
-        BrandImagePick('버거킹','버거킹'),
+        BrandAddImagePick('버거킹'),
       ],
     );
   }
@@ -346,7 +346,6 @@ class AddMegabox extends StatelessWidget {
     );
   }
 }
-
 class AddCGV extends StatelessWidget {
   const AddCGV({Key? key}) : super(key: key);
   @override
@@ -368,7 +367,6 @@ class AddCGV extends StatelessWidget {
     );
   }
 }
-
 class AddLotteCinema extends StatelessWidget {
   const AddLotteCinema({Key? key}) : super(key: key);
   @override
@@ -390,7 +388,6 @@ class AddLotteCinema extends StatelessWidget {
     );
   }
 }
-
 class AddBurgerKing extends StatelessWidget {
   const AddBurgerKing({Key? key}) : super(key: key);
   @override
@@ -405,7 +402,6 @@ class AddBurgerKing extends StatelessWidget {
     );
   }
 }
-
 class AddMcDonalds extends StatelessWidget {
   const AddMcDonalds({Key? key}) : super(key: key);
   @override
@@ -420,7 +416,6 @@ class AddMcDonalds extends StatelessWidget {
     );
   }
 }
-
 class AddBBQ extends StatelessWidget {
   const AddBBQ({Key? key}) : super(key: key);
   @override
@@ -438,7 +433,6 @@ class AddBBQ extends StatelessWidget {
     );
   }
 }
-
 class AddKyochon extends StatelessWidget {
   const AddKyochon({Key? key}) : super(key: key);
   @override
@@ -453,7 +447,6 @@ class AddKyochon extends StatelessWidget {
     );
   }
 }
-
 class AddTous extends StatelessWidget {
   const AddTous({Key? key}) : super(key: key);
   @override
@@ -475,7 +468,6 @@ class AddTous extends StatelessWidget {
     );
   }
 }
-
 class Add711 extends StatelessWidget {
   const Add711({Key? key}) : super(key: key);
   @override
@@ -495,7 +487,6 @@ class Add711 extends StatelessWidget {
     );
   }
 }
-
 class AddMinistop extends StatelessWidget {
   const AddMinistop({Key? key}) : super(key: key);
   @override
@@ -514,7 +505,6 @@ class AddMinistop extends StatelessWidget {
     );
   }
 }
-
 class AddGS extends StatelessWidget {
   const AddGS({Key? key}) : super(key: key);
   @override
@@ -535,7 +525,6 @@ class AddGS extends StatelessWidget {
     );
   }
 }
-
 class AddCU extends StatelessWidget {
   const AddCU({Key? key}) : super(key: key);
   @override
@@ -551,7 +540,6 @@ class AddCU extends StatelessWidget {
     );
   }
 }
-
 class AddGongcha extends StatelessWidget {
   const AddGongcha({Key? key}) : super(key: key);
   @override
@@ -567,7 +555,6 @@ class AddGongcha extends StatelessWidget {
     );
   }
 }
-
 class AddSulbing extends StatelessWidget {
   const AddSulbing({Key? key}) : super(key: key);
   @override
@@ -582,7 +569,6 @@ class AddSulbing extends StatelessWidget {
     );
   }
 }
-
 class AddEdiya extends StatelessWidget {
   const AddEdiya({Key? key}) : super(key: key);
   @override
@@ -597,7 +583,6 @@ class AddEdiya extends StatelessWidget {
     );
   }
 }
-
 class AddTwosome extends StatelessWidget {
   const AddTwosome({Key? key}) : super(key: key);
   @override
