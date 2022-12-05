@@ -32,11 +32,9 @@ class _BrandListPageState extends State<BrandListPage> {
                     crossAxisCount: 3,
                   ),
                   itemBuilder: (context, index) {
-                    print(data[index]["brand_name"].runtimeType);
-
                     return IconButton(
                       icon: ShadowedBrandIcon(
-                          data[index], BrandMainIcon(data[index])),
+                          data[index]["brand_name"], BrandMainIcon(data[index]["brand_name"])),
                       iconSize: 50,
                       onPressed: () {
                         Navigator.push(
@@ -45,7 +43,7 @@ class _BrandListPageState extends State<BrandListPage> {
                                 BrandDetailPage(brandName: data[index]["brand_name"],))
                         );
                       },
-                    );;
+                    );
                   }
               ),
             );

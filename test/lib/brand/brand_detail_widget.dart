@@ -29,7 +29,7 @@ class BrandDetailWidget extends StatelessWidget {
     'CGV': 'cgv 헤더.png',
     '메가박스': '메가박스 헤더.jpg',
     'CJ ONE': 'CJ ONE 헤더.jpg',
-    'T': 'T  헤더.png',
+    'T': 'T 헤더.png',
     'kt': 'kt 헤더.jpg',
     'U+': 'U+ 헤더.jpg',
     '기아멤버스': '기아멤버스 헤더.png',

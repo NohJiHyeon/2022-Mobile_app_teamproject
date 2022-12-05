@@ -17,6 +17,14 @@ class BrandCRUD {
     print("$brandName 바코드: $barcode, 브랜드 추가 완료");
   }
 
+  Future add_brand_without_barcode(String brandName) async {
+    final brandDoc = brandDb.doc(brandName);
+    brandDoc.set({
+      "no_barcode": true,
+    });
+    print("$brandName: 브랜드 추가 완료");
+  }
+
   // TODO: 할인 브랜드, 적립 브랜드 없는 브랜드에 추가할 때 exception 만들기
   // TODO: 없는 컬렉션에 접근했을 때 어떻게 나오는지
   // 할인 브랜드 추가
