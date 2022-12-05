@@ -15,34 +15,50 @@ class _BrandListPageState extends State<BrandListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<String>>(
+    return FutureBuilder(
       future: brandCRUD.get_brand(),
       builder: (context,snapshot){
         if (snapshot.hasData){
-         // List data = snapshot.data!.toList();
-          List data = ['스타벅스','맥도날드'];
-          return Padding(
-            padding: const EdgeInsets.all(15),
-            child: GridView.builder(
-                itemCount: data!.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisSpacing: 30,
-                  mainAxisSpacing: 20,
-                  crossAxisCount: 3,
+          List data = snapshot.data!.toList();
+          print(data);
+          //List data = ['스타벅스','맥도날드'];
+          if (data.length > 0) {
+            return Padding(
+              padding: const EdgeInsets.all(15),
+              child: GridView.builder(
+                  itemCount: data!.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisSpacing: 30,
+                    mainAxisSpacing: 20,
+                    crossAxisCount: 3,
+                  ),
+                  itemBuilder: (context, index) {
+                    return IconButton(
+                      icon: ShadowedBrandIcon(
+                          data[index], BrandMainIcon(data[index])),
+                      iconSize: 50,
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) =>
+                                BrandDetailPage(brandName: data[index],)));
+                      },
+                    );;
+                  }
+              ),
+            );
+          }
+          else{
+            return const Center(
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 80),
+                child: Text(
+                  '브랜드를 추가하세요!',
+                  style: TextStyle(fontSize: 25),
                 ),
-                itemBuilder: (context, index){
-                  return IconButton(
-                    icon: ShadowedBrandIcon(data[index], BrandMainIcon(data[index])),
-                    iconSize: 50,
-                    onPressed: (){
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => BrandDetailPage(brandName: data[index],)));
-                    },
-                  );;
-                }
-            ),
-          );
+              ),
+            );
+          }
         }
         else {
           return const Center(child: CircularProgressIndicator());

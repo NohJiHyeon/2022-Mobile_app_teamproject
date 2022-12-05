@@ -42,7 +42,7 @@ class BrandCRUD {
         "$brandName의 멤버쉽 브랜드 - $membershipBrand 바코드: $membershipBarcode, 추가 완료");
   }
 
-  Future<List<String>> get_brand() async {
+  Future get_brand() async {
     final QuerySnapshot snapshot = await brandDb.get();
     List<String> data = [];
     for (var doc in snapshot.docs) {
