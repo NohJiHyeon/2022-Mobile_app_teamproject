@@ -31,8 +31,7 @@ class CustomButton extends StatelessWidget {
   final info;
 
   _save(BuildContext context) async {
-    var response = await Dio().get(
-        info[0]['imageURL'] ?? "",
+    var response = await Dio().get(info[0]['imageURL'] ?? "",
         options: Options(responseType: ResponseType.bytes));
     final result = await ImageGallerySaver.saveImage(
         Uint8List.fromList(response.data),
@@ -62,6 +61,7 @@ class CustomButton extends StatelessWidget {
     }
     return message;
   }
+
   @override
   Widget build(BuildContext context) {
     // 저장 info: ['gifticon_id', Datetime]
@@ -87,62 +87,63 @@ class CustomButton extends StatelessWidget {
           console.delete_gifticon(info);
           break;
       }
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(snackBarMessage),
-          duration: const Duration(seconds: 2),
-          backgroundColor: Colors.black45,
-        ));
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (BuildContext context) => const BrandMainPage()),
-                (route) => false);
-
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(snackBarMessage),
+        duration: const Duration(seconds: 2),
+        backgroundColor: Colors.black45,
+      ));
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => const BrandMainPage()),
+          (route) => false);
     }
-
 
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
       child: ElevatedButton(
         onPressed: () => {
-          if(text == '저장'){
-
-        showDialog(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(title: const Text("안내"),
-        content: const Text('기프티콘을 저장하시겠습니까?'),
-        actions: [
-        OutlinedButton(onPressed: (){
-        _save(context);
-
-        }, child: const Text("저장")),
-        OutlinedButton(onPressed: () => Navigator.pop(context, 'Cancel'),
-        child: const Text("취소")),
-        ],)
-        )
-
-        }
-          else{
-            showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (BuildContext context) => AlertDialog(
-                        title: const Text('안내'),
-                        content: Text(getAlertMessage()),
+          if (text == '저장')
+            {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                        title: const Text("안내"),
+                        content: const Text('기프티콘을 저장하시겠습니까?'),
                         actions: [
                           OutlinedButton(
-                              child: const Text('확인'),
                               onPressed: () {
-                                navigateAfterProcess();
-                                Navigator.of(context).pop();
-                              }),
+                                _save(context);
+                              },
+                              child: const Text("저장")),
                           OutlinedButton(
-                              child: const Text('취소'),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              })
-                        ]))
-          }
+                              onPressed: () => Navigator.pop(context, 'Cancel'),
+                              child: const Text("취소")),
+                        ],
+                      ))
+            }
+          else
+            {
+              showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (BuildContext context) => AlertDialog(
+                          title: const Text('안내'),
+                          content: Text(getAlertMessage()),
+                          actions: [
+                            OutlinedButton(
+                                child: const Text('확인'),
+                                onPressed: () {
+                                  navigateAfterProcess();
+                                  Navigator.of(context).pop();
+                                }),
+                            OutlinedButton(
+                                child: const Text('취소'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                })
+                          ]))
+            }
         },
         style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -186,8 +187,8 @@ class _GifticonDetailState extends State<GifticonDetail> {
           children: [
             FittedBox(
               child: Container(
-                  width: 300,
-                  height: 450,
+                  width: 350,
+                  height: 350,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: AppColor.BRIGHT_GRAY),
@@ -227,9 +228,12 @@ class _GifticonDetailState extends State<GifticonDetail> {
                           ).then((selectedDate) async {
                             if (selectedDate != null) {
                               print(selectedDate);
-                              console.update_expiration_date(data['gifticon_id'], DateTime.parse(DateFormat('yyyy-MM-dd')
-                                  .format(selectedDate)));
-                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                              console.update_expiration_date(
+                                  data['gifticon_id'],
+                                  DateTime.parse(DateFormat('yyyy-MM-dd')
+                                      .format(selectedDate)));
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
                                 content: Text('유효기간이 변경됐습니다.'),
                                 duration: Duration(seconds: 2),
                                 backgroundColor: Colors.black45,
@@ -238,6 +242,7 @@ class _GifticonDetailState extends State<GifticonDetail> {
                                 dateFormat = DateFormat('yyyy-MM-dd')
                                     .format(selectedDate);
                               });
+                              Navigator.of(context).pop();
                             }
                             //print(dateFormat);
                           });
@@ -255,9 +260,12 @@ class _GifticonDetailState extends State<GifticonDetail> {
                     data['gifticon_id']),
                 const SizedBox(width: 15),
                 data['canUse']
-                    ? CustomButton('저장', 100, 50, AppColor.APPBAR_COLOR, [data, dateFormat == null
-                    ? data['expiration_date'].toDate()
-                    : DateTime.parse(dateFormat!)])
+                    ? CustomButton('저장', 100, 50, AppColor.APPBAR_COLOR, [
+                        data,
+                        dateFormat == null
+                            ? data['expiration_date'].toDate()
+                            : DateTime.parse(dateFormat!)
+                      ])
                     : Container(),
                 const SizedBox(width: 15),
                 CustomButton('삭제', 100, 50, AppColor.GRAY, data['gifticon_id']),
