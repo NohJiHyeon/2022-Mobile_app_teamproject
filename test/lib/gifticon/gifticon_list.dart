@@ -57,8 +57,10 @@ class _GifticonListPageState extends State<GifticonListPage> {
             }
           } else {
             if (data != null) {
-              print('스냅샷 ${snapshot.data}');
-              data = [...snapshot!.data!];
+              data.sort((e1, e2) {
+                return e1['created_date'].compareTo(e2['created_date']);
+              });
+              // print('스냅샷 ${data.map((i) => i['created_date'])}');
             }
           }
           if (_bottomNaviIndex == 0) {
@@ -95,7 +97,7 @@ class _GifticonListPageState extends State<GifticonListPage> {
                                             .set_expiration_mode();
                                   },
                                   child: Text(sortOption == 'EXPIRATION'
-                                      ? '시간순'
+                                      ? '유효기간순'
                                       : '등록순'))
                               : !data.isEmpty
                                   ? ElevatedButton(
