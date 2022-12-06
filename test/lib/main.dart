@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:w3_class/brand/brand_main.dart';
-import 'package:w3_class/components/barcode.dart';
-import 'package:w3_class/gifticon/gifticon_list.dart';
 import 'brand/brand_add.dart';
 import 'gifticon/barcode_scan.dart';
 import 'components/gifticonDetail.dart';
@@ -26,20 +24,9 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        DefaultMaterialLocalizations.delegate,
-        DefaultWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('ko'),
-        Locale('KR'),
-      ],
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: AppColor.APPBAR_COLOR,
@@ -52,13 +39,12 @@ class MyApp extends StatelessWidget {
             if (snapshot.hasData) {
               // Data가 있다면 로그인이 된 상태
               return MaterialApp(
-                debugShowCheckedModeBanner: false,
                 theme: ThemeData(
                   primarySwatch: AppColor.APPBAR_COLOR,
                 ),
                 initialRoute: '/',
                 routes: {
-                  '/': (context) => const BrandMainPage(),
+                  '/': (context) => BrandMainPage(),
                   '/gifticon_detail': (context) => const GifticonDetail(),
                   '/barcode_scan': (context) => BarcodeScanner(),
                   '/barcode' : (context) => const BarcodePage(),

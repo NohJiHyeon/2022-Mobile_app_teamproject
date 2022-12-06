@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:w3_class/main.dart';
 import 'package:w3_class/network/brand_crud.dart';
+import 'package:w3_class/styles.dart';
 
 /*
   버튼을 누르면 휴대폰 갤러리로 이동 -> 갤러리에서 사진 선택 -> 다음 페이지로 넘어가는 위젯입니다.
@@ -49,6 +50,10 @@ class BrandAddImagePickState extends State<BrandAddImagePick> {
     return Column(
       children: [
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            minimumSize: Size(350,35),
+            backgroundColor: AppColor.GRAY
+          ),
           onPressed: () {
             getImage(ImageSource.gallery, '/brand_barcode_scan');
           },
@@ -61,12 +66,16 @@ class BrandAddImagePickState extends State<BrandAddImagePick> {
           ),
         ),
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            minimumSize: Size(350,35),
+              backgroundColor: AppColor.GRAY
+          ),
           child: const Text(
             "등록하기",
             style: TextStyle(fontSize: 18),
           ),
           onPressed: () async {
-            user.add_brand(brand, '123456');
+            user.add_brand(brand, barcode);
           },
         ),
       ],
@@ -114,6 +123,10 @@ class BrandMembershipImagePickState extends State<BrandMembershipImagePick> {
     return Column(
       children: [
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            minimumSize: Size(350,35),
+              backgroundColor: AppColor.GRAY
+          ),
           onPressed: () {
             getImage(ImageSource.gallery, '/brand_barcode_scan');
           },
@@ -126,12 +139,16 @@ class BrandMembershipImagePickState extends State<BrandMembershipImagePick> {
           ),
         ),
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            minimumSize: Size(350,35),
+              backgroundColor: AppColor.GRAY
+          ),
           child: const Text(
             "등록하기",
             style: TextStyle(fontSize: 18),
           ),
           onPressed: () async {
-            user.add_membership_brand(brand, discount, '123456');
+            user.add_membership_brand(brand, discount, barcode);
           },
         ),
       ],
@@ -179,6 +196,10 @@ class BrandDiscountImagePickState extends State<BrandDiscountImagePick> {
     return Column(
       children: [
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            minimumSize: Size(350,35),
+              backgroundColor: AppColor.GRAY
+          ),
           onPressed: () {
             getImage(ImageSource.gallery, '/brand_barcode_scan');
           },
@@ -191,12 +212,16 @@ class BrandDiscountImagePickState extends State<BrandDiscountImagePick> {
           ),
         ),
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            minimumSize: Size(350,35),
+              backgroundColor: AppColor.GRAY
+          ),
           child: const Text(
             "등록하기",
             style: TextStyle(fontSize: 18),
           ),
           onPressed: () async {
-           user.add_discount_brand(brand, discount, '123456');
+           user.add_discount_brand(brand, discount, barcode);
           },
         ),
       ],

@@ -76,7 +76,7 @@ String BrandMainIcon(String brand){
     case '뚜레쥬르':
     case '교촌치킨':
     case '공차':
-    case '씨유':
+    case 'CU':
     case '이디야':
       fileType = 'jpg';
       break;
@@ -88,6 +88,7 @@ String BrandMainIcon(String brand){
     case '맥도날드':
     case 'CGV':
     case 'bbq':
+    case 'GS25':
       fileType = 'png';
       break;
   }

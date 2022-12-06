@@ -70,6 +70,7 @@ class _BarcodeScanner extends State<BarcodeScanner> {
             children: [
               Image.file(imageFile),
               // Text('Running on: $_platformVersion\n'),
+              const SizedBox(height: 30),
               Center(
                 child: Wrap(
                   children: [
