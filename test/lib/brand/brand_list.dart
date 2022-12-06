@@ -76,21 +76,18 @@ class _BrandListPageState extends State<BrandListPage> {
                   '브랜드를 추가하세요!',
                   style: TextStyle(fontSize: 25),
                 ),
-              ),
-            );
+              );
+            }
+          } else {
+            return const Center(child: CircularProgressIndicator());
           }
-        }
-        else {
-          return const Center(child: CircularProgressIndicator());
-        }
-      }
-    );
+        });
   }
 }
 
-String BrandMainIcon(String brand){
+String BrandMainIcon(String brand) {
   String fileType = '';
-  switch(brand){
+  switch (brand) {
     case '투썸플레이스':
     case '버거킹':
     case '롯데시네마':
@@ -116,7 +113,3 @@ String BrandMainIcon(String brand){
 
   return fileType;
 }
-
-
-
-

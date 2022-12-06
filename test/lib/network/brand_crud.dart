@@ -98,7 +98,7 @@ class BrandCRUD {
   // 할인 브랜드 읽어오기
   Future get_discount_brand_list(String brand) async {
     final QuerySnapshot snapshot =
-    await brandDb.doc(brand).collection("discount").get();
+        await brandDb.doc(brand).collection("discount").get();
     final data = [];
     for (var doc in snapshot.docs) {
       var dataElement = doc.data() as Map<String, dynamic>;
@@ -111,7 +111,7 @@ class BrandCRUD {
   // 적립 브랜드 읽어오기
   Future get_membership_brand_list(String brand) async {
     final QuerySnapshot snapshot =
-    await brandDb.doc(brand).collection("membership").get();
+        await brandDb.doc(brand).collection("membership").get();
     final data = [];
     for (var doc in snapshot.docs) {
       var dataElement = doc.data() as Map<String, dynamic>;
@@ -119,5 +119,11 @@ class BrandCRUD {
       data.add(dataElement);
     }
     return data;
+  }
+
+  // 특정 브랜드 삭제하기
+  Future delete_brand(String brand) async {
+    final brandDoc = brandDb.doc(brand);
+    brandDoc.delete().then((doc) => print("브랜드 삭제 완료"));
   }
 }

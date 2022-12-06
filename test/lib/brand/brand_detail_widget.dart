@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:w3_class/network/brand_crud.dart';
 import 'barcode_image_generation.dart';
 import 'package:w3_class/styles.dart';
 import '../components/gifticon_stack.dart';
@@ -49,9 +50,15 @@ class BrandDetailWidget extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
+                BrandCRUD().delete_brand(brand_name);
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.delete)),
+          IconButton(
+              onPressed: () {
                 GifticonCRUD().logout();
               },
-              icon: const Icon(Icons.logout))
+              icon: const Icon(Icons.logout)),
         ],
       ),
       body: ListView(
@@ -154,5 +161,3 @@ class BrandDetailWidget extends StatelessWidget {
     );
   }
 }
-
-
