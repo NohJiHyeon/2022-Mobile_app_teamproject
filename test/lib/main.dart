@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: AppColor.APPBAR_COLOR,
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
             if (snapshot.hasData) {
               // Data가 있다면 로그인이 된 상태
               return MaterialApp(
+                debugShowCheckedModeBanner: false,
                 theme: ThemeData(
                   primarySwatch: AppColor.APPBAR_COLOR,
                 ),

@@ -39,8 +39,6 @@ class BrandDetailWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print(gifticonData);
-    // print(brandData['brand_barcode'] != null ? "null아님" : "null임");
     final discount_list = brandData['discount_list'];
     final membership_list = brandData['membership_list'];
 
@@ -102,8 +100,8 @@ class BrandDetailWidget extends StatelessWidget {
   }
 
   Widget barcodeListWidget(String listName, List barcodeList) {
-    print(barcodeList);
-    if (barcodeList == null) {
+    print(barcodeList.toString() + "Test");
+    if (barcodeList.isEmpty) {
       return Container();
     }
     return Column(
