@@ -154,3 +154,5 @@ class BrandDetailWidget extends StatelessWidget {
     );
   }
 }
+
+

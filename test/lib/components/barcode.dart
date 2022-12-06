@@ -3,14 +3,8 @@ import 'package:flutter/material.dart';
 
 
 //바코드 확대 화면
-class BarcodePage extends StatefulWidget {
+class BarcodePage extends StatelessWidget {
   const BarcodePage({Key? key}) : super(key: key);
-
-  @override
-  State<BarcodePage> createState() => _BarcodePageState();
-}
-
-class _BarcodePageState extends State<BarcodePage> {
 
   @override
   Widget build(BuildContext context) {
