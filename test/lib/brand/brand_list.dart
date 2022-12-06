@@ -31,50 +31,52 @@ class _BrandListPageState extends State<BrandListPage> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<dynamic>>(
-      future: getBrandList(),
-      builder: (context,AsyncSnapshot<List<dynamic>> snapshot){
-        if (snapshot.hasData){
-          List data = [...snapshot.data!];
-          print(data.length);
-          if (data.length > 0) {
-            return Scaffold(
-              body: RefreshIndicator(
-                onRefresh: _onRefresh,
-                child: Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: GridView.builder(
-                      itemCount: data!.length,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisSpacing: 30,
-                        mainAxisSpacing: 20,
-                        crossAxisCount: 3,
-                      ),
-                      itemBuilder: (context, index) {
-                        return IconButton(
-                          icon: ShadowedBrandIcon(
-                              data[index]["brand_name"], BrandMainIcon(data[index]["brand_name"])),
-                          iconSize: 50,
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) =>
-                                    BrandDetailPage(brandName: data[index]["brand_name"],))
-                            );
-                          },
-                        );
-                      }
+        future: getBrandList(),
+        builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
+          if (snapshot.hasData) {
+            List data = [...snapshot.data!];
+            print(data.length);
+            if (data.length > 0) {
+              return Scaffold(
+                body: RefreshIndicator(
+                  onRefresh: _onRefresh,
+                  child: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: GridView.builder(
+                        itemCount: data!.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisSpacing: 30,
+                          mainAxisSpacing: 20,
+                          crossAxisCount: 3,
+                        ),
+                        itemBuilder: (context, index) {
+                          return IconButton(
+                            icon: ShadowedBrandIcon(data[index]["brand_name"],
+                                BrandMainIcon(data[index]["brand_name"])),
+                            iconSize: 50,
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => BrandDetailPage(
+                                            brandName: data[index]
+                                                ["brand_name"],
+                                          )));
+                            },
+                          );
+                        }),
                   ),
                 ),
-              ),
-            );
-          }
-          else{
-            return const Center(
-              child: Padding(
-                padding: EdgeInsets.only(bottom: 80),
-                child: Text(
-                  '브랜드를 추가하세요!',
-                  style: TextStyle(fontSize: 25),
+              );
+            } else {
+              return const Center(
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 80),
+                  child: Text(
+                    '브랜드를 추가하세요!',
+                    style: TextStyle(fontSize: 25),
+                  ),
                 ),
               );
             }
