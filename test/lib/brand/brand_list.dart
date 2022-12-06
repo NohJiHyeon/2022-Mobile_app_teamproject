@@ -13,37 +13,58 @@ class BrandListPage extends StatefulWidget {
 class _BrandListPageState extends State<BrandListPage> {
   BrandCRUD brandCRUD = BrandCRUD();
 
+  // DB 기프티콘 구하기
+  Future<List<dynamic>> getBrandList() async {
+    final List brand_list = await brandCRUD.get_brand_list();
+    return brand_list;
+  }
+
+  Future<void> _onRefresh() {
+    setState(() {
+      getBrandList();
+      print(getBrandList());
+      build(context);
+    });
+    return Future<void>.value();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: brandCRUD.get_brand_list(),
-      builder: (context,snapshot){
+    return FutureBuilder<List<dynamic>>(
+      future: getBrandList(),
+      builder: (context,AsyncSnapshot<List<dynamic>> snapshot){
         if (snapshot.hasData){
-          List data = snapshot.data!.toList();
+          List data = [...snapshot.data!];
+          print(data.length);
           if (data.length > 0) {
-            return Padding(
-              padding: const EdgeInsets.all(15),
-              child: GridView.builder(
-                  itemCount: data!.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisSpacing: 30,
-                    mainAxisSpacing: 20,
-                    crossAxisCount: 3,
-                  ),
-                  itemBuilder: (context, index) {
-                    return IconButton(
-                      icon: ShadowedBrandIcon(
-                          data[index]["brand_name"], BrandMainIcon(data[index]["brand_name"])),
-                      iconSize: 50,
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) =>
-                                BrandDetailPage(brandName: data[index]["brand_name"],))
+            return Scaffold(
+              body: RefreshIndicator(
+                onRefresh: _onRefresh,
+                child: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: GridView.builder(
+                      itemCount: data!.length,
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisSpacing: 30,
+                        mainAxisSpacing: 20,
+                        crossAxisCount: 3,
+                      ),
+                      itemBuilder: (context, index) {
+                        return IconButton(
+                          icon: ShadowedBrandIcon(
+                              data[index]["brand_name"], BrandMainIcon(data[index]["brand_name"])),
+                          iconSize: 50,
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>
+                                    BrandDetailPage(brandName: data[index]["brand_name"],))
+                            );
+                          },
                         );
-                      },
-                    );
-                  }
+                      }
+                  ),
+                ),
               ),
             );
           }
