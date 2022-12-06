@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:w3_class/brand/brand_main.dart';
+import 'package:w3_class/components/barcode.dart';
 import 'brand/brand_add.dart';
 import 'gifticon/barcode_scan.dart';
 import 'components/gifticonDetail.dart';
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
                   '/': (context) => BrandMainPage(),
                   '/gifticon_detail': (context) => const GifticonDetail(),
                   '/barcode_scan': (context) => BarcodeScanner(),
+                  '/barcode' : (context) => BarcodePage(),
                   '/brand_barcode_scan': (context) => BrandBarcodeScanner(),
                   '/gifticon_add': (context) => GifticonAddPage(),
                   '/brand_add': (context) => BrandAddPage(),
