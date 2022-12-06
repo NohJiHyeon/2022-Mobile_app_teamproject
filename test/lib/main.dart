@@ -45,6 +45,7 @@ class MyApp extends StatelessWidget {
                 routes: {
                   '/': (context) => BrandMainPage(),
                   '/gifticon_detail': (context) => const GifticonDetail(),
+                  '/barcode_scan': (context) => BarcodeScanner(),
                   '/brand_barcode_scan': (context) => BrandBarcodeScanner(),
                   '/gifticon_add': (context) => GifticonAddPage(),
                   '/brand_add': (context) => BrandAddPage(),
