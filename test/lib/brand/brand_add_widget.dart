@@ -163,7 +163,7 @@ class _AddKiaMembershipState extends State<AddKiaMembership> {
           const SizedBox(
             height: 20,
           ),
-          BrandDiscountImagePick(brand, 'Kia'),
+          BrandMembershipImagePick(brand, 'Kia'),
         ],
       ),
     );
@@ -204,7 +204,7 @@ class _AddOKMembershipState extends State<AddOKMembership> {
           const SizedBox(
             height: 20,
           ),
-          BrandDiscountImagePick(brand, 'OK캐쉬백'),
+          BrandMembershipImagePick(brand, 'OK캐쉬백'),
         ],
       ),
     );
@@ -245,7 +245,7 @@ class _AddLPointMembershipState extends State<AddLPointMembership> {
           const SizedBox(
             height: 20,
           ),
-          BrandDiscountImagePick(brand, 'LPoint'),
+          BrandMembershipImagePick(brand, 'LPoint'),
         ],
       ),
     );
@@ -286,7 +286,7 @@ class _AddCJOneMembershipState extends State<AddCJOneMembership> {
           const SizedBox(
             height: 20,
           ),
-          BrandDiscountImagePick(brand, 'CJ ONE'),
+          BrandMembershipImagePick(brand, 'CJ ONE'),
         ],
       ),
     );

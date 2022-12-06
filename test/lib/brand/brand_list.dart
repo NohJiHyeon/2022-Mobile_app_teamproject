@@ -76,7 +76,8 @@ class _BrandListPageState extends State<BrandListPage> {
                   '브랜드를 추가하세요!',
                   style: TextStyle(fontSize: 25),
                 ),
-              );
+              ),
+            );
             }
           } else {
             return const Center(child: CircularProgressIndicator());
