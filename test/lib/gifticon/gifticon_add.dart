@@ -36,50 +36,21 @@ class _GifticonAddFormState extends State<GifticonAddForm> {
         key: _formkey,
         child: ListView(
           children: [
-            const Text('기프티콘 이미지 선택', style: TextStyle(fontSize: 16)),
+            SizedBox(
+              height: 20,
+            ),
+            const Text('기프티콘 이미지 선택', style: TextStyle(fontSize: 18)),
             const SizedBox(
+              height: 20,
+            ),
+            const Text('갤러리에서 기프티콘 이미지를 업로드해 주세요.', style: TextStyle(fontSize: 18)),
+            SizedBox(
               height: 20,
             ),
             const ImagePick(),
             const SizedBox(
               height: 20,
             ),
-            // TextFormField(
-            //   decoration: const InputDecoration(
-            //     labelText: '바코드',
-            //   ),
-            //   onChanged: (value) {
-            //   },
-            // ),
-            // const SizedBox(
-            //   height: 20,
-            // ),
-            // TextFormField(
-            //   decoration: const InputDecoration(
-            //     labelText: '상품명',
-            //   ),
-            //   onChanged: (value) {
-            //   },
-            // ),
-            // const SizedBox(
-            //   height: 20,
-            // ),
-            // TextFormField(
-            //   decoration: const InputDecoration(
-            //     labelText: '사용처',
-            //   ),
-            //   onChanged: (value) {
-            //   },
-            // ),
-            // const SizedBox(
-            //   height: 20,
-            // ),
-            // CalendarButton(100, 50),
-            // const SizedBox(
-            //   height: 20,
-            // ),
-            //
-            // ElevatedButton(onPressed: (){}, child: const Text('등록', style: TextStyle(fontSize: 18),)),
           ],
         ),
       ),

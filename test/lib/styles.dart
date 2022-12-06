@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 // AppColor.ORANGE, AppColor.APPBAR_COLOR 등등...
 
 class AppColor {
-  static const ORANGE = Color(0xFFE59673); // 브랜드/기프티콘 탭 선택, 기프티콘 선택 완료 버튼 색깔
+  static const ORANGE = Color(0xFFE59674); // 브랜드/기프티콘 탭 선택, 기프티콘 선택 완료 버튼 색깔
   static const GRAY = Color(0xFFA5A198);
-  static const BRIGHT_GRAY = Color(0XFFBFBEBA);
+  static const BRIGHT_GRAY = Color(0xFFBFBEBA);
   static const EXPIRED_DATE_COLOR = Color(0xFFEBF0F2);
+  static const GRAY_WITH_OPACITY = Color(0xFFBFBEAA);
 
   static const MaterialColor APPBAR_COLOR = MaterialColor(
     0xffE8B28D,
@@ -35,4 +36,6 @@ class CustomTextStyle {
 
   static const TextStyle expiredSoonTextStyle =
       TextStyle(fontSize: 18, color: Colors.white);
+
+  static const TextStyle smallButtonTextStyle = TextStyle(fontSize: 15);
 }

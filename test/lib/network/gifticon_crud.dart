@@ -47,6 +47,7 @@ class GifticonCRUD {
         "canUse": true,
         "imageURL": downloadURL,
         "gifticon_barcode": gifticonBarcode,
+        "created_date": Timestamp.fromDate(DateTime.now()),
       });
 
       gifticonDoc.get().then((DocumentSnapshot doc) {
@@ -58,13 +59,16 @@ class GifticonCRUD {
 
   // 모든 기프티콘 리스트 읽어오기
   Future get_gifticon_list() async {
-    QuerySnapshot snapshot = await gifticonDB.get();
+    QuerySnapshot snapshot =
+        await gifticonDB.orderBy('created_date', descending: false).get();
     final data = [];
     for (var doc in snapshot.docs) {
       var dataElement = doc.data() as Map<String, dynamic>;
       dataElement["gifticon_id"] = doc.id;
       data.add(dataElement);
     }
+    print("=========================");
+    print(data);
     return data;
   }
 
@@ -118,10 +122,11 @@ class GifticonCRUD {
   }
 
   // 기프티콘 유효기간 변경
-  Future update_expired_date(String gifticonId, DateTime expiredDate) async {
+  Future update_expiration_date(String gifticonId, DateTime expiredDate) async {
     final gifticonDoc = gifticonDB.doc(gifticonId);
-    gifticonDoc.update({"expiration_date": Timestamp.fromDate(DateTime(
-        expiredDate.year, expiredDate.month, expiredDate.day))}).then((value) => print("유효기간 변경 완료"));
+    gifticonDoc.update({
+      "expiration_date": Timestamp.fromDate(
+          DateTime(expiredDate.year, expiredDate.month, expiredDate.day))
+    }).then((value) => print("유효기간 변경 완료"));
   }
 }
-

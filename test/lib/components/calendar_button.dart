@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:w3_class/provider/date_provider.dart';
 
 import '../styles.dart';
 
@@ -25,35 +27,40 @@ class _CalendarButtonState extends State<CalendarButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: widget.width,
-        height: widget.height,
-        decoration: BoxDecoration( borderRadius: BorderRadius.circular(20)),
-        child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
+          width: widget.width,
+          height: widget.height,
+          decoration: BoxDecoration( borderRadius: BorderRadius.circular(20)),
+          child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                backgroundColor: AppColor.BRIGHT_GRAY,
+                fixedSize: Size(widget.width, widget.height),
               ),
-              backgroundColor: AppColor.EXPIRED_DATE_COLOR,
-              fixedSize: Size(widget.width, widget.height),
-            ),
-            child: Text('유효기간: $dateFormat',
-                style: CustomTextStyle.dateButtonTextStyle),
-            onPressed: () async {
-              await showDatePicker(
-                context: context,
-                initialDate: DateTime.parse(expiredDate.toString()),
-                firstDate: DateTime(2022),
-                lastDate: DateTime(2030),
-                initialEntryMode: DatePickerEntryMode.calendarOnly,
-              ).then((selectedDate) {
-                if (selectedDate != null) {
-                  setState(() {
-                    expiredDate = selectedDate;
-                    dateFormat = DateFormat('yyyy-MM-dd').format(selectedDate);
-                  });
-                }
-                //print(dateFormat);
-              });
-            }));
+              child: Text('유효기간: $dateFormat',
+                  style: CustomTextStyle.dateButtonTextStyle),
+              onPressed: () async {
+                await showDatePicker(
+                  context: context,
+                  initialDate: DateTime.parse(expiredDate.toString()),
+                  firstDate: DateTime(2022),
+                  lastDate: DateTime(2030),
+                  initialEntryMode: DatePickerEntryMode.calendarOnly,
+                ).then((selectedDate) {
+                  if (selectedDate != null) {
+                    setState(() {
+                      expiredDate = selectedDate;
+                      dateFormat = DateFormat('yyyy-MM-dd').format(selectedDate);
+                      context.read<Date>().changeDate(selectedDate);
+                    });
+                  }
+                  //print(dateFormat);
+                });
+              }));
+
+
   }
+
 }
+

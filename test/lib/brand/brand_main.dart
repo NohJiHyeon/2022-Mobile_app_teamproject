@@ -5,9 +5,10 @@ import '../components/shadowed_brand_icon.dart';
 import '../gifticon/gifticon_list.dart';
 import '../components/custom_floatingActionButton.dart';
 import '../network/gifticon_crud.dart';
-
+import 'brand_detail.dart';
 import 'package:provider/provider.dart';
 import '../provider/sort_provider.dart';
+import 'brand_list.dart';
 
 class BrandMainPage extends StatefulWidget {
   const BrandMainPage({Key? key}) : super(key: key);
@@ -49,26 +50,7 @@ class _BrandMainPageState extends State<BrandMainPage> {
             ),
             body: TabBarView(
               children: [
-                Tab(
-                  child: GridView.count(
-                    primary: false,
-                    padding: const EdgeInsets.all(30),
-                    crossAxisSpacing: 40,
-                    mainAxisSpacing: 20,
-                    crossAxisCount: 3,
-                    children: [
-                      ShadowedBrandIcon('lib/images/cat.jpg'),
-                      ShadowedBrandIcon('lib/images/cat.jpg'),
-                      ShadowedBrandIcon('lib/images/cat.jpg'),
-                      ShadowedBrandIcon('lib/images/cat.jpg'),
-                      ShadowedBrandIcon('lib/images/cat.jpg'),
-                      ShadowedBrandIcon('lib/images/cat.jpg'),
-                      ShadowedBrandIcon('lib/images/cat.jpg'),
-                      ShadowedBrandIcon('lib/images/cat.jpg'),
-                      ShadowedBrandIcon('lib/images/cat.jpg'),
-                    ],
-                  ),
-                ),
+                BrandListPage(),
                 const GifticonListPage(),
               ],
             ),

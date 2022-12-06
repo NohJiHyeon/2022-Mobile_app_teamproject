@@ -9,7 +9,8 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Register'),
+        centerTitle: true,
+        title: const Text('회원가입'),
       ),
       body: const RegisterForm(),
     );
@@ -39,7 +40,7 @@ class _RegisterFormState extends State<RegisterForm> {
             children: [
               TextFormField(
                 decoration: const InputDecoration(
-                  labelText: 'Email',
+                  labelText: '이메일',
                 ),
                 onChanged: (value) {
                   email = value;
@@ -51,7 +52,7 @@ class _RegisterFormState extends State<RegisterForm> {
               TextFormField(
                 obscureText: true,
                 decoration: const InputDecoration(
-                  labelText: 'Password',
+                  labelText: '비밀번호',
                 ),
                 onChanged: (value) {
                   password = value;
@@ -62,7 +63,7 @@ class _RegisterFormState extends State<RegisterForm> {
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                  labelText: 'User Name',
+                  labelText: '닉네임',
                 ),
                 onChanged: (value) {
                   userName = value;
@@ -98,13 +99,13 @@ class _RegisterFormState extends State<RegisterForm> {
                       print(e);
                     }
                   },
-                  child: const Text('Enter')),
+                  child: const Text('계정 생성')),
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const Text('If you already registered, '),
+                  const Text('이미 계정이 있나요?'),
                   TextButton(
-                    child: const Text('Login with your email.'),
+                    child: const Text('로그인'),
                     onPressed: () {
                       Navigator.pop(context);
                     },

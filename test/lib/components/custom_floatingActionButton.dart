@@ -49,27 +49,25 @@ class _CustomFloatingActionButton extends State<CustomFloatingActionButton> {
           child: const Icon(Icons.add_photo_alternate_outlined),
           backgroundColor: AppColor.ORANGE,
           foregroundColor: Colors.white,
-          label: '기프티콘 추가하기',
+          label: ' 기프티콘 추가하기 ',
+          labelBackgroundColor: Colors.black45,
           labelStyle: const TextStyle(
             fontSize: 18.0,
-            color: Colors.black,
+            color: Colors.white,
           ),
-          onTap: () => {
-            Navigator.pushNamed(context, '/gifticon_add')
-          },
+          onTap: () => {Navigator.pushNamed(context, '/gifticon_add')},
         ),
         SpeedDialChild(
           child: const Icon(Icons.work_rounded),
           backgroundColor: AppColor.ORANGE,
           foregroundColor: Colors.white,
-          label: '브랜드 추가하기',
+          label: ' 브랜드 추가하기 ',
+          labelBackgroundColor: Colors.black45,
           labelStyle: const TextStyle(
             fontSize: 18.0,
-            color: Colors.black,
+            color: Colors.white,
           ),
-          onTap: () => {
-            Navigator.pushNamed(context, '/brand_add')
-          },
+          onTap: () => {Navigator.pushNamed(context, '/brand_add')},
         ),
       ],
     );

@@ -17,8 +17,16 @@ class BrandCRUD {
     print("$brandName 바코드: $barcode, 브랜드 추가 완료");
   }
 
+  Future add_brand_without_barcode(String brandName) async {
+    final brandDoc = brandDb.doc(brandName);
+    brandDoc.set({
+      "no_barcode": true,
+    });
+    print("$brandName: 브랜드 추가 완료");
+  }
+
   // TODO: 할인 브랜드, 적립 브랜드 없는 브랜드에 추가할 때 exception 만들기
-  // TODO: 없는 컬렉션에 접근햇을 때 어떻게 나오는지
+  // TODO: 없는 컬렉션에 접근했을 때 어떻게 나오는지
   // 할인 브랜드 추가
   Future add_discount_brand(
       String brandName, String discountBrand, String discountBarcode) async {
@@ -42,6 +50,15 @@ class BrandCRUD {
         "$brandName의 멤버쉽 브랜드 - $membershipBrand 바코드: $membershipBarcode, 추가 완료");
   }
 
+  Future get_brand() async {
+    final QuerySnapshot snapshot = await brandDb.get();
+    List<String> data = [];
+    for (var doc in snapshot.docs) {
+      data.add(doc.id);
+    }
+    return data;
+  }
+
   // 브랜드 리스트 읽어오기
   Future get_brand_list() async {
     final QuerySnapshot snapshot = await brandDb.get();
@@ -60,6 +77,24 @@ class BrandCRUD {
     return data;
   }
 
+  // 특정 브랜드 리스트 읽어오기
+  Future get_brand_info(String brand) async {
+    final brandDoc = brandDb.doc(brand);
+    DocumentSnapshot doc = await brandDoc.get();
+    final data = doc.data() as Map<String, dynamic>;
+    if (data == null) {
+      // 브랜드에 등록된 기프티콘이 없을 경우
+      return {};
+    }
+    // 할인 브랜드 리스트
+    var brand_list = await get_discount_brand_list(brand);
+    data["discount_list"] = brand_list;
+    // 적립 브랜드 리스트
+    var membership_list = await get_membership_brand_list(brand);
+    data["membership_list"] = membership_list;
+    return data;
+  }
+
   // 할인 브랜드 읽어오기
   Future get_discount_brand_list(String brand) async {
     final QuerySnapshot snapshot =
@@ -67,7 +102,7 @@ class BrandCRUD {
     final data = [];
     for (var doc in snapshot.docs) {
       var dataElement = doc.data() as Map<String, dynamic>;
-      dataElement["discount_brand_name"] = doc.id;
+      dataElement["brand_name"] = doc.id;
       data.add(dataElement);
     }
     return data;
@@ -80,9 +115,15 @@ class BrandCRUD {
     final data = [];
     for (var doc in snapshot.docs) {
       var dataElement = doc.data() as Map<String, dynamic>;
-      dataElement["membership_brand_name"] = doc.id;
+      dataElement["brand_name"] = doc.id;
       data.add(dataElement);
     }
     return data;
+  }
+
+  // 특정 브랜드 삭제하기
+  Future delete_brand(String brand) async {
+    final brandDoc = brandDb.doc(brand);
+    brandDoc.delete().then((doc) => print("브랜드 삭제 완료"));
   }
 }

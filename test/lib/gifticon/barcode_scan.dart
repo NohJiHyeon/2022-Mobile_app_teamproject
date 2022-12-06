@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'dart:io';
 import 'dart:async';
 import 'package:scan/scan.dart';
 import 'package:flutter/services.dart';
+import 'package:w3_class/brand/brand_main.dart';
+import 'package:w3_class/gifticon/gifticon_list.dart';
 import '../components/calendar_button.dart';
 import '../network/gifticon_crud.dart';
+import 'package:provider/provider.dart';
+import '../provider/date_provider.dart';
+import '../styles.dart';
 
 /*
   argument로 이미지 파일을 넣으면 이미지에서 바코드를 읽어오는 위젯입니다.
@@ -13,6 +19,7 @@ import '../network/gifticon_crud.dart';
  */
 
 class BarcodeScanner extends StatefulWidget {
+
   @override
   _BarcodeScanner createState() => _BarcodeScanner();
 }
@@ -20,6 +27,10 @@ class BarcodeScanner extends StatefulWidget {
 class _BarcodeScanner extends State<BarcodeScanner> {
   String _platformVersion = 'Unknown';
   String qrcode = 'Unknown';
+  final _controller = TextEditingController();
+  final _brandcontroller = TextEditingController();
+  String gifticon_name = '';
+  String? brand = '';
 
   @override
   void initState() {
@@ -45,74 +56,149 @@ class _BarcodeScanner extends State<BarcodeScanner> {
   Widget build(BuildContext context) {
     final imageFile = ModalRoute.of(context)?.settings.arguments as File;
     final GifticonCRUD crud = GifticonCRUD();
-    final _controller = TextEditingController();
-    final _brandcontroller = TextEditingController();
-    String gifticon_name = '';
-    String brand = '';
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('이미지에서 바코드 스캔'),
-      ),
-      body: SizedBox(
-        height: double.infinity,
-        child: ListView(
-          children: [
-            Image.file(imageFile),
-            // Text('Running on: $_platformVersion\n'),
-            Center(
-              child: Wrap(
-                children: [
-                  ElevatedButton(
-                    child: const Text(
-                      "이미지에서 바코드 스캔하기",
-                      style: TextStyle(fontSize: 18),
+    print(brand);
+    print(gifticon_name);
+    final _brandList = [
+      '스타벅스',
+      '투썸플레이스',
+      '이디야',
+      '설빙',
+      '공차',
+      'CU',
+      'GS25',
+      '미니스톱',
+      '세븐일레븐',
+      '뚜레쥬르',
+      '교촌치킨',
+      'bbq',
+      '맥도날드',
+      '버거킹',
+      '롯데시네마',
+      'CGV',
+      '메가박스'
+    ];
+    return ChangeNotifierProvider(
+      create: (BuildContext context) => Date(),
+      builder: (context, child) => Scaffold(
+        appBar: AppBar(
+          title: const Text('이미지에서 바코드 스캔'),
+        ),
+        body: SizedBox(
+          height: double.infinity,
+          child: ListView(
+            children: [
+              Image.file(imageFile),
+              // Text('Running on: $_platformVersion\n'),
+              const SizedBox(height: 30),
+              Center(
+                child: Wrap(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () async {
+                        String? str = await Scan.parse(imageFile!.path);
+                        if (str != null) {
+                          setState(() {
+                            qrcode = str;
+                          });
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        backgroundColor: AppColor.BRIGHT_GRAY,
+                        fixedSize: const Size(350, 50),
+                      ),
+                      child: const Text(
+                        "이미지에서 바코드 스캔하기",
+                        style: TextStyle(fontSize: 18),
+                      ),
                     ),
-                    onPressed: () async {
-                      String? str = await Scan.parse(imageFile!.path);
-                      if (str != null) {
-                        setState(() {
-                          qrcode = str;
-                        });
-                      }
-                    },
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Center(
+                child: Text(
+                  '바코드 번호 : $qrcode',
+                  style: const TextStyle(fontSize: 18),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Center(child: Wrap(children: const [CalendarButton(350, 50)])),
+              const SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  children: [
+                    const Text("상품명 : ", style: TextStyle(fontSize: 18),),
+                    Expanded(
+                        child: TextField(
+                      controller: _controller,
+                      onChanged: (value) {
+                        gifticon_name = value;
+                      },
+                    )),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  children: [
+                    const Text("브랜드명 : ", style: TextStyle(fontSize: 18),),
+                    Expanded(
+                        child: DropdownButtonFormField<String>(
+                          decoration:  InputDecoration(
+                            labelText: '브랜드명',
+                          ),
+                          items: _brandList.map((brand) => DropdownMenuItem(
+                            value: brand,
+                            child: Text(brand),
+                          )).toList(),
+                          onChanged: (val) {
+                            setState(() {
+                              brand = val;
+                            });
+                          },
+                        )),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Wrap(
+                children: [
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                         crud.add_gifticon(gifticon_name, brand!, context.read<Date>().expDate, imageFile, qrcode);
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => BrandMainPage())).then((value) {
+                           setState(() {});
+                         });
+                      },
+                      child: const Text("등록", style: TextStyle(fontSize: 18)),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        backgroundColor: AppColor.APPBAR_COLOR,
+                        fixedSize: const Size(400, 50),
+                      ),
+                ),
                   ),
-                ],
+                ]
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Center(
-              child: Text(
-                '바코드 번호 : $qrcode',
-                style: TextStyle(fontSize: 18),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            CalendarButton(300, 50),
-            Expanded(
-                child: TextField(
-              controller: _controller,
-              onChanged: (value) {
-                gifticon_name = value;
-              },
-            )),
-            Expanded(
-                child: TextField(
-              controller: _brandcontroller,
-              onChanged: (value) {
-                brand = value;
-              },
-            )),
-            ElevatedButton(
-                onPressed: () {
-                  // crud.add_gifticon(gifticon_name, brand, 2022, 11, 28, imageFile);
-                },
-                child: Text("등록"))
-          ],
+            ],
+          ),
         ),
       ),
     );
