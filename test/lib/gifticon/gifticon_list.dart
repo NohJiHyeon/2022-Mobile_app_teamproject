@@ -58,7 +58,7 @@ class _GifticonListPageState extends State<GifticonListPage> {
           } else {
             if (data != null) {
               data.sort((e1, e2) {
-                return e1['created_date'].compareTo(e2['created_date']);
+                return e2['created_date'].compareTo(e1['created_date']);
               });
               // print('스냅샷 ${data.map((i) => i['created_date'])}');
             }
