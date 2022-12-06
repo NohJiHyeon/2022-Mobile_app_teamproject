@@ -35,7 +35,7 @@ class _BrandAddFormState extends State<BrandAddForm> {
   final _brandList = [
     '스타벅스',
     '투썸플레이스',
-    '이디야커피',
+    '이디야',
     '설빙',
     '공차',
     'CU',

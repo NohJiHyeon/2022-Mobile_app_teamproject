@@ -29,6 +29,8 @@ class _BarcodeScanner extends State<BarcodeScanner> {
   String qrcode = 'Unknown';
   final _controller = TextEditingController();
   final _brandcontroller = TextEditingController();
+  String gifticon_name = '';
+  String? brand = '';
 
   @override
   void initState() {
@@ -54,9 +56,28 @@ class _BarcodeScanner extends State<BarcodeScanner> {
   Widget build(BuildContext context) {
     final imageFile = ModalRoute.of(context)?.settings.arguments as File;
     final GifticonCRUD crud = GifticonCRUD();
-    String gifticon_name = '';
-    String brand = '';
 
+    print(brand);
+    print(gifticon_name);
+    final _brandList = [
+      '스타벅스',
+      '투썸플레이스',
+      '이디야',
+      '설빙',
+      '공차',
+      'CU',
+      'GS25',
+      '미니스톱',
+      '세븐일레븐',
+      '뚜레쥬르',
+      '교촌치킨',
+      'bbq',
+      '맥도날드',
+      '버거킹',
+      '롯데시네마',
+      'CGV',
+      '메가박스'
+    ];
     return ChangeNotifierProvider(
       create: (BuildContext context) => Date(),
       builder: (context, child) => Scaffold(
@@ -134,12 +155,20 @@ class _BarcodeScanner extends State<BarcodeScanner> {
                   children: [
                     const Text("브랜드명 : ", style: TextStyle(fontSize: 18),),
                     Expanded(
-                        child: TextField(
-                      controller: _brandcontroller,
-                      onChanged: (value) {
-                        brand = value;
-                      },
-                    )),
+                        child: DropdownButtonFormField<String>(
+                          decoration:  InputDecoration(
+                            labelText: '브랜드명',
+                          ),
+                          items: _brandList.map((brand) => DropdownMenuItem(
+                            value: brand,
+                            child: Text(brand),
+                          )).toList(),
+                          onChanged: (val) {
+                            setState(() {
+                              brand = val;
+                            });
+                          },
+                        )),
                   ],
                 ),
               ),
@@ -151,7 +180,7 @@ class _BarcodeScanner extends State<BarcodeScanner> {
                   Center(
                     child: ElevatedButton(
                       onPressed: () {
-                         crud.add_gifticon(gifticon_name, brand, context.read<Date>().expDate, imageFile, qrcode);
+                         crud.add_gifticon(gifticon_name, brand!, context.read<Date>().expDate, imageFile, qrcode);
                          Navigator.push(context, MaterialPageRoute(builder: (context) => BrandMainPage())).then((value) {
                            setState(() {});
                          });
